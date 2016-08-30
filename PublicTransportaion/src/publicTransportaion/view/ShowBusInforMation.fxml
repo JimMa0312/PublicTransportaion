@@ -5,26 +5,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.5413533834586466" layoutX="300.0" layoutY="195.0" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0">
                <children>
-                  <SplitPane dividerPositions="0.6868131868131868" layoutX="-3.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="429.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5567765567765568" layoutX="-3.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="429.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label layoutX="20.0" layoutY="70.0" prefHeight="30.0" prefWidth="84.0" text="车辆位置信息：" />
+                              <Label layoutX="38.0" layoutY="125.0" text="上一站：" />
+                              <Label layoutX="38.0" layoutY="153.0" text="下一站：" />
+                              <Label layoutX="14.0" layoutY="193.0" text="距离本站还有几站：" />
+                              <Label layoutX="138.0" layoutY="78.0" prefHeight="15.0" prefWidth="48.0" text="Label" />
+                              <Label layoutX="142.0" layoutY="125.0" prefHeight="15.0" prefWidth="40.0" text="Label" />
+                              <Label layoutX="142.0" layoutY="153.0" prefHeight="15.0" prefWidth="40.0" text="Label" />
+                              <Label layoutX="141.0" layoutY="193.0" text="Label" />
+                              <Label layoutX="32.0" layoutY="33.0" text="公交路线：" />
+                              <Label layoutX="141.0" layoutY="33.0" text="Label" />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0">
                <children>
-                  <SplitPane dividerPositions="0.6831501831501832" layoutX="102.0" layoutY="249.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.25457875457875456" layoutX="102.0" layoutY="249.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TextField layoutX="32.0" layoutY="57.0" />
+                              <Button layoutX="226.0" layoutY="57.0" mnemonicParsing="false" text="搜索" />
+                           </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                     </items>
                   </SplitPane>
