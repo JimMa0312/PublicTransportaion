@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="219.0" layoutY="163.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" text="登录" />
+      <Label layoutX="61.0" layoutY="62.0" prefHeight="17.0" prefWidth="29.0" text="账号" />
+      <Label layoutX="61.0" layoutY="91.0" prefHeight="18.0" prefWidth="29.0" text="密码" />
+      <TextField layoutX="106.0" layoutY="59.0" />
+      <PasswordField layoutX="106.0" layoutY="89.0" />
+      <Label layoutX="106.0" layoutY="14.0" prefHeight="29.0" prefWidth="116.0" text="管理员登录界面" />
+   </children>
+</AnchorPane>
