@@ -56,10 +56,10 @@
                            </children>
                         </HBox>
                         <Label layoutX="67.0" layoutY="121.0" text="班线编号：" />
-                        <Label layoutX="55.0" layoutY="166.0" text="早班发车时间：" />
-                        <Label layoutX="55.0" layoutY="209.0" text="末班发车时间：" />
+                        <Label layoutX="49.0" layoutY="233.0" text="早班发车时间：" />
+                        <Label layoutX="50.0" layoutY="256.0" text="末班发车时间：" />
                         <Label layoutX="174.0" layoutY="121.0" text="Label" />
-                        <Label layoutX="174.0" layoutY="166.0" text="Label" />
+                        <Label layoutX="174.0" layoutY="181.0" text="Label" />
                         <Label layoutX="174.0" layoutY="209.0" text="Label" />
                         <Label layoutX="19.0" layoutY="65.0" text="班线详细信息" />
                         <ScrollPane layoutX="402.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0">
@@ -68,6 +68,12 @@
                           </content>
                         </ScrollPane>
                         <Label layoutX="402.0" layoutY="63.0" prefHeight="19.0" prefWidth="54.0" text="班线列表" />
+                        <Label layoutX="61.0" layoutY="202.0" text="上下行路线：" />
+                        <Label layoutX="77.0" layoutY="151.0" text="起点：" />
+                        <Label layoutX="174.0" layoutY="233.0" text="Label" />
+                        <Label layoutX="174.0" layoutY="256.0" text="Label" />
+                        <Label layoutX="77.0" layoutY="174.0" text="终点：" />
+                        <Label layoutX="174.0" layoutY="151.0" text="Label" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -102,9 +108,24 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="42.0" layoutY="106.0" text="检索已有车辆：" />
-                        <Label layoutX="439.0" layoutY="106.0" text="Label" />
-                        <TextField layoutX="139.0" layoutY="102.0" />
+                        <Label layoutX="42.0" layoutY="106.0" text="检索已有车牌号或班线：" />
+                        <Label layoutX="463.0" layoutY="193.0" text="发车时间：" />
+                        <TextField layoutX="176.0" layoutY="102.0" prefHeight="23.0" prefWidth="124.0" />
+                        <Label layoutX="413.0" layoutY="106.0" text="已发车辆计划信息：" />
+                        <Label layoutX="463.0" layoutY="144.0" text="车牌照号：" />
+                        <Label layoutX="463.0" layoutY="168.0" text="班线编号：" />
+                        <Button layoutX="315.0" layoutY="102.0" mnemonicParsing="false" text="查找" />
+                        <ScrollPane layoutX="126.0" layoutY="183.0" prefHeight="248.0" prefWidth="222.0">
+                           <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="211.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="463.0" layoutY="214.0" text="执行日期:" />
+                        <Label layoutX="463.0" layoutY="236.0" text="线路使用:" />
+                        <Label layoutX="463.0" layoutY="258.0" text="位置信息：" />
+                        <Label layoutX="42.0" layoutY="144.0" text="以下为符合检索条件的车辆：" />
+                        <Label layoutX="36.0" layoutY="446.0" text="双击车辆可以在右侧查看车辆详细的发车动态信息" />
+                        <TextArea layoutX="414.0" layoutY="319.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
                      </children></AnchorPane>
               </content>
             </Tab>
