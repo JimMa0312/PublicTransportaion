@@ -1,33 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane layoutY="14.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="车辆">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="182.0" layoutY="478.0" spacing="30.0">
+                           <children>
+                              <Button layoutX="182.0" layoutY="479.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="96.0" text="增加车辆" />
+                              <Button layoutX="307.0" layoutY="479.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="108.0" text="修改车辆信息" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="439.0" AnchorPane.topAnchor="479.0" />
+                              <Button layoutX="392.0" layoutY="478.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="81.0" text="删除车辆" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="39.0" layoutY="49.0" text="车辆详细信息" />
+                        <Label layoutX="81.0" layoutY="102.0" text="车牌照号：" />
+                        <Label layoutX="81.0" layoutY="139.0" text="发动机号码：" />
+                        <Label layoutX="81.0" layoutY="178.0" text="车架编号：" />
+                        <Label layoutX="81.0" layoutY="219.0" text="车型：" />
+                        <Label layoutX="81.0" layoutY="261.0" text="车座：" />
+                        <Label layoutX="81.0" layoutY="296.0" text="核载人数：" />
+                        <Label layoutX="173.0" layoutY="102.0" text="Label" />
+                        <Label layoutX="173.0" layoutY="139.0" text="Label" />
+                        <Label layoutX="173.0" layoutY="178.0" text="Label" />
+                        <Label layoutX="173.0" layoutY="219.0" text="Label" />
+                        <Label layoutX="173.0" layoutY="261.0" text="Label" />
+                        <Label layoutX="173.0" layoutY="296.0" text="Label" />
+                        <ScrollPane layoutX="442.0" layoutY="78.0" prefHeight="265.0" prefWidth="284.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="269.0" prefWidth="278.0" />
+                          </content>
+                        </ScrollPane>
+                        <Label layoutX="409.0" layoutY="49.0" text="车辆列表" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="班线">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="235.0" layoutY="453.0" spacing="20.0">
+                           <children>
+                              <Button layoutX="126.0" layoutY="449.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" text="新增班线" />
+                              <Button layoutX="234.0" layoutY="449.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="73.0" text="修改班线" />
+                              <Button layoutX="434.0" layoutY="449.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="删除班线" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="67.0" layoutY="121.0" text="班线编号：" />
+                        <Label layoutX="55.0" layoutY="166.0" text="早班发车时间：" />
+                        <Label layoutX="55.0" layoutY="209.0" text="末班发车时间：" />
+                        <Label layoutX="174.0" layoutY="121.0" text="Label" />
+                        <Label layoutX="174.0" layoutY="166.0" text="Label" />
+                        <Label layoutX="174.0" layoutY="209.0" text="Label" />
+                        <Label layoutX="19.0" layoutY="65.0" text="班线详细信息" />
+                        <ScrollPane layoutX="402.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Label layoutX="402.0" layoutY="63.0" prefHeight="19.0" prefWidth="54.0" text="班线列表" />
+                     </children></AnchorPane>
               </content>
             </Tab>
           <Tab text="站点">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="230.0" layoutY="454.0" spacing="30.0">
+                           <children>
+                              <Button layoutX="230.0" layoutY="454.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" text="新增站点" />
+                              <Button layoutX="345.0" layoutY="454.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="93.0" text="修改站点信息" />
+                              <Button layoutX="474.0" layoutY="455.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="69.0" text="删除站点" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="49.0" layoutY="78.0" text="站点详细信息" />
+                        <Label layoutX="103.0" layoutY="117.0" text="站点名称：" />
+                        <Label layoutX="103.0" layoutY="153.0" text="站点编号：" />
+                        <Label layoutX="103.0" layoutY="189.0" text="站点地址：" />
+                        <Label layoutX="199.0" layoutY="117.0" text="Label" />
+                        <Label layoutX="199.0" layoutY="153.0" text="Label" />
+                        <Label layoutX="199.0" layoutY="189.0" text="Label" />
+                        <Label layoutX="433.0" layoutY="78.0" text="站点列表：" />
+                        <ScrollPane layoutX="427.0" layoutY="104.0" prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="发车动态与计划">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="42.0" layoutY="106.0" text="检索已有车辆：" />
+                        <Label layoutX="439.0" layoutY="106.0" text="Label" />
+                        <TextField layoutX="139.0" layoutY="102.0" />
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
