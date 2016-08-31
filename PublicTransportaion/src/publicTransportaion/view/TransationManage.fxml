@@ -249,7 +249,7 @@
                         <Label layoutX="463.0" layoutY="193.0" text="发车时间：" />
                         <TextField layoutX="176.0" layoutY="102.0" prefHeight="23.0" prefWidth="124.0" />
                         <Label layoutX="413.0" layoutY="106.0" text="已发车辆计划信息：" />
-                        <Label layoutX="463.0" layoutY="144.0" text="车牌照号：" />
+                        <Label layoutX="469.0" layoutY="144.0" text="车牌照号：" />
                         <Label layoutX="463.0" layoutY="168.0" text="班线编号：" />
                         <Button layoutX="315.0" layoutY="102.0" mnemonicParsing="false" text="查找" />
                         <ScrollPane layoutX="126.0" layoutY="183.0" prefHeight="248.0" prefWidth="222.0">

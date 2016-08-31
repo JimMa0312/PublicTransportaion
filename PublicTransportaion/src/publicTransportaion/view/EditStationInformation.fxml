@@ -13,7 +13,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <GridPane layoutX="51.0" layoutY="33.0" prefHeight="232.0" prefWidth="304.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="33.0">
+      <GridPane layoutX="51.0" layoutY="33.0" prefHeight="232.0" prefWidth="304.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="33.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="123.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="181.0" />
