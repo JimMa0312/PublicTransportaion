@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="322.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="322.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="322.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="322.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.EditCarsInformationController">
    <children>
       <Label prefHeight="37.0" prefWidth="121.0" text="车辆信息" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
          <font>
@@ -33,12 +33,12 @@
             <Label text="车型" GridPane.rowIndex="3" />
             <Label text="核载人数" GridPane.rowIndex="4" />
             <Label text="车座" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="License_Plate_TextField" GridPane.columnIndex="1" />
+            <TextField fx:id="Engine_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="Frame_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="Bus_type_TextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="Can_population_TextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="Bus_chair_TextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox layoutX="271.0" layoutY="263.0" prefHeight="23.0" prefWidth="91.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
