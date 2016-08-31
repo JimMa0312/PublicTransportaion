@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="340.0" prefWidth="737.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="340.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.EditBusLineInformationController">
    <children>
       <Pane prefHeight="540.0" prefWidth="737.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,10 +33,10 @@
             <Label layoutX="35.0" layoutY="174.0" text="上下行路线：" />
             <Label layoutX="23.0" layoutY="213.0" text="早班发车时间：" />
             <Label layoutX="23.0" layoutY="251.0" text="末班发车时间：" />
-            <TextField layoutX="101.0" layoutY="105.0" />
-            <TextField layoutX="101.0" layoutY="136.0" />
+            <TextField fx:id="Bus_id" layoutX="101.0" layoutY="105.0" />
+            <TextField fx:id="Time_lag" layoutX="101.0" layoutY="136.0" />
             <ChoiceBox layoutX="119.0" layoutY="170.0" prefWidth="150.0" />
-            <HBox layoutX="109.0" layoutY="209.0" spacing="20.0">
+            <HBox fx:id="Time_start" layoutX="109.0" layoutY="209.0" spacing="20.0">
                <children>
                   <ChoiceBox layoutX="117.0" layoutY="228.0" prefWidth="43.0">
                      <HBox.margin>
@@ -56,7 +55,7 @@
                   </ChoiceBox>
                </children>
             </HBox>
-            <HBox layoutX="109.0" layoutY="247.0" spacing="20.0">
+            <HBox fx:id="Time_end" layoutX="109.0" layoutY="247.0" spacing="20.0">
                <children>
                   <ChoiceBox layoutX="118.0" layoutY="260.0" prefHeight="23.0" prefWidth="43.0">
                      <HBox.margin>

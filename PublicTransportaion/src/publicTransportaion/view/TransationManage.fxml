@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="519.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="519.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.TransationManageController">
    <children>
       <TabPane layoutY="14.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -52,12 +52,12 @@
                               <Label text="车型：" GridPane.rowIndex="3" />
                               <Label text="车座：" GridPane.rowIndex="4" />
                               <Label text="核载人数：" GridPane.rowIndex="5" />
-                              <Label text="Label" GridPane.columnIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="Bus_id" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Einge_id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="Frame_id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="Bus_type" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="Bus_Chair" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="Can_population" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                         <HBox layoutX="311.0" layoutY="430.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="35.0">
@@ -131,12 +131,12 @@
                               <Label text="上下行路线：" GridPane.rowIndex="3" />
                               <Label text="早班发车时间：" GridPane.rowIndex="4" />
                               <Label text="末班发车时间：" GridPane.rowIndex="5" />
-                              <Label text="Label" GridPane.columnIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="Bus_No" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Start_point" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="End_point" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="Stream" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="Time_start" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="Time_End" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                         <HBox layoutX="345.0" layoutY="426.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="35.0">
@@ -196,9 +196,9 @@
                               <Label text="站点名称：" />
                               <Label text="站点编号：" GridPane.rowIndex="1" />
                               <Label text="站点地址：" GridPane.rowIndex="2" />
-                              <Label text="Label" GridPane.columnIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="Station_Name" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Station_ID" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="Station_Address" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <TableView layoutX="376.0" layoutY="92.0" prefHeight="330.0" prefWidth="216.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
@@ -245,24 +245,53 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="42.0" layoutY="106.0" text="检索已有车牌号或班线：" />
-                        <Label layoutX="463.0" layoutY="193.0" text="发车时间：" />
-                        <TextField layoutX="176.0" layoutY="102.0" prefHeight="23.0" prefWidth="124.0" />
-                        <Label layoutX="413.0" layoutY="106.0" text="已发车辆计划信息：" />
-                        <Label layoutX="469.0" layoutY="144.0" text="车牌照号：" />
-                        <Label layoutX="463.0" layoutY="168.0" text="班线编号：" />
-                        <Button layoutX="315.0" layoutY="102.0" mnemonicParsing="false" text="查找" />
-                        <ScrollPane layoutX="126.0" layoutY="183.0" prefHeight="248.0" prefWidth="222.0">
+                        <Label layoutX="21.0" layoutY="67.0" text="检索已有车牌号或班线：" />
+                        <TextField fx:id="neirong" layoutX="168.0" layoutY="63.0" prefHeight="23.0" prefWidth="124.0" />
+                        <Label layoutX="396.0" layoutY="90.0" text="已发车辆计划信息：">
+                           <font>
+                              <Font name="Microsoft YaHei Bold" size="18.0" />
+                           </font></Label>
+                        <Button fx:id="Search" layoutX="304.0" layoutY="63.0" mnemonicParsing="false" text="查找" />
+                        <ScrollPane layoutX="57.0" layoutY="145.0" prefHeight="248.0" prefWidth="222.0">
                            <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="211.0" />
                            </content>
                         </ScrollPane>
-                        <Label layoutX="463.0" layoutY="214.0" text="执行日期:" />
-                        <Label layoutX="463.0" layoutY="236.0" text="线路使用:" />
-                        <Label layoutX="463.0" layoutY="258.0" text="位置信息：" />
-                        <Label layoutX="42.0" layoutY="144.0" text="以下为符合检索条件的车辆：" />
-                        <Label layoutX="36.0" layoutY="446.0" text="双击车辆可以在右侧查看车辆详细的发车动态信息" />
-                        <TextArea layoutX="414.0" layoutY="319.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
+                        <Label layoutX="21.0" layoutY="114.0" text="以下为符合检索条件的车辆：" />
+                        <Label layoutX="57.0" layoutY="414.0" text="双击车辆可以在右侧查看车辆详细的发车动态信息" />
+                        <TextArea layoutX="396.0" layoutY="361.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
+                        <GridPane layoutX="377.0" layoutY="139.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="车牌照号：">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="bus_id" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="bus_no" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="start_time" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="execute_date" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="Use_Line" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="position_information" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="班线编号：" GridPane.rowIndex="1" />
+                              <Label text="发车时间：" GridPane.rowIndex="2" />
+                              <Label text="执行日期：" GridPane.rowIndex="3" />
+                              <Label text="线路使用：" GridPane.rowIndex="4" />
+                              <Label text="位置信息：" GridPane.rowIndex="5" />
+                           </children>
+                        </GridPane>
                      </children></AnchorPane>
               </content>
             </Tab>
