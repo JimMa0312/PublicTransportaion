@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.EditStationInformationController">
    <children>
       <Label prefHeight="29.0" prefWidth="90.0" text="站点信息" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
          <font>
@@ -29,10 +29,10 @@
             <Label text="站点名称" GridPane.rowIndex="1" />
             <Label text="站点地址" GridPane.rowIndex="2" />
             <Label text="站点GPS" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="Station_ID_TextField" GridPane.columnIndex="1" />
+            <TextField fx:id="Station_Name_TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="Station_Address_TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="Station_GPS_TextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <HBox layoutX="279.0" layoutY="265.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
