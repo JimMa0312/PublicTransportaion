@@ -25,14 +25,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="15.0" prefWidth="77.0" text="车牌照号" />
             <Label text="发动机号码" GridPane.rowIndex="1" />
             <Label text="车架编号" GridPane.rowIndex="2" />
             <Label text="车型" GridPane.rowIndex="3" />
-            <Label text="车牌照号" GridPane.rowIndex="6" />
             <Label text="核载人数" GridPane.rowIndex="4" />
             <Label text="车座" GridPane.rowIndex="5" />
             <TextField GridPane.columnIndex="1" />
@@ -41,7 +39,6 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <HBox layoutX="271.0" layoutY="263.0" prefHeight="23.0" prefWidth="91.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
