@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import publicTransportaion.model.Station;
 
 public class EditStationInformationController {
 	 @FXML
@@ -15,8 +16,8 @@ public class EditStationInformationController {
 	    private TextField Station_Address_TextField;
 	    @FXML
 	    private TextField Station_GPS_TextField;
-
-
+	    
+	    private Station station;	//此处要先对Station类进行实例化，否则将无法调用该类的静态方法
 
 	    private Stage dialogStage;
 
@@ -40,7 +41,13 @@ public class EditStationInformationController {
 	     */
 	    @FXML
 	    private void handleOk() {
-	       
+	       if(isInputValid()){
+	    	   station.setStationName(Station_Name_TextField.getText());
+	    	   station.setStationID(Station_ID_TextField.getText());
+	    	   station.setStationAddress(Station_Address_TextField.getText());
+	    	   station.setStationGPS(Station_GPS_TextField.getText());
+	    	   dialogStage.close();
+	       }
 	    }
 
 	    /**
@@ -68,7 +75,6 @@ public class EditStationInformationController {
 	        if (Station_Address_TextField.getText() == null || Station_Address_TextField.getText().length() == 0) {
 	            errorMessage += "No valid Station_Address!\n"; 
 	        }
-
 	        if (Station_GPS_TextField.getText() == null || Station_GPS_TextField.getText().length() == 0) {
 	            errorMessage += "No valid Station_GPS!\n"; 
 	        } 
