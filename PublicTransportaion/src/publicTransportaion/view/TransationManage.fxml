@@ -24,9 +24,9 @@
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font></Label>
-                        <TableView layoutX="409.0" layoutY="85.0" prefHeight="327.0" prefWidth="194.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
+                        <TableView fx:id="CarsTable" layoutX="409.0" layoutY="85.0" prefHeight="327.0" prefWidth="194.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="车牌照号" />
+                            <TableColumn fx:id="License_Plate_Column" prefWidth="75.0" text="车牌照号" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -52,12 +52,21 @@
                               <Label text="车型：" GridPane.rowIndex="3" />
                               <Label text="车座：" GridPane.rowIndex="4" />
                               <Label text="核载人数：" GridPane.rowIndex="5" />
+<<<<<<< HEAD
                               <Label fx:id="Bus_id" text="Label" GridPane.columnIndex="1" />
                               <Label fx:id="Einge_id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="Frame_id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="Bus_type" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label fx:id="Bus_Chair" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label fx:id="Can_population" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+=======
+                              <Label fx:id="License_Plate_Label" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Engine_id_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="Frame_id_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="Bus_type_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="Bus_chair_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="Can_population_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+>>>>>>> branch 'master' of https://github.com/JimMa0312/PublicTransportaion
                            </children>
                         </GridPane>
                         <HBox layoutX="311.0" layoutY="430.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="35.0">
@@ -103,9 +112,9 @@
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font></Label>
-                        <TableView layoutX="381.0" layoutY="96.0" prefHeight="306.0" prefWidth="150.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
+                        <TableView fx:id="Bus_Line_ListTable" layoutX="381.0" layoutY="96.0" prefHeight="306.0" prefWidth="150.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="班线编号" />
+                            <TableColumn fx:id="Bus_Line_Column" prefWidth="75.0" text="班线编号" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -131,12 +140,21 @@
                               <Label text="上下行路线：" GridPane.rowIndex="3" />
                               <Label text="早班发车时间：" GridPane.rowIndex="4" />
                               <Label text="末班发车时间：" GridPane.rowIndex="5" />
+<<<<<<< HEAD
                               <Label fx:id="Bus_No" text="Label" GridPane.columnIndex="1" />
                               <Label fx:id="Start_point" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="End_point" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="Stream" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label fx:id="Time_start" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label fx:id="Time_End" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+=======
+                              <Label fx:id="Bus_No_Label" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Start_Station_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="End_Station_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="Route_Selection_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="Time_Start_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="Time_End_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+>>>>>>> branch 'master' of https://github.com/JimMa0312/PublicTransportaion
                            </children>
                         </GridPane>
                         <HBox layoutX="345.0" layoutY="426.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="35.0">
@@ -196,15 +214,21 @@
                               <Label text="站点名称：" />
                               <Label text="站点编号：" GridPane.rowIndex="1" />
                               <Label text="站点地址：" GridPane.rowIndex="2" />
+<<<<<<< HEAD
                               <Label fx:id="Station_Name" text="Label" GridPane.columnIndex="1" />
                               <Label fx:id="Station_ID" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="Station_Address" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+=======
+                              <Label fx:id="Station_Name_Label" text="Label" GridPane.columnIndex="1" />
+                              <Label fx:id="Station_ID_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="Station_Address_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+>>>>>>> branch 'master' of https://github.com/JimMa0312/PublicTransportaion
                            </children>
                         </GridPane>
-                        <TableView layoutX="376.0" layoutY="92.0" prefHeight="330.0" prefWidth="216.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
+                        <TableView fx:id="stationsTable" layoutX="376.0" layoutY="92.0" prefHeight="330.0" prefWidth="216.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="85.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="站点编号" />
-                            <TableColumn prefWidth="75.0" text="站点名称" />
+                            <TableColumn fx:id="Station_ID_Column" prefWidth="75.0" text="站点编号" />
+                            <TableColumn fx:id="Station_Name_Column" prefWidth="75.0" text="站点名称" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
