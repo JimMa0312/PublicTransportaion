@@ -20,7 +20,7 @@ public class TransationManageController {
     @FXML
     private Label Bus_type_Label;
     @FXML
-    private Label Can_population_Label;
+    private Label Car_population_Label;
     @FXML
     private Label Bus_chair_Label;
     
