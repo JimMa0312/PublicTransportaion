@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 
 import publicTransportaion.*;
+import publicTransportaion.model.Cars;
 
 
 public class EditCarsInformationController {
@@ -24,14 +25,14 @@ public class EditCarsInformationController {
     @FXML
     private TextField Bus_type_TextField;
     @FXML
-    private TextField Can_population_TextField;
+    private TextField Car_population_TextField;
     @FXML
     private TextField Bus_chair_TextField;
 
 
 
     private Stage dialogStage;
-
+    private Cars cars;
     private boolean okClicked = false;
 
    
@@ -41,6 +42,17 @@ public class EditCarsInformationController {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+    
+    public void setCars(Cars cars) {
+        this.cars = cars;
+
+        License_Plate_TextField.setText(cars.getLicensePlate());
+        Engine_id_TextField.setText(cars.getEingeId());
+        Frame_id_TextField.setText(cars.getFrameId());
+        Bus_type_TextField.setText(cars.getBusType());
+        Car_population_TextField.setText(Integer.toString(cars.getCarPopulation()));
+        Bus_chair_TextField.setText(Integer.toString(cars.getBusChair()));
     }
 
     public boolean isOkClicked() {
@@ -52,6 +64,17 @@ public class EditCarsInformationController {
      */
     @FXML
     private void handleOk() {
+    	if (isInputValid()) {
+            cars.setLicensePlate(License_Plate_TextField.getText());
+            cars.setEingeId(Engine_id_TextField.getText());
+            cars.setFrameId(Frame_id_TextField.getText());
+            cars.setBusType(Bus_type_TextField.getText());
+            cars.setCarPopulation(Car_population_TextField.getText());
+            cars.setBusChair(Bus_chair_TextField.getText());
+
+            okClicked = true;
+            dialogStage.close();
+        }
        
     }
 
@@ -85,12 +108,12 @@ public class EditCarsInformationController {
             errorMessage += "No valid Bus_type!\n"; 
         } 
 
-        if (Can_population_TextField.getText() == null || Can_population_TextField.getText().length() == 0) {
+        if (Car_population_TextField.getText() == null || Car_population_TextField.getText().length() == 0) {
             errorMessage += "No valid Can_population!\n"; 
         }else {
             // try to parse the postal code into an int.
             try {
-                Integer.parseInt(Can_population_TextField.getText());
+                Integer.parseInt(Car_population_TextField.getText());
             } catch (NumberFormatException e) {
                 errorMessage += "No valid Can_population (must be an integer)!\n"; 
             }
@@ -111,11 +134,6 @@ public class EditCarsInformationController {
             return true;
         } else {
             // Show the error message.
-//            Dialogs.create()
-//                .title("Invalid Fields")
-//                .masthead("Please correct invalid fields")
-//                .message(errorMessage)
-//                .showError();
         	Alert alert=new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Fields");
 			alert.setHeaderText("Please correct invalid fields");
