@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.ShowBusInforMationController">
    <children>
       <SplitPane dividerPositions="0.5413533834586466" layoutX="300.0" layoutY="195.0" prefHeight="550.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -14,7 +14,7 @@
                <children>
                   <SplitPane dividerPositions="0.6" layoutX="-3.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="429.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane fx:id="left_page" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <GridPane layoutX="63.0" layoutY="14.0" prefHeight="189.0" prefWidth="301.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -30,16 +30,16 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="公交路线：" />
+                                    <Label text="公交班线：" />
                                     <Label prefHeight="30.0" prefWidth="84.0" text="车辆位置信息：" GridPane.rowIndex="1" />
                                     <Label text="上一站：" GridPane.rowIndex="2" />
                                     <Label text="下一站：" GridPane.rowIndex="3" />
                                     <Label text="距离本站还有几站：" GridPane.rowIndex="4" />
-                                    <Label text="Label" GridPane.columnIndex="1" />
-                                    <Label prefHeight="15.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="bus_no" text="Label" GridPane.columnIndex="1" />
+                                    <Label fx:id="position_information" prefHeight="15.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="last_station" prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="next_station" prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="how_many_station" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>
                            </children></AnchorPane>
@@ -51,11 +51,11 @@
                <children>
                   <SplitPane dividerPositions="0.25457875457875456" layoutX="102.0" layoutY="249.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="361.0">
+                      <AnchorPane fx:id="right_page" minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="361.0">
                            <children>
                               <HBox layoutX="80.0" layoutY="57.0">
                                  <children>
-                                    <TextField layoutX="32.0" layoutY="57.0" />
+                                    <TextField fx:id="neirong" layoutX="32.0" layoutY="57.0" />
                                     <Button layoutX="226.0" layoutY="57.0" mnemonicParsing="false" text="搜索" />
                                  </children>
                               </HBox>
