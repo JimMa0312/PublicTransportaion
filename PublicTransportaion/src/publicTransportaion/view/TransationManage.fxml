@@ -267,7 +267,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Label layoutX="396.0" layoutY="79.0" text="已发车辆计划信息：">
+                        <Label layoutX="377.0" layoutY="79.0" text="发车辆计划信息：">
                            <font>
                               <Font name="Microsoft YaHei Bold" size="18.0" />
                            </font></Label>
@@ -276,7 +276,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font></Label>
                         <Label layoutX="23.0" layoutY="423.0" text="单击车辆可以在右侧查看车辆详细的发车动态信息" />
-                        <TextArea layoutX="396.0" layoutY="361.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
+                        <TextArea layoutX="377.0" layoutY="353.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
                         <GridPane layoutX="377.0" layoutY="114.0" prefHeight="239.0" prefWidth="221.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
