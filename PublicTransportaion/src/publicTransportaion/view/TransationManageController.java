@@ -7,53 +7,53 @@ import javafx.scene.control.TextField;
 
 public class TransationManageController {
 	@FXML
-	private Label Bus_id;
+	private Label Bus_id;			//³µÅÆºÅ
 	@FXML
-	private Label Einge_id;
+	private Label Einge_id;			//·¢¶¯»ú±àºÅ
 	@FXML
-	private Label Frame_id;
+	private Label Frame_id;			//³µ¼Ü±àºÅ
 	@FXML
-	private Label Bus_type;
+	private Label Bus_type;			//³µĞÍ
 	@FXML
-	private Label Bus_Chair;
+	private Label Bus_Chair;		//³µ×ù
 	@FXML
-	private Label Can_population;
-	//ä»¥ä¸Šæ˜¯è½¦è¾†æ ‡ç­¾é¡µçš„æ ‡ç­¾
+	private Label Can_population;	//ºËÔØÈËÊı
+	//ÒÔÉÏÊÇ¡°³µÁ¾¡±Ñ¡ÏîÒ³µÄ±êÇ©
 	@FXML
-	private Label Bus_No;
+	private Label Bus_No;			//°àÏß±àºÅ
 	@FXML
-	private Label Start_point;
+	private Label Start_point;		//Æğµã
 	@FXML
-	private Label End_point;
+	private Label End_point;		//ÖÕµã
 	@FXML
-	private Label Stream;
+	private Label Stream;			//ÉÏÏÂĞĞÂ·Ïß
 	@FXML
-	private Label Time_start;
+	private Label Time_start;		//Ôç°à·¢³µÊ±¼ä
 	@FXML
-	private Label Time_End;
-	//ä»¥ä¸Šæ˜¯ç­çº¿æ ‡ç­¾é¡µé¢çš„æ ‡ç­¾
+	private Label Time_End;			//Ä©°à·¢³µÊ±¼ä
+	//ÒÔÉÏÊÇ¡°°àÏß¡±Ñ¡ÏîÒ³µÄ±êÇ©
 	@FXML
-	private Label Station_Name;
+	private Label Station_Name;		//Õ¾µãÃû
 	@FXML
-	private Label Station_ID;
+	private Label Station_ID;		//Õ¾µã±àºÅ
 	@FXML
-	private Label Station_Address;
-	//ä»¥ä¸Šæ˜¯ç«™ç‚¹æ ‡ç­¾é¡µçš„æ ‡ç­¾
+	private Label Station_Address;	//Õ¾µãÎ»ÖÃ
+	//ÒÔÉÏÊÇ¡°Õ¾µã¡±±êÇ©Ò³µÄ±êÇ©
 	@FXML
-	private TextField neirong;
+	private TextField neirong;	//ËÑË÷¿ò
 	@FXML
-	private Button Search;
+	private Button Search;		//¡°²éÕÒ¡±°´Å¥
 	@FXML
-	private Label bus_id;		//è½¦ç‰Œç…§å·
+	private Label bus_id;		//³µÅÆºÅ
 	@FXML
-	private Label bus_no;		//ç­çº¿ç¼–å·
+	private Label bus_no;		//°àÏß±àºÅ
 	@FXML
-	private Label start_time;	//æ¯æ—¥å‘è½¦æ—¶é—´
+	private Label start_time;	//·¢³µÊ±¼ä
 	@FXML
-	private Label execute_date;	//æ‰§è¡Œæ—¥æœŸ
+	private Label execute_date;	//Ö´ĞĞÈÕÆÚ
 	@FXML
-	private Label Use_Line; 	//çº¿è·¯ä½¿ç”¨
+	private Label Use_Line; 	//Ê¹ÓÃÏßÂ·
 	@FXML
-	private Label position_information; //ä½ç½®ä¿¡æ¯
-	//
+	private Label position_information; //Î»ÖÃĞÅÏ¢
+	//ÒÔÉÏÊÇ¡°·¢³µ¶¯Ì¬Óë¼Æ»®¡±Ñ¡ÏîÒ³µÄ±êÇ©
 }
