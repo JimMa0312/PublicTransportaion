@@ -57,7 +57,7 @@
                               <Label fx:id="Frame_id_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="Bus_type_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label fx:id="Bus_chair_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label fx:id="Can_population_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="Car_population_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                         <HBox layoutX="311.0" layoutY="430.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="35.0">

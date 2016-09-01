@@ -43,11 +43,11 @@
       </GridPane>
       <HBox layoutX="271.0" layoutY="263.0" prefHeight="23.0" prefWidth="91.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.0">
          <children>
-            <Button layoutX="171.0" layoutY="163.0" mnemonicParsing="false" text="取消">
+            <Button layoutX="171.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleCancel" text="取消">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin></Button>
-            <Button layoutX="226.0" layoutY="163.0" mnemonicParsing="false" text="确定" />
+            <Button layoutX="226.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleOk" text="确定" />
          </children>
       </HBox>
       <Separator layoutX="74.0" layoutY="37.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
