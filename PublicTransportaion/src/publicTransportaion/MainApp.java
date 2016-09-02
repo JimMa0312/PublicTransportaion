@@ -48,6 +48,7 @@ public class MainApp extends Application {
 			rootLayout.setCenter(busInformationDialog);
 		} catch (IOException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

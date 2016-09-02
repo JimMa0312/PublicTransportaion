@@ -14,7 +14,7 @@
                <children>
                   <SplitPane dividerPositions="0.6" layoutX="-3.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="429.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane fx:id="left_page" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <GridPane layoutX="63.0" layoutY="14.0" prefHeight="189.0" prefWidth="301.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -51,7 +51,7 @@
                <children>
                   <SplitPane dividerPositions="0.25457875457875456" layoutX="102.0" layoutY="249.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane fx:id="right_page" minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="361.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="361.0">
                            <children>
                               <HBox layoutX="80.0" layoutY="57.0">
                                  <children>
