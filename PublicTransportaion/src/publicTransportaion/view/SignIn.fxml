@@ -6,16 +6,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.SingeInController">
+<AnchorPane maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.SignInController">
    <children>
       <HBox layoutX="181.0" layoutY="167.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <Button layoutX="181.0" layoutY="167.0" mnemonicParsing="false" text="退出">
+            <Button layoutX="181.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleCancel" text="退出">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="219.0" layoutY="163.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" text="登录" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+            <Button layoutX="219.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="23.0" prefWidth="49.0" text="登录" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
          </children>
       </HBox>
       <Label layoutX="106.0" layoutY="14.0" prefHeight="29.0" prefWidth="137.0" text="管理员登录" AnchorPane.leftAnchor="10.0">

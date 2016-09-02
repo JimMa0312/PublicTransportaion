@@ -1,6 +1,9 @@
 package publicTransportaion.view;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -85,6 +88,14 @@ public class EditCarsInformationController {
     private void handleCancel() {
         dialogStage.close();
     }
+    //测试车牌照格式是否正确
+    public boolean CheckLicense_Plate(String patString){
+    	String re="/^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/";
+    	Pattern pattern = Pattern.compile(re,Pattern.CASE_INSENSITIVE);
+    	Matcher matcher = pattern.matcher(patString);
+    	
+    	return matcher.matches();
+    }
 
     /**
      * Validates the user input in the text fields.
@@ -97,6 +108,9 @@ public class EditCarsInformationController {
         if (License_Plate_TextField.getText() == null || License_Plate_TextField.getText().length() == 0) {
             errorMessage += "No valid License_Plate!\n"; 
         }
+        if (!CheckLicense_Plate(License_Plate_TextField.getText())) {
+			errorMessage+="车牌号格式错误！\n";
+		}
         if (Engine_id_TextField.getText() == null || Engine_id_TextField.getText().length() == 0) {
             errorMessage += "No valid Engine_id!\n"; 
         }
