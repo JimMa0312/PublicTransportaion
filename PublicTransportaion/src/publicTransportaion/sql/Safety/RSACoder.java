@@ -2,11 +2,17 @@ package publicTransportaion.sql.Safety;
 
 import java.security.Key;
 import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 
@@ -128,5 +134,101 @@ public abstract class RSACoder extends Coder {
 		cipher.init(Cipher.DECRYPT_MODE, publicKey);
 		
 		return cipher.doFinal(data);
+	}
+	
+	/*
+	 * 加密<br>
+	 * 用公钥加密
+	 * 
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte[] encryptByPublicKey(byte[] data, String key) throws Exception{
+		byte[] keyBytes=decryptBASE64(key);
+		X509EncodedKeySpec x509KeySpec=new X509EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory=KeyFactory.getInstance(KEY_ALGORITHM);
+		Key publicKey=keyFactory.generatePublic(x509KeySpec);
+		
+		Cipher cipher=Cipher.getInstance(keyFactory.getAlgorithm());
+		cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+		
+		return cipher.doFinal(data);
+	}
+	
+	/*
+	 * 加密<br>
+	 * 用私钥加密
+	 * 
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte[] encryByPricvateKey(byte[] data, String key) throws Exception {
+		byte[] keyBytes=decryptBASE64(key);
+		
+		PKCS8EncodedKeySpec pKeySpec=new PKCS8EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory=KeyFactory.getInstance(KEY_ALGORITHM);
+		Key privateKey=keyFactory.generatePrivate(pKeySpec);
+		
+		Cipher cipher=Cipher.getInstance(keyFactory.getAlgorithm());
+		cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+		
+		return cipher.doFinal(data);
+	}
+	
+	/*
+	 * 获取私钥
+	 * 
+	 * @param keyMap
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public static String getPrivateKey(Map<String, Object> keyMap) throws Exception {
+		Key key=(Key) keyMap.get(PRIVATE_KEY);
+		
+		return encryptBASE64(key.getEncoded());
+	}
+	
+	/*
+	 * 获取公钥
+	 * 
+	 * @param keyMap
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getPublicKey(Map<String, Object> keyMap) throws Exception {
+		Key key=(Key) keyMap.get(PUBLIC_KEY);
+		
+		return encryptBASE64(key.getEncoded());
+	}
+	
+	/*
+	 * 初始化密钥
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public static Map<String, Object> initKey() throws Exception {
+		KeyPairGenerator keyPairGenerator=KeyPairGenerator.getInstance(KEY_ALGORITHM);
+		keyPairGenerator.initialize(1024);
+		
+		KeyPair keyPair=keyPairGenerator.generateKeyPair();
+		
+		//public
+		RSAPublicKey publicKey=(RSAPublicKey) keyPair.getPublic();
+		
+		//private
+		RSAPrivateKey privateKey=(RSAPrivateKey)keyPair.getPrivate();
+		
+		Map<String, Object> keyMap=new HashMap<String, Object>(2);
+		
+		keyMap.put(PUBLIC_KEY, publicKey);
+		keyMap.put(PRIVATE_KEY, privateKey);
+		
+		return keyMap;
 	}
 }
