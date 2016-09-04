@@ -31,7 +31,7 @@
                                 </rowConstraints>
                                  <children>
                                     <Label text="公交班线：" />
-                                    <Label prefHeight="30.0" prefWidth="84.0" text="车辆位置信息：" GridPane.rowIndex="1" />
+                                    <Label prefHeight="30.0" prefWidth="84.0" text="车辆位 n置信息：" GridPane.rowIndex="1" />
                                     <Label text="上一站：" GridPane.rowIndex="2" />
                                     <Label text="下一站：" GridPane.rowIndex="3" />
                                     <Label text="距离本站还有几站：" GridPane.rowIndex="4" />
