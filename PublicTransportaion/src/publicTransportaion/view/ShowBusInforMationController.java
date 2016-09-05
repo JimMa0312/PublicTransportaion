@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import publicTransportaion.MainApp;
 
 public class ShowBusInforMationController {
 	@FXML
@@ -23,4 +24,10 @@ public class ShowBusInforMationController {
 	//
 	@FXML
 	private TextField neirong;
+	
+	private MainApp mainApp;
+	
+	public void setMainApp(MainApp mainApp){
+		this.mainApp=mainApp;
+	}
 }
