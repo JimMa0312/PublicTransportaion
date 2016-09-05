@@ -6,16 +6,16 @@
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Mao_information') and o.name = 'FK_MAO_INFO_HAVE1_STATION_')
-alter table Mao_information
-   drop constraint FK_MAO_INFO_HAVE1_STATION_
+   where r.fkeyid = object_id('Map_information') and o.name = 'FK_Map_INFO_HAVE1_STATION_')
+alter table Map_information
+   drop constraint FK_Map_INFO_HAVE1_STATION_
 go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Mao_information') and o.name = 'FK_MAO_INFO_HAVE2_STATION_')
-alter table Mao_information
-   drop constraint FK_MAO_INFO_HAVE2_STATION_
+   where r.fkeyid = object_id('Map_information') and o.name = 'FK_Map_INFO_HAVE2_STATION_')
+alter table Map_information
+   drop constraint FK_Map_INFO_HAVE2_STATION_
 go
 
 if exists (select 1
@@ -69,27 +69,27 @@ go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('Mao_information')
+           where  id    = object_id('Map_information')
             and   name  = 'have2_FK'
             and   indid > 0
             and   indid < 255)
-   drop index Mao_information.have2_FK
+   drop index Map_information.have2_FK
 go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('Mao_information')
+           where  id    = object_id('Map_information')
             and   name  = 'have1_FK'
             and   indid > 0
             and   indid < 255)
-   drop index Mao_information.have1_FK
+   drop index Map_information.have1_FK
 go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('Mao_information')
+           where  id = object_id('Map_information')
             and   type = 'U')
-   drop table Mao_information
+   drop table Map_information
 go
 
 if exists (select 1
@@ -184,7 +184,7 @@ create table Car_infomation (
    License_Plate        varchar(9)           not null,
    Einge_id             char(18)             not null,
    Frame_id             char(10)             not null,
-   Bus_tyoe             varchar(20)          not null,
+   Bus_type             varchar(20)          not null,
    Can_population       int                  not null,
    Bus_Chair            int                  not null,
    constraint PK_CAR_INFOMATION primary key nonclustered (License_Plate)
@@ -192,21 +192,21 @@ create table Car_infomation (
 go
 
 /*==============================================================*/
-/* Table: Mao_information                                       */
+/* Table: Map_information                                       */
 /*==============================================================*/
-create table Mao_information (
+create table Map_information (
    Station_ID           char(10)             not null,
    Sta_Station_ID       char(10)             not null,
    Station_distence2    float(8)             not null,
    Station_State2       int                  not null,
-   constraint PK_MAO_INFORMATION primary key nonclustered (Station_ID, Sta_Station_ID)
+   constraint PK_Map_INFORMATION primary key nonclustered (Station_ID, Sta_Station_ID)
 )
 go
 
 /*==============================================================*/
 /* Index: have1_FK                                              */
 /*==============================================================*/
-create index have1_FK on Mao_information (
+create index have1_FK on Map_information (
 Station_ID ASC
 )
 go
@@ -214,7 +214,7 @@ go
 /*==============================================================*/
 /* Index: have2_FK                                              */
 /*==============================================================*/
-create index have2_FK on Mao_information (
+create index have2_FK on Map_information (
 Sta_Station_ID ASC
 )
 go
@@ -253,7 +253,7 @@ create table SID (
    Bus_No               varchar(1)           not null,
    Station_ID           char(10)             not null,
    License_Plate        varchar(9)           not null,
-   Engine_start         datetime             not null,
+   Engine_start         time            	 not null,
    GPS                  text                 not null,
    CarrOut_Date         datetime             not null,
    Line_Layer           int                  not null,
@@ -308,13 +308,13 @@ create table admin_information (
 )
 go
 
-alter table Mao_information
-   add constraint FK_MAO_INFO_HAVE1_STATION_ foreign key (Station_ID)
+alter table Map_information
+   add constraint FK_Map_INFO_HAVE1_STATION_ foreign key (Station_ID)
       references Station_information (Station_ID)
 go
 
-alter table Mao_information
-   add constraint FK_MAO_INFO_HAVE2_STATION_ foreign key (Sta_Station_ID)
+alter table Map_information
+   add constraint FK_Map_INFO_HAVE2_STATION_ foreign key (Sta_Station_ID)
       references Station_information (Station_ID)
 go
 
