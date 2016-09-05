@@ -172,7 +172,7 @@ create table Bus_information (
    Bus_No               varchar(1)           not null,
    Time_Start           datetime             not null,
    Time_End             datetime             not null,
-   Time_Lag             datetime             not null,
+   Time_Lag             int             not null,
    constraint PK_BUS_INFORMATION primary key nonclustered (Bus_No)
 )
 go
