@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class SignInController {
@@ -12,6 +14,8 @@ public class SignInController {
     private TextField Control_Id_TextField;
     @FXML
     private PasswordField Control_PWD_PasswordField;
+    @FXML
+    private Label returnMessage;
 
 
     private Stage dialogStage;
@@ -21,8 +25,10 @@ public class SignInController {
     private String user;
     private String password;
     
+    
     @FXML
     private void initialize() {
+    	returnMessage.setText(null);
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -38,20 +44,16 @@ public class SignInController {
        if(isInputValid()){
     	   if(Control_Id_TextField.getText()==user&&Control_PWD_PasswordField.getText()==password)
     	   {
-           	Alert alert=new Alert(AlertType.CONFIRMATION);
-   			alert.setTitle("消息提示");
-   			alert.setHeaderText("登陆状态");
-   			alert.setContentText("您已登录成功！");
-   			alert.showAndWait();
+           	returnMessage.setText("登陆成功");
+           	returnMessage.setTextFill(Color.GREEN);
+   			
+   			okClicked=true;
     		   //此处需要添加登陆成功的提示窗并弹出管理页面
     		   dialogStage.close();
     	   }
     	   else {
-              	Alert alert=new Alert(AlertType.CONFIRMATION);
-       			alert.setTitle("消息提示");
-       			alert.setHeaderText("登陆状态");
-       			alert.setContentText("用户名或密码错误！");
-       			alert.showAndWait();
+              	returnMessage.setText("账号或密码错误！");
+              	returnMessage.setTextFill(Color.RED);
     	   }
        }
     }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import publicTransportaion.MainApp;
 import publicTransportaion.model.Bus;
 import publicTransportaion.model.Cars;
@@ -65,6 +66,7 @@ public class TransationManageController {
     
     
     private MainApp mainApp ;
+    private Stage stage;
 	   
     public void initializeCars(){
     	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
@@ -111,5 +113,8 @@ public class TransationManageController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;      
     }
+    public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 
 }
