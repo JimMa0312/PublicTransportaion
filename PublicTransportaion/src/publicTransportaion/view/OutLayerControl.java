@@ -7,10 +7,10 @@ import publicTransportaion.MainApp;
 
 public class OutLayerControl {
 	
-	private MainApp MainApp;
+	private MainApp mainApp;
 	
 	public void setMainApp(MainApp mainApp) {
-		MainApp = mainApp;
+		this.mainApp = mainApp;
 	}
 	
 	@FXML
@@ -29,5 +29,16 @@ public class OutLayerControl {
 		alert.setHeaderText("开发小组：黑耀开发");
 		alert.setContentText("项目组长：马玉琛\n项目成员：王瀚、甘孟坤、何佳东\n\n软件版本：DateV 0.5.0");
 		alert.showAndWait();
+	}
+	@FXML
+	private void ShowSignIn(){
+		boolean isAccessSql=mainApp.showSignInView();
+		
+		if (isAccessSql) {
+			System.out.println("Access");
+		}
+		else{
+			System.out.println("Not Access");
+		}
 	}
 }

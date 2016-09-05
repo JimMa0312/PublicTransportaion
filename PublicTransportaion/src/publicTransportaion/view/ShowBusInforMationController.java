@@ -30,4 +30,9 @@ public class ShowBusInforMationController {
 	public void setMainApp(MainApp mainApp){
 		this.mainApp=mainApp;
 	}
+	
+	@FXML
+	private void initialize(){
+		
+	}
 }

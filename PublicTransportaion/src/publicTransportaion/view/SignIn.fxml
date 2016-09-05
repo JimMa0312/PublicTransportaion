@@ -10,12 +10,12 @@
    <children>
       <HBox layoutX="181.0" layoutY="167.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <Button layoutX="181.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleCancel" text="退出">
+            <Button layoutX="181.0" layoutY="167.0" mnemonicParsing="false" text="退出">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="219.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="23.0" prefWidth="49.0" text="登录" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+            <Button layoutX="219.0" layoutY="163.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" text="登录" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
          </children>
       </HBox>
       <Label layoutX="106.0" layoutY="14.0" prefHeight="29.0" prefWidth="137.0" text="管理员登录" AnchorPane.leftAnchor="10.0">
@@ -38,5 +38,6 @@
             <PasswordField fx:id="Control_PWD_PasswordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Label fx:id="returnMessage" layoutX="180.0" layoutY="138.0" prefHeight="15.0" prefWidth="70.0" text="Label" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="50.0" />
    </children>
 </AnchorPane>
