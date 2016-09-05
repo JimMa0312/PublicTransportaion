@@ -62,9 +62,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('Car_infomation')
+           where  id = object_id('Car_information')
             and   type = 'U')
-   drop table Car_infomation
+   drop table Car_information
 go
 
 if exists (select 1
@@ -178,16 +178,16 @@ create table Bus_information (
 go
 
 /*==============================================================*/
-/* Table: Car_infomation                                        */
+/* Table: Car_information                                        */
 /*==============================================================*/
-create table Car_infomation (
+create table Car_information (
    License_Plate        varchar(9)           not null,
    Einge_id             char(18)             not null,
    Frame_id             char(10)             not null,
    Bus_type             varchar(20)          not null,
    Can_population       int                  not null,
    Bus_Chair            int                  not null,
-   constraint PK_CAR_INFOMATION primary key nonclustered (License_Plate)
+   constraint PK_CAR_information primary key nonclustered (License_Plate)
 )
 go
 
@@ -336,7 +336,7 @@ go
 
 alter table SID
    add constraint FK_SID_PLANED_CA_CAR_INFO foreign key (License_Plate)
-      references Car_infomation (License_Plate)
+      references Car_information (License_Plate)
 go
 
 alter table SID
