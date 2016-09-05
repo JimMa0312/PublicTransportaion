@@ -257,6 +257,7 @@ create table SID (
    GPS                  text                 not null,
    CarrOut_Date         datetime             not null,
    Line_Layer           int                  not null,
+   planning_type			int					 not null
    constraint PK_SID primary key nonclustered (Bus_No, Station_ID, License_Plate)
 )
 go
