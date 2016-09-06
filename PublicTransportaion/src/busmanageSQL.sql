@@ -223,7 +223,6 @@ go
 /* Table: Route_Planning                                        */
 /*==============================================================*/
 create table Route_Planning (
-   Bus_Bus_No           varchar(1)           null,
    Bus_No               varchar(1)           null,
    UpStream             text                 not null,
    DownStream           text                 not null
@@ -233,7 +232,7 @@ go
 /*==============================================================*/
 /* Index: Planning2_FK                                          */
 /*==============================================================*/
-create index Planning2_FK on Route_Planning (
+create index Planning_FK on Route_Planning (
 Bus_No ASC
 )
 go
@@ -241,10 +240,6 @@ go
 /*==============================================================*/
 /* Index: Planning_FK                                           */
 /*==============================================================*/
-create index Planning_FK on Route_Planning (
-Bus_Bus_No ASC
-)
-go
 
 /*==============================================================*/
 /* Table: SID                                                   */
@@ -317,11 +312,6 @@ go
 alter table Map_information
    add constraint FK_Map_INFO_HAVE2_STATION_ foreign key (Sta_Station_ID)
       references Station_information (Station_ID)
-go
-
-alter table Route_Planning
-   add constraint FK_ROUTE_PL_PLANNING_BUS_INFO foreign key (Bus_Bus_No)
-      references Bus_information (Bus_No)
 go
 
 alter table Route_Planning
