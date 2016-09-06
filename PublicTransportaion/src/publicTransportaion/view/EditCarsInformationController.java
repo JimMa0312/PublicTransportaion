@@ -17,7 +17,7 @@ import publicTransportaion.*;
 import publicTransportaion.model.Cars;
 
 
-public class EditCarsInformationController {
+public class EditCarsInformationController implements ControlledStage {
 
     @FXML
     private TextField License_Plate_TextField;
@@ -37,6 +37,8 @@ public class EditCarsInformationController {
     private Stage dialogStage;
     private Cars cars;
     private boolean okClicked = false;
+    
+    private StageController myController;
 
    
     @FXML
@@ -156,4 +158,10 @@ public class EditCarsInformationController {
 			return false;
         }
     }
+
+	@Override
+	public void setStageController(StageController stageController) {
+		// TODO Auto-generated method stub
+		myController=stageController;
+	}
 }

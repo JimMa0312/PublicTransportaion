@@ -7,7 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import publicTransportaion.model.Station;
 
-public class EditStationInformationController {
+public class EditStationInformationController implements ControlledStage{
 	 @FXML
 	    private TextField Station_Name_TextField;
 	    @FXML
@@ -22,6 +22,8 @@ public class EditStationInformationController {
 	    private Stage dialogStage;
 
 	    private boolean okClicked = false;
+	    
+	    private StageController myController;
 
 	   
 	    @FXML
@@ -91,5 +93,12 @@ public class EditStationInformationController {
 				return false;
 	        }
 	    }
+
+		@Override
+		public void setStageController(StageController stageController) {
+			// TODO Auto-generated method stub
+			this.myController=stageController;
+			
+		}
 
 }

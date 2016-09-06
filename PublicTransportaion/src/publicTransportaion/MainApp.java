@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.view.EditStationInformationController;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
 import publicTransportaion.view.StageController;
@@ -33,8 +34,14 @@ public class MainApp extends Application {
 	public static final String TransationManangeId = "TransationManange";
 	public static final String TransationManageRes = "TransationManage.fxml";
 	
-	public static String EditBusLineInformationId="EditBusLineInformation";
-	public static String EditBusLineInformationRes="EditBusLineInformation.fxml";
+	public static final String EditBusLineInformationId="EditBusLineInformation";
+	public static final String EditBusLineInformationRes="EditBusLineInformation.fxml";
+	
+	public static final String EditCarsinformationId="EditCarsInformation";
+	public static final String EditCarsinformationRes="EditCarsInformation.java";
+	
+	public static final String EditStationInformationId="EditStationInformation";
+	public static final String EditStationInformationRes="EditStationInformation.fxml";
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -49,6 +56,9 @@ public class MainApp extends Application {
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
 		stageController.loadStage(TransationManangeId, TransationManageRes);
 		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
+//		stageController.loadStage(EditCarsinformationId, EditCarsinformationRes, StageStyle.UNDECORATED);
+//		stageController.loadStage(EditStationInformationId, EditStationInformationRes, StageStyle.UNDECORATED);
+		
 
 	}
 
