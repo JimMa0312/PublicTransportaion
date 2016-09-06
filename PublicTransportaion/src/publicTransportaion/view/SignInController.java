@@ -1,6 +1,10 @@
 package publicTransportaion.view;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -8,8 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import publicTransportaion.MainApp;
 
-public class SignInController {
+public class SignInController implements ControlledStage,Initializable {
 	@FXML
     private TextField Control_Id_TextField;
     @FXML
@@ -17,22 +22,18 @@ public class SignInController {
     @FXML
     private Label returnMessage;
 
-
-    private Stage dialogStage;
-
     private boolean okClicked = false;
     
     private String user;
     private String password;
     
+    private StageController myController;
+    private Stage stage;
+    
     
     @FXML
     private void initialize() {
     	returnMessage.setText(null);
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
     }
 
     public boolean isOkClicked() {
@@ -49,7 +50,8 @@ public class SignInController {
    			
    			okClicked=true;
     		   //此处需要添加登陆成功的提示窗并弹出管理页面
-    		   dialogStage.close();
+    		myController.shutDownStage(MainApp.SignInId);
+   			stage.close();
     	   }
     	   else {
               	returnMessage.setText("账号或密码错误！");
@@ -59,7 +61,7 @@ public class SignInController {
     }
     @FXML
     private void handleCancel() {
-        dialogStage.close();
+    	myController.shutDownStage(MainApp.SignInId);
     }
 
     /**
@@ -88,5 +90,24 @@ public class SignInController {
 			return false;
         }
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setStageController(StageController stageController) {
+		// TODO Auto-generated method stub
+		this.myController=stageController;
+	}
+	
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
     
+	public void goToMain() {
+		myController.setStage(MainApp.SignInId);
+	}
 }

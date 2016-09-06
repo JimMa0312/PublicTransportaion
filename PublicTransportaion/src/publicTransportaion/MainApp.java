@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
@@ -18,12 +19,17 @@ import publicTransportaion.view.TransationManageController;
 
 public class MainApp extends Application {
 	
-	private StageController stageController;
+	private static StageController stageController;
 	private Stage PrimaryStage;
 	private BorderPane rootLayout;
 	
 	public static String OutLayerId="OutLayer";
 	public static String OutLayerRes="view/OutLayer.fxml";
+	
+	public static String ShowBusInforMationRes="view/ShowBusInforMation.fxml";
+	
+	public static String SignInId="SignIn";
+	public static String SignInRes="SignIn.fxml";
 	
 
 	@Override
@@ -31,11 +37,15 @@ public class MainApp extends Application {
 		stageController=new StageController();
 		this.PrimaryStage=primaryStage;
 		this.PrimaryStage.setTitle("公交车查询系统");
+		stageController.setPrimaryStage(OutLayerId, primaryStage);
+		
 		
 		initRootLayout();
 		ShowBusInformationOverView();
 		
-		stageController.addStage(OutLayerId, primaryStage);
+		stageController.loadStage(SignInId, SignInRes);
+		
+
 	}
 	
 	private void initRootLayout() {
@@ -45,7 +55,6 @@ public class MainApp extends Application {
 			rootLayout=(BorderPane) loader.load();
 			
 			OutLayerControl control=new OutLayerControl();
-			control.setMainApp(this);
 			
 			Scene scene=new Scene(rootLayout);
 			PrimaryStage.setScene(scene);
@@ -59,7 +68,7 @@ public class MainApp extends Application {
 	private void ShowBusInformationOverView(){
 		try {
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/ShowBusInforMation.fxml"));
+			loader.setLocation(MainApp.class.getResource(ShowBusInforMationRes));
 			AnchorPane busInformationDialog=(AnchorPane) loader.load();
 			
 			ShowBusInforMationController controller=new ShowBusInforMationController();
@@ -70,36 +79,11 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * 有bug，进程无法创建
-	 */
-	public boolean showSignInView() {
-		try {
-			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/SignIn.fxml"));
-			AnchorPane page=(AnchorPane)loader.load();
-			
-			Stage stage=new Stage();
-			stage.setTitle("登陆");
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(PrimaryStage);
-			Scene scene=new Scene(page);
-			stage.setScene(scene);
-			
-			SignInController controller=new SignInController();
-			controller.setDialogStage(stage);
-			
-			stage.showAndWait();
-			
-			
-			return controller.isOkClicked();
-
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return false;
-		}
+	
+	public static void showSignInView(){
+		stageController.setWaitStage(SignInId);
 	}
+
 	
 	public void showTranstationManage(){
 		try {

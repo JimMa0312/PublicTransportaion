@@ -83,11 +83,20 @@ public class StageController {
 		return true;
 	}
 	
+	public boolean setWaitStage(String name){
+		this.getStage(name).showAndWait();
+		return true;
+	}
+	
 	public boolean setStage(String show, String close) {
 		getStage(close).close();
 		setStage(show);
 		
 		return true;
+	}
+	
+	public void shutDownStage(String name){
+		this.getStage(name).close();
 	}
 	
 	public boolean unloadStage(String name){
