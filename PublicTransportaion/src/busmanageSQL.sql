@@ -169,7 +169,7 @@ go
 /* Table: Bus_information                                       */
 /*==============================================================*/
 create table Bus_information (
-   Bus_No               varchar(1)           not null,
+   Bus_No               varchar(10)           not null,
    Time_Start           datetime             not null,
    Time_End             datetime             not null,
    Time_Lag             int             not null,
@@ -223,7 +223,7 @@ go
 /* Table: Route_Planning                                        */
 /*==============================================================*/
 create table Route_Planning (
-   Bus_No               varchar(1)           null,
+   Bus_No               varchar(10)           null,
    UpStream             text                 not null,
    DownStream           text                 not null
 )
@@ -245,7 +245,7 @@ go
 /* Table: SID                                                   */
 /*==============================================================*/
 create table SID (
-   Bus_No               varchar(1)           not null,
+   Bus_No               varchar(10)           not null,
    Station_ID           char(10)             not null,
    License_Plate        varchar(9)           not null,
    Engine_start         time            	 not null,
