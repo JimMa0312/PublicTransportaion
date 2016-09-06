@@ -2,6 +2,7 @@ package publicTransportaion.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.zip.InflaterInputStream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import publicTransportaion.MainApp;
 
-public class SignInController implements ControlledStage,Initializable {
+public class SignInController implements ControlledStage {
 	@FXML
     private TextField Control_Id_TextField;
     @FXML
@@ -42,16 +43,20 @@ public class SignInController implements ControlledStage,Initializable {
 
     @FXML
     private void handleOk() {
+    	
+    	user="sa";
+    	password="1230";
+    	
        if(isInputValid()){
-    	   if(Control_Id_TextField.getText()==user&&Control_PWD_PasswordField.getText()==password)
+    	   if(!Control_Id_TextField.equals(user)&& !Control_PWD_PasswordField.equals(password))
     	   {
            	returnMessage.setText("登陆成功");
            	returnMessage.setTextFill(Color.GREEN);
    			
    			okClicked=true;
-    		   //此处需要添加登陆成功的提示窗并弹出管理页面
     		myController.shutDownStage(MainApp.SignInId);
-   			stage.close();
+   			MainApp.showTranstationManageView();
+    		
     	   }
     	   else {
               	returnMessage.setText("账号或密码错误！");
@@ -70,32 +75,22 @@ public class SignInController implements ControlledStage,Initializable {
      * @return true if the input is valid
      */
     private boolean isInputValid() {
-        String errorMessage = "";
+        boolean isInputvalid=true;
 
         if (Control_Id_TextField.getText() == null || Control_Id_TextField.getText().length() == 0) {
-            errorMessage += "ID cant't be empty!\n"; 
+            returnMessage.setText("请输入账户");
+            returnMessage.setTextFill(Color.RED);
+            isInputvalid=false;
         }
         if (Control_PWD_PasswordField.getText() == null || Control_PWD_PasswordField.getText().length() == 0) {
-            errorMessage += "Password can't be empty!\n"; 
+            returnMessage.setText("请输入密码");
+            returnMessage.setTextFill(Color.RED);
+            isInputvalid=false;
         }
-        if (errorMessage.length() == 0) {
-            return true;
-        } else {
-
-        	Alert alert=new Alert(AlertType.ERROR);
-			alert.setTitle("Invalid Fields");
-			alert.setHeaderText("Please correct invalid fields");
-			alert.setContentText(errorMessage);
-			alert.showAndWait();
-			return false;
-        }
+        
+        return isInputvalid;
+        
     }
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void setStageController(StageController stageController) {

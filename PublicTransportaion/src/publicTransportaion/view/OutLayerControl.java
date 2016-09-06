@@ -1,17 +1,12 @@
 package publicTransportaion.view;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import publicTransportaion.MainApp;
 
 public class OutLayerControl implements ControlledStage, Initializable {
@@ -38,26 +33,6 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	}
 	@FXML
 	private void ShowSignIn(){
-//		Stage stage=new Stage();
-//		try {
-//			FXMLLoader loader=new FXMLLoader();
-//			loader.setLocation(getClass().getResource(MainApp.SignInRes));
-//			AnchorPane pane=(AnchorPane)loader.load();
-//			
-//			Scene scene=new Scene(pane);
-//			stage.setTitle("登陆");
-//			stage.setScene(scene);
-//			
-//			SignInController controller=new SignInController();
-//			controller.setStage(stage);
-//			
-//			stage.showAndWait();
-//		} catch (IOException e) {
-//			// TODO: handle exception\
-//			e.printStackTrace();
-//		}
-		
-		//myController.setWaitStage(MainApp.OutLayerId);
 		MainApp.showSignInView();
 	}
 
