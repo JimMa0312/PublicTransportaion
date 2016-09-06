@@ -48,7 +48,6 @@ public class MainApp extends Application {
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
 		stageController.loadStage(TransationManangeId, TransationManageRes);
-		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
 
 	}
 
