@@ -48,6 +48,7 @@ public class MainApp extends Application {
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
 		stageController.loadStage(TransationManangeId, TransationManageRes);
+		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
 
 	}
 
@@ -83,13 +84,13 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void showSignInView() {
-		stageController.setWaitStage(SignInId);
+		stageController.setStage(SignInId);
 	}
 
 	public static void showTranstationManageView() {
-		stageController.setWaitStage(TransationManangeId);
+		stageController.setStage(TransationManangeId);
 	}
 
 	public static void main(String[] args) {

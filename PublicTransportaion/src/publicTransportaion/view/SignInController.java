@@ -55,6 +55,9 @@ public class SignInController implements ControlledStage {
    			
    			okClicked=true;
     		myController.shutDownStage(MainApp.SignInId);
+    		Control_Id_TextField.setText(null);
+    		Control_PWD_PasswordField.setText(null);
+    		returnMessage.setText(null);
    			MainApp.showTranstationManageView();
     		
     	   }
