@@ -38,6 +38,6 @@
             <PasswordField fx:id="Control_PWD_PasswordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label fx:id="returnMessage" layoutX="180.0" layoutY="138.0" prefHeight="15.0" prefWidth="70.0" text="Label" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="50.0" />
+      <Label fx:id="returnMessage" layoutX="180.0" layoutY="138.0" prefHeight="15.0" prefWidth="157.0" text="Label" textAlignment="RIGHT" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="50.0" />
    </children>
 </AnchorPane>

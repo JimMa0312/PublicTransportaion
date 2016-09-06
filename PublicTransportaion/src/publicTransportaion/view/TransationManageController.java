@@ -5,13 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
-import publicTransportaion.MainApp;
 import publicTransportaion.model.Bus;
 import publicTransportaion.model.Cars;
 import publicTransportaion.model.Station;
 
-public class TransationManageController {
+public class TransationManageController implements ControlledStage {
 	@FXML
     private Label License_Plate_Label;
     @FXML
@@ -63,10 +61,8 @@ public class TransationManageController {
     @FXML
     private TableColumn<Station, String> Station_Name_Column;
     
+    private StageController myController;
     
-    
-    private MainApp mainApp ;
-    private Stage stage;
 	   
     public void initializeCars(){
     	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
@@ -91,7 +87,6 @@ public class TransationManageController {
                 (observable, oldValue, newValue) -> showBusDetails(newValue));
     }
 	private void showBusDetails(Bus bus) {
-		// TODO Auto-generated method stub
 		return;
 	}
 	
@@ -106,15 +101,12 @@ public class TransationManageController {
     }
     
 	private void showStationDetails(Station station) {
-		// TODO Auto-generated method stub
 		return;
 	}
-    
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;      
-    }
-    public void setStage(Stage stage) {
-		this.stage = stage;
+
+	@Override
+	public void setStageController(StageController stageController) {
+		this.myController=stageController;
 	}
 
 }
