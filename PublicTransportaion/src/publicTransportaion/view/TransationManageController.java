@@ -81,7 +81,7 @@ public class TransationManageController implements ControlledStage {
 	public void initializeBus(){
 //		Bus_Line_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
     	
-    	showCarsDetails(null);
+    	showBusDetails(null);
     	
     	Bus_Line_ListTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showBusDetails(newValue));

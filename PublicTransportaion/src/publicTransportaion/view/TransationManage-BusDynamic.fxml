@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TableView layoutX="31.0" layoutY="124.0" prefHeight="286.0" prefWidth="268.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <columns>
+            <TableColumn prefWidth="75.0" text="车牌照号" />
+            <TableColumn prefWidth="75.0" text="班线" />
+         </columns>
+      </TableView>
+      <GridPane layoutX="387.0" layoutY="124.0" prefHeight="239.0" prefWidth="221.0">
+         <children>
+            <Label text="车牌照号：">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Label" GridPane.columnIndex="1" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label prefHeight="12.0" prefWidth="60.0" text="班线编号：" GridPane.rowIndex="1" />
+            <Label text="发车时间：" GridPane.rowIndex="2" />
+            <Label text="执行日期：" GridPane.rowIndex="3" />
+            <Label text="线路使用：" GridPane.rowIndex="4" />
+            <Label text="位置信息：" GridPane.rowIndex="5" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <TextArea layoutX="387.0" layoutY="363.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
+      <Label layoutX="33.0" layoutY="433.0" text="单击车辆可以在右侧查看车辆详细的发车动态信息" />
+      <Label layoutX="33.0" layoutY="89.0" text="以下为符合检索条件的车辆：">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="387.0" layoutY="89.0" text="发车辆计划信息：">
+         <font>
+            <Font name="Microsoft YaHei Bold" size="18.0" />
+         </font>
+      </Label>
+      <HBox layoutX="26.0" layoutY="37.0">
+         <children>
+            <Label layoutX="16.0" layoutY="31.0" text="检索已有车牌号或班线：">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <TextField layoutX="163.0" layoutY="27.0" prefHeight="23.0" prefWidth="124.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <Button layoutX="299.0" layoutY="27.0" mnemonicParsing="false" text="查找">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
