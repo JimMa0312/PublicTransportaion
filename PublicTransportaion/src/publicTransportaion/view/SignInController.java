@@ -48,7 +48,7 @@ public class SignInController implements ControlledStage {
     	password="1230";
     	
        if(isInputValid()){
-    	   if(!Control_Id_TextField.equals(user)&& !Control_PWD_PasswordField.equals(password))
+    	   if(Control_Id_TextField.getText().equals(user)&& Control_PWD_PasswordField.getText().equals(password))
     	   {
            	returnMessage.setText("登陆成功");
            	returnMessage.setTextFill(Color.GREEN);
