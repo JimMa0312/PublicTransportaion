@@ -16,11 +16,6 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
-import com.sun.glass.ui.CommonDialogs.Type;
-
-import sun.launcher.resources.launcher;
-import sun.security.jca.GetInstance;
-
 /*
  * RSA安全编码组件
  */

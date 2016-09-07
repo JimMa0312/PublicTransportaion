@@ -25,7 +25,8 @@ public class TransationManageBusLineController implements ControlledStage {
     @FXML
     private TableColumn<Bus, String> Bus_Line_Column;
     
-    private StageController myController;
+    @SuppressWarnings("unused")
+	private StageController myController;
     
     public void initializeBus(){
 //		Bus_Line_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());

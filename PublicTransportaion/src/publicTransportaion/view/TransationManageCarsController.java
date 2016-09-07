@@ -25,7 +25,8 @@ public class TransationManageCarsController implements ControlledStage {
     @FXML
     private TableColumn<Cars, String> License_Plate_Column;
     
-    private StageController myController;
+    @SuppressWarnings("unused")
+	private StageController myController;
     
     public void initializeCars(){
     	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());

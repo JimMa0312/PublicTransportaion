@@ -25,6 +25,7 @@ public class ShowBusInforMationController {
 	@FXML
 	private TextField neirong;
 
+	@SuppressWarnings("unused")
 	private MainApp mainApp;
 
 	public void setMainApp(MainApp mainApp) {

@@ -2,6 +2,7 @@ package publicTransportaion.util;
 
 public class GPS {
 	private static final String PANE="|";
+	private static String outString;
 	
 	public static double[] parseFloatList(String GPSString) {
 		String[] tempValue=GPSString.split(PANE);
@@ -15,7 +16,7 @@ public class GPS {
 	}
 	
 	public static String parseString(double[] GPSVale) {
-		String outString = null;
+		outString = null;
 		for (int i = 0; i < GPSVale.length; i++) {
 			outString.concat(Double.toString(GPSVale[i]));
 			if (i!=GPSVale.length-1) {

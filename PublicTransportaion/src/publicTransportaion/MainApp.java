@@ -7,15 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import publicTransportaion.sql.SqlDeloy;
-import publicTransportaion.view.EditStationInformationController;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
 import publicTransportaion.view.StageController;
-import publicTransportaion.view.TransationManageController;
 
 public class MainApp extends Application {
 
@@ -33,6 +30,21 @@ public class MainApp extends Application {
 
 	public static final String TransationManangeId = "TransationManange";
 	public static final String TransationManageRes = "TransationManage.fxml";
+	
+	public static final String InToManagerViewId="InToManagerView";
+	public static final String InToManagerViewRes="InToManagerView.fxml";
+	
+	public static final String TransationManage_BusDynamicId="TransationManage-BusDynamic";
+	public static final String TranstationManage_BusDynamicRes="TransationManage-BusDynamic.fxml";
+	
+	public static final String TransationManage_BusLineId="TransationManage-BusLine";
+	public static final String TransationManage_BusLineRes="TransationManage-BusLine.fxml";
+	
+	public static final String TransationManage_CarsId="TransationManage-Cars";
+	public static final String TransationManage_CarsRes="TransationManage-Cars.fxml";
+	
+	public static final String TransationManage_StationId="TransationManage-Station";
+	public static final String TransationManage_StationRes="TransationManage-Station.fxml";
 	
 	public static final String EditBusLineInformationId="EditBusLineInformation";
 	public static final String EditBusLineInformationRes="EditBusLineInformation.fxml";
@@ -54,8 +66,13 @@ public class MainApp extends Application {
 		ShowBusInformationOverView();
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
-		stageController.loadStage(TransationManangeId, TransationManageRes);
-		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
+//		stageController.loadStage(TransationManangeId, TransationManageRes);
+		stageController.loadStage(InToManagerViewId, InToManagerViewRes);
+		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
+		stageController.loadStage(TransationManage_BusLineId, TransationManage_BusLineRes);
+		stageController.loadStage(TransationManage_CarsId, TransationManage_CarsRes);
+		stageController.loadStage(TransationManage_StationId, TransationManage_StationRes);
+//		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
 //		stageController.loadStage(EditCarsinformationId, EditCarsinformationRes, StageStyle.UNDECORATED);
 //		stageController.loadStage(EditStationInformationId, EditStationInformationRes, StageStyle.UNDECORATED);
 		
@@ -98,10 +115,30 @@ public class MainApp extends Application {
 	public static void showSignInView() {
 		stageController.setStage(SignInId);
 	}
-
-	public static void showTranstationManageView() {
-		stageController.setStage(TransationManangeId);
+	
+	public static void showInToManageView() {
+		stageController.setStage(InToManagerViewId);
 	}
+	
+	public static void showTransationManage_BusDyanmicView() {
+		stageController.setStage(TransationManage_BusDynamicId);
+	}
+	
+	public static void showTranastionManage_BusLineView() {
+		stageController.setStage(TransationManage_BusLineId);
+	}
+	
+	public static void showTransationManage_CarsView() {
+		stageController.setStage(TransationManage_CarsId);
+	}
+	
+	public static void showTransationManage_StationView() {
+		stageController.setStage(TransationManage_StationId);
+	}
+
+//	public static void showTranstationManageView() {
+//		stageController.setStage(TransationManangeId);
+//	}
 
 	public static void main(String[] args) {
 

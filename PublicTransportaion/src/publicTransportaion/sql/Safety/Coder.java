@@ -1,7 +1,6 @@
 package publicTransportaion.sql.Safety;
 
 import java.security.MessageDigest;
-import java.util.Base64;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;

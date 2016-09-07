@@ -1,26 +1,16 @@
 package publicTransportaion.view;
 
 import java.util.*;
-import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.zip.InflaterInputStream;
-
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-import com.sun.crypto.provider.RC2Parameters;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import publicTransportaion.MainApp;
 import publicTransportaion.sql.SqlDeloy;
 
@@ -34,11 +24,7 @@ public class SignInController implements ControlledStage {
 
     private boolean okClicked = false;
     
-    private String user;
-    private String password;
-    
     private StageController myController;
-    private Stage stage;
     
     
     @FXML
@@ -53,9 +39,6 @@ public class SignInController implements ControlledStage {
     @FXML
     private void handleOk() {
     	
-    	user="sa";
-    	password="1230";
-    	
        if(isInputValid()){
     	   if(NTLM())
     	   {
@@ -67,7 +50,8 @@ public class SignInController implements ControlledStage {
     		Control_Id_TextField.setText(null);
     		Control_PWD_PasswordField.setText(null);
     		returnMessage.setText(null);
-   			MainApp.showTranstationManageView();
+//   			MainApp.showTranstationManageView();
+    		MainApp.showInToManageView();
     		
     	   }
     	   else {
@@ -105,7 +89,9 @@ public class SignInController implements ControlledStage {
 					return true;
 				}
 			}
-    		
+    		resultSet.close();
+    		stmt.close();
+    		sqlDeloy.shotDownCon();
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -147,10 +133,6 @@ public class SignInController implements ControlledStage {
 	public void setStageController(StageController stageController) {
 		// TODO Auto-generated method stub
 		this.myController=stageController;
-	}
-	
-	public void setStage(Stage stage){
-		this.stage=stage;
 	}
     
 	public void goToMain() {

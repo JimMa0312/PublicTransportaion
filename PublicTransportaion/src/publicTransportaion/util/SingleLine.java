@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SingleLine {
+	@SuppressWarnings("unused")
 	private List<String> line;
 
 	public SingleLine() {

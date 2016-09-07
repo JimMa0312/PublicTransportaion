@@ -61,7 +61,8 @@ public class TransationManageController implements ControlledStage {
     @FXML
     private TableColumn<Station, String> Station_Name_Column;
     
-    private StageController myController;
+    @SuppressWarnings("unused")
+	private StageController myController;
     
 	   
     public void initializeCars(){

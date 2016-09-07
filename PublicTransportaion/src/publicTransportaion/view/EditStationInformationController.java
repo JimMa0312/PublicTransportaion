@@ -23,7 +23,8 @@ public class EditStationInformationController implements ControlledStage{
 
 	    private boolean okClicked = false;
 	    
-	    private StageController myController;
+	    @SuppressWarnings("unused")
+		private StageController myController;
 
 	   
 	    @FXML

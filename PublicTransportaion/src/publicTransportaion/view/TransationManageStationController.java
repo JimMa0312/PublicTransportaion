@@ -21,7 +21,8 @@ public class TransationManageStationController implements ControlledStage{
     @FXML
     private TableColumn<Station, String> Station_Name_Column;
     
-    private StageController myController;
+    @SuppressWarnings("unused")
+	private StageController myController;
     
     public void initializeStation(){
 		Station_ID_Column.setCellValueFactory(cellData -> cellData.getValue().getStationIDProperty());

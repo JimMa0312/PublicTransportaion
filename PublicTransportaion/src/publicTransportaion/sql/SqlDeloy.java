@@ -2,7 +2,6 @@ package publicTransportaion.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import publicTransportaion.sql.Safety.RSACoder;
@@ -10,6 +9,7 @@ import publicTransportaion.sql.Safety.RSACoder;
 public class SqlDeloy {
 	private static final String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static final String	DBURL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=Bus";
+	@SuppressWarnings("unused")
 	private static SqlCon sqlCon;
 	private static Connection connection=null;
 	

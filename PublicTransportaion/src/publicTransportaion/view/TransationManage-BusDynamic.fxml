@@ -7,8 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.TransationManageBusDyanmic">
    <children>
       <TableView layoutX="31.0" layoutY="124.0" prefHeight="286.0" prefWidth="268.0">
          <columnResizePolicy>
