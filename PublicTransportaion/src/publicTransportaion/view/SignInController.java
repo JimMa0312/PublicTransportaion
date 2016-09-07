@@ -1,13 +1,15 @@
 package publicTransportaion.view;
 
+import java.util.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.sql.Statement;
 import java.util.zip.InflaterInputStream;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.crypto.provider.RC2Parameters;
 
 import javafx.fxml.FXML;
@@ -80,21 +82,30 @@ public class SignInController implements ControlledStage {
     	Connection connection=sqlDeloy.getConnection();
     	
     	
-    	String sql="select Control_PWD from [dbo].[admin_information] where COntrol_Id='"+Control_Id_TextField.getText()+"'";
-    	PreparedStatement pstmt;
+    	String sql="select Control_PWD from admin_information where COntrol_Id='"+Control_Id_TextField.getText()+"'";
     	
     	try {
-			pstmt=(PreparedStatement) connection.prepareStatement(sql);
-			ResultSet resultSet=pstmt.executeQuery();
-			int col=resultSet.getMetaData().getColumnCount();
-			if (col<1||col>1) {
+    		Statement stmt=connection.createStatement();
+    		ResultSet resultSet=stmt.executeQuery(sql);
+    		
+    		List<String> list=new ArrayList<String>();
+    		
+    		while(resultSet.next()){
+    			list.add(resultSet.getString("Control_PWD"));
+    		}
+    		
+    		System.out.println(list);
+    		
+    		if (list.size()!=1) {
 				return false;
 			}
-			String TRUEpwd=resultSet.getString("Control_PWD");
-			
-			if (TRUEpwd.equals(Control_PWD_PasswordField.getText())) {
-				return true;
+    		
+    		for (String TruePwd : list) {
+				if (TruePwd.equals(Control_PWD_PasswordField.getText())) {
+					return true;
+				}
 			}
+    		
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
