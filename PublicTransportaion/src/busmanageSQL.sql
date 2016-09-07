@@ -170,8 +170,8 @@ go
 /*==============================================================*/
 create table Bus_information (
    Bus_No               varchar(10)           not null,
-   Time_Start           datetime             not null,
-   Time_End             datetime             not null,
+   Time_Start           time             not null,
+   Time_End             time             not null,
    Time_Lag             int             not null,
    constraint PK_BUS_INFORMATION primary key nonclustered (Bus_No)
 )
@@ -250,7 +250,7 @@ create table SID (
    License_Plate        varchar(9)           not null,
    Engine_start         time            	 not null,
    GPS                  text                 not null,
-   CarrOut_Date         datetime             not null,
+   CarrOut_Date         date             not null,
    Line_Layer           int                  not null,
    planning_type			int					 not null
    constraint PK_SID primary key nonclustered (Bus_No, Station_ID, License_Plate)
