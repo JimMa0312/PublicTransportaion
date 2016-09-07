@@ -1,8 +1,14 @@
 package publicTransportaion.view;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.zip.InflaterInputStream;
+
+import com.sun.crypto.provider.RC2Parameters;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import publicTransportaion.MainApp;
+import publicTransportaion.sql.SqlDeloy;
 
 public class SignInController implements ControlledStage {
 	@FXML
@@ -48,7 +55,7 @@ public class SignInController implements ControlledStage {
     	password="1230";
     	
        if(isInputValid()){
-    	   if(!Control_Id_TextField.equals(user)&& !Control_PWD_PasswordField.equals(password))
+    	   if(NTLM())
     	   {
            	returnMessage.setText("登陆成功");
            	returnMessage.setTextFill(Color.GREEN);
@@ -67,6 +74,36 @@ public class SignInController implements ControlledStage {
     	   }
        }
     }
+    
+    private boolean NTLM(){
+    	SqlDeloy sqlDeloy=new SqlDeloy();
+    	Connection connection=sqlDeloy.getConnection();
+    	
+    	
+    	String sql="select Control_PWD from [dbo].[admin_information] where COntrol_Id='"+Control_Id_TextField.getText()+"'";
+    	PreparedStatement pstmt;
+    	
+    	try {
+			pstmt=(PreparedStatement) connection.prepareStatement(sql);
+			ResultSet resultSet=pstmt.executeQuery();
+			int col=resultSet.getMetaData().getColumnCount();
+			if (col<1||col>1) {
+				return false;
+			}
+			String TRUEpwd=resultSet.getString("Control_PWD");
+			
+			if (TRUEpwd.equals(Control_PWD_PasswordField.getText())) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    	return false;
+    	
+    }
+    
     @FXML
     private void handleCancel() {
     	myController.shutDownStage(MainApp.SignInId);
