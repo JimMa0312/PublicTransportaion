@@ -105,8 +105,8 @@ public class MainApp extends Application {
 
 	public static void main(String[] args) {
 
-//		SqlDeloy testsqlDeloy = new SqlDeloy();
-//		testsqlDeloy.shotDownCon();
+		SqlDeloy testsqlDeloy = new SqlDeloy();
+		testsqlDeloy.shotDownCon();
 
 		launch(args);
 	}
