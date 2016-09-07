@@ -66,7 +66,7 @@ public class SignInController implements ControlledStage {
     	Connection connection=sqlDeloy.getConnection();
     	
     	
-    	String sql="select Control_PWD from admin_information where COntrol_Id='"+Control_Id_TextField.getText()+"'";
+    	String sql="select Control_PWD from admin_information where Control_Id='"+Control_Id_TextField.getText()+"'";
     	
     	try {
     		Statement stmt=connection.createStatement();

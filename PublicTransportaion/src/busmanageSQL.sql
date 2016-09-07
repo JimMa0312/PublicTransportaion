@@ -250,7 +250,7 @@ create table SID (
    License_Plate        varchar(9)           not null,
    Engine_start         time            	 not null,
    GPS                  text                 not null,
-   CarrOut_Date         date             not null,
+   CarrOut_Date         date				 not null,
    Line_Layer           int                  not null,
    planning_type			int					 not null
    constraint PK_SID primary key nonclustered (Bus_No, Station_ID, License_Plate)
@@ -297,10 +297,10 @@ go
 /* Table: admin_information                                     */
 /*==============================================================*/
 create table admin_information (
-   COntrol_Id           char(10)             not null,
+   Control_Id           char(10)             not null,
    Control_PWD          varchar(50)          not null,
    Control_Limit        int                  not null,
-   constraint PK_ADMIN_INFORMATION primary key nonclustered (COntrol_Id)
+   constraint PK_ADMIN_INFORMATION primary key nonclustered (Control_Id)
 )
 go
 
