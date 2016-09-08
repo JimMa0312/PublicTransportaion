@@ -5,20 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SingleLine {
-	@SuppressWarnings("unused")
-	private List<String> line;
-
-	public SingleLine() {
-		// TODO Auto-generated constructor stub
-		line=new ArrayList<String>();
-	}
+	private static List<String> line;
 	
-	public SingleLine(String lienString){
+	
+	public static List<String> parse(String lienString){
+		line=new ArrayList<String>();
 		String[] strings=lienString.split("|");
 		line= Arrays.asList(strings);
-	}
-	
-	public List<String> getLine(){
 		return line;
 	}
 }
