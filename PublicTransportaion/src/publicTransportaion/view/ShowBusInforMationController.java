@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,8 @@ import publicTransportaion.MainApp;
 import publicTransportaion.model.Bus;
 import publicTransportaion.model.Station;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.util.TimeConverter;
+import sun.security.krb5.internal.crypto.crc32;
 
 public class ShowBusInforMationController {
 	@FXML
@@ -62,8 +65,10 @@ public class ShowBusInforMationController {
 
 	@FXML
 	private void initialize() throws SQLException {
-		ShowBusInfor();
+		ShowBusInfor(null);
 		//
+		e1.setText("");
+		e2.setText("");
 		SqlDeloy s1 = new SqlDeloy();
 		String sql1="select * from Station_information";
 		Connection c1=s1.getConnection();
@@ -107,15 +112,44 @@ public class ShowBusInforMationController {
 		zhanming.setCellValueFactory(cellData -> cellData.getValue().getStationNameProperty());
 		dizhi.setCellValueFactory(cellData -> cellData.getValue().getStationAddressProperty());
 		//将搜索结果框中的数据进行初始化
+		bustable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+					try {
+						ShowBusInfor(newValue);
+					} catch (SQLException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
+					}
+				});
 	}
 
-	private void ShowBusInfor() {
-		e1.setText("");
-		e2.setText("");
-		bus_no.setText(null);
-		position_information.setText(null);
-		next_station.setText(null);
-		how_many_station.setText(null);
+	private void ShowBusInfor(Bus bus) throws SQLException {
+		if(bus==null)
+		{
+			bus_no.setText(null);
+			position_information.setText(null);
+			next_station.setText(null);
+			how_many_station.setText(null);
+		}
+		else{
+			bus_no.setText(bus.getBusNo());
+			//此处往下必须通过链接数据库动态获取数据
+			SqlDeloy s3 = new SqlDeloy();
+			String sql3="select GPS from SID where Bus_No=?";
+			Connection c1=s3.getConnection();
+			PreparedStatement ps3=c1.prepareStatement(sql3);
+			ps3.setString(1,bus.getBusNo());
+			ResultSet result3=ps3.executeQuery();
+			if(result3.next()){ 
+				position_information.setText(result3.getString(1));
+			}	
+			else{
+				position_information.setText(null);
+			}
+			result3.close();
+			ps3.close();
+			c1.close();
+		}		
 	}
 	@FXML
 	private void Search2() throws SQLException
@@ -148,6 +182,7 @@ public class ShowBusInforMationController {
 			}while(result.next());
 		}
 		else{
+			busdata.clear();
 			e2.setText("抱歉，没有查询到相关班线。");
 			System.out.println("抱歉，没有查询到相关信息。");
 		}
@@ -191,6 +226,7 @@ public class ShowBusInforMationController {
 			}while(result.next());
 		}
 		else{
+			stationdata.clear();
 			e1.setText("抱歉，没有查询到相关站点。");
 			System.out.println("抱歉，没有查询到相关信息。");
 		}
@@ -204,4 +240,5 @@ public class ShowBusInforMationController {
    public ObservableList<Station> getStationData() {
        return stationdata;
    }
+   
 }
