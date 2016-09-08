@@ -62,6 +62,7 @@ public class SignInController implements ControlledStage {
     }
     
     private boolean NTLM(){
+    	boolean isOk=false;
     	SqlDeloy sqlDeloy=new SqlDeloy();
     	Connection connection=sqlDeloy.getConnection();
     	
@@ -80,13 +81,9 @@ public class SignInController implements ControlledStage {
     		
     		System.out.println(list);
     		
-    		if (list.size()!=1) {
-				return false;
-			}
-    		
     		for (String TruePwd : list) {
 				if (TruePwd.equals(Control_PWD_PasswordField.getText())) {
-					return true;
+					isOk=true;
 				}
 			}
     		resultSet.close();
@@ -97,7 +94,7 @@ public class SignInController implements ControlledStage {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-    	return false;
+    	return isOk;
     	
     }
     
