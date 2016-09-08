@@ -6,9 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,10 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import publicTransportaion.model.Bus;
-import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.util.SingleLine;
-import publicTransportaion.util.TImeUtil;
 import publicTransportaion.util.TimeConverter;
 
 public class TransationManageBusLineController implements ControlledStage,Initializable {
