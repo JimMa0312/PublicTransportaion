@@ -50,7 +50,7 @@ public class TransationManageCarsController implements ControlledStage,Initializ
 			Car_population_Label.setText(null);
 			Bus_chair_Label.setText(null);
 		}else{
-			License_Plate_Column.setText(cars.getLicensePlate());
+			License_Plate_Label.setText(cars.getLicensePlate());
 			Engine_id_Label.setText(cars.getEingeId());
 			Frame_id_Label.setText(cars.getFrameId());
 			Bus_type_Label.setText(cars.getBusType());
@@ -83,10 +83,12 @@ public class TransationManageCarsController implements ControlledStage,Initializ
 				car.setBusType(resultSet.getString("Bus_type"));
 				car.setCarPopulation(resultSet.getInt("Can_population"));
 				car.setBusChair(resultSet.getInt("Bus_Chair"));
-				
 				carsList.add(car);
-				
 			}
+	    	
+	    	resultSet.close();
+	    	stmt.close();
+	    	sqlDeloy.shotDownCon();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +99,9 @@ public class TransationManageCarsController implements ControlledStage,Initializ
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
     	connectAndSelectCarsInfor();
-    	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
+    	
+    	CarsTable.setItems(carsList);
+    	License_Plate_Column.setCellValueFactory(cellData->cellData.getValue().getLicensePlateProperty());
     	
     	showCarsDetails(null);
     	
