@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+import jdk.nashorn.internal.ir.debug.PrintVisitor;
 import publicTransportaion.model.Cars;
 
 
@@ -31,7 +31,7 @@ public class EditCarsInformationController implements ControlledStage {
 
 
     private Stage dialogStage;
-    private Cars cars;
+    private static Cars cars;
     private boolean okClicked = false;
     
     @SuppressWarnings("unused")
@@ -40,16 +40,19 @@ public class EditCarsInformationController implements ControlledStage {
    
     @FXML
     private void initialize() {
+    	printValue();
     }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
     
-    public void setCars(Cars cars) {
-        this.cars = cars;
-
-        License_Plate_TextField.setText(cars.getLicensePlate());
+    public static void setCars(Cars cars) {
+        EditCarsInformationController.cars = cars;
+    }
+    
+    private void printValue(){
+    	License_Plate_TextField.setText(cars.getLicensePlate());
         Engine_id_TextField.setText(cars.getEingeId());
         Frame_id_TextField.setText(cars.getFrameId());
         Bus_type_TextField.setText(cars.getBusType());
@@ -159,6 +162,6 @@ public class EditCarsInformationController implements ControlledStage {
 	@Override
 	public void setStageController(StageController stageController) {
 		// TODO Auto-generated method stub
-		myController=stageController;
+		this.myController=stageController;
 	}
 }
