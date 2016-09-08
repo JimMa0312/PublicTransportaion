@@ -11,8 +11,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
-import publicTransportaion.view.EditCarsInformationController;
-import publicTransportaion.view.EditStationInformationController;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
 import publicTransportaion.view.StageController;
@@ -49,16 +47,6 @@ public class MainApp extends Application {
 	public static final String TransationManage_StationId="TransationManage-Station";
 	public static final String TransationManage_StationRes="TransationManage-Station.fxml";
 	
-	public static final String EditBusLineInformationId="EditBusLineInformation";
-	public static final String EditBusLineInformationRes="EditBusLineInformation.fxml";
-	
-	public static final String EditCarsinformationId="EditCarsInformation";
-	public static final String EditCarsinformationRes="EditCarsInformation.fxml";
-	
-	public static final String EditStationInformationId="EditStationInformation";
-	public static final String EditStationInformationRes="EditStationInformation.fxml";
-	
-	public EditStationInformationController editCarsInformationController;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -75,9 +63,6 @@ public class MainApp extends Application {
 		stageController.loadStage(InToManagerViewId, InToManagerViewRes);
 		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
 		stageController.loadStage(TransationManage_BusLineId, TransationManage_BusLineRes);
-		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
-		stageController.loadStage(EditCarsinformationId, EditCarsinformationRes, StageStyle.UNDECORATED);
-		stageController.loadStage(EditStationInformationId, EditStationInformationRes, StageStyle.UNDECORATED);
 		
 
 	}
@@ -139,11 +124,6 @@ public class MainApp extends Application {
 	public static void showTransationManage_StationView() {
 		stageController.loadStage(TransationManage_StationId, TransationManage_StationRes);
 		stageController.setStage(TransationManage_StationId);
-	}
-	
-	public static void EditCarsInformationView(Cars car){
-		EditCarsInformationController.setCars(car);
-		stageController.setStage(EditCarsinformationId);
 	}
 
 //	public static void showTranstationManageView() {

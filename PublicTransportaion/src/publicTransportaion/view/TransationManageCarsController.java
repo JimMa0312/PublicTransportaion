@@ -1,5 +1,6 @@
 package publicTransportaion.view;
 
+import java.awt.TextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,14 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -24,17 +22,17 @@ import publicTransportaion.sql.SqlDeloy;
 
 public class TransationManageCarsController implements ControlledStage, Initializable {
 	@FXML
-	private Label License_Plate_Label;
+	private TextField License_Plate_TextField;
 	@FXML
-	private Label Engine_id_Label;
+	private TextField Engine_id_TextField;
 	@FXML
-	private Label Frame_id_Label;
+	private TextField Frame_id_TextField;
 	@FXML
-	private Label Bus_type_Label;
+	private TextField Bus_type_TextField;
 	@FXML
-	private Label Car_population_Label;
+	private TextField Car_population_TextField;
 	@FXML
-	private Label Bus_chair_Label;
+	private TextField Bus_chair_TextField;
 
 	@FXML
 	private TableView<Cars> CarsTable;
@@ -48,19 +46,19 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 
 	private void showCarsDetails(Cars cars) {
 		if (cars == null) {
-			License_Plate_Label.setText(null);
-			Engine_id_Label.setText(null);
-			Frame_id_Label.setText(null);
-			Bus_type_Label.setText(null);
-			Car_population_Label.setText(null);
-			Bus_chair_Label.setText(null);
+			License_Plate_TextField.setText(null);
+			Engine_id_TextField.setText(null);
+			Frame_id_TextField.setText(null);
+			Bus_type_TextField.setText(null);
+			Car_population_TextField.setText(null);
+			Bus_chair_TextField.setText(null);
 		} else {
-			License_Plate_Label.setText(cars.getLicensePlate());
-			Engine_id_Label.setText(cars.getEingeId());
-			Frame_id_Label.setText(cars.getFrameId());
-			Bus_type_Label.setText(cars.getBusType());
-			Car_population_Label.setText(Integer.toString(cars.getCarPopulation()));
-			Bus_chair_Label.setText(Integer.toString(cars.getBusChair()));
+			License_Plate_TextField.setText(cars.getLicensePlate());
+			Engine_id_TextField.setText(cars.getEingeId());
+			Frame_id_TextField.setText(cars.getFrameId());
+			Bus_type_TextField.setText(cars.getBusType());
+			Car_population_TextField.setText(Integer.toString(cars.getCarPopulation()));
+			Bus_chair_TextField.setText(Integer.toString(cars.getBusChair()));
 
 		}
 	}
@@ -137,6 +135,11 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			alert.setContentText("请选择删除的对象");
 			alert.showAndWait();
 		}
+	}
+	
+	@FXML
+	private void handleNewCars(){
+		Cars newCar=new Cars();
 	}
 
 	private boolean DeleteCarsInformationfromSql(String Id) {

@@ -11,7 +11,7 @@
    <children>
       <HBox layoutX="321.0" layoutY="440.0">
          <children>
-            <Button mnemonicParsing="false" prefWidth="96.0" text="增加车辆">
+            <Button mnemonicParsing="false" onAction="#handleNewCars" prefWidth="96.0" text="增加车辆">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,12 +45,12 @@
             <Label text="车型：" GridPane.rowIndex="3" />
             <Label text="车座：" GridPane.rowIndex="4" />
             <Label text="核载人数：" GridPane.rowIndex="5" />
-            <Label fx:id="License_Plate_Label" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="Engine_id_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="Frame_id_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="Bus_type_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="Bus_chair_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="Car_population_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="License_Plate_TextField" GridPane.columnIndex="1" />
+            <TextField fx:id="Engine_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="Frame_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="Bus_type_TextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="Bus_chair_TextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="Car_population_TextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
