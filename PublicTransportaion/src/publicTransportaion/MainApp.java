@@ -75,7 +75,6 @@ public class MainApp extends Application {
 		stageController.loadStage(InToManagerViewId, InToManagerViewRes);
 		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
 		stageController.loadStage(TransationManage_BusLineId, TransationManage_BusLineRes);
-		stageController.loadStage(TransationManage_StationId, TransationManage_StationRes);
 		stageController.loadStage(EditBusLineInformationId, EditBusLineInformationRes, StageStyle.UNDECORATED);
 		stageController.loadStage(EditCarsinformationId, EditCarsinformationRes, StageStyle.UNDECORATED);
 		stageController.loadStage(EditStationInformationId, EditStationInformationRes, StageStyle.UNDECORATED);
@@ -138,6 +137,7 @@ public class MainApp extends Application {
 	}
 	
 	public static void showTransationManage_StationView() {
+		stageController.loadStage(TransationManage_StationId, TransationManage_StationRes);
 		stageController.setStage(TransationManage_StationId);
 	}
 	
