@@ -51,9 +51,6 @@
             <Label text="站点名称：" />
             <Label text="站点编号：" GridPane.rowIndex="1" />
             <Label text="站点地址：" GridPane.rowIndex="2" />
-            <Label text="Label" GridPane.columnIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="Station_Name_Label" text="Label" GridPane.columnIndex="1" />
             <Label fx:id="Station_ID_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="Station_Address_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
