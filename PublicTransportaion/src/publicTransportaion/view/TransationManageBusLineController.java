@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableView;
 import publicTransportaion.model.Bus;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.util.SingleLine;
 import publicTransportaion.util.TImeUtil;
 import publicTransportaion.util.TimeConverter;
 
@@ -43,6 +46,7 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 	private StageController myController;
     
     private ObservableList<Bus> busList=FXCollections.observableArrayList();
+   
     
 	private void showBusDetails(Bus bus) {
 		if (bus == null) {
