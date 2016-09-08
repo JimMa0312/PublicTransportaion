@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.ir.debug.PrintVisitor;
 import publicTransportaion.model.Cars;
 
 
@@ -40,7 +39,7 @@ public class EditCarsInformationController implements ControlledStage {
    
     @FXML
     private void initialize() {
-    	printValue();
+    	//printValue();
     }
 
     public void setDialogStage(Stage dialogStage) {

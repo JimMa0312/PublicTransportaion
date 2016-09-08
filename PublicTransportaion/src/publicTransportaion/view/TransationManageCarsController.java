@@ -1,19 +1,23 @@
 package publicTransportaion.view;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
 
-public class TransationManageCarsController implements ControlledStage {
+public class TransationManageCarsController implements ControlledStage,Initializable {
 	@FXML
     private Label License_Plate_Label;
     @FXML
@@ -37,17 +41,21 @@ public class TransationManageCarsController implements ControlledStage {
     
     private ObservableList<Cars> carsList=FXCollections.observableArrayList();
     
-    public void initializeCars(){
-    	connectAndSelectCarsInfor();
-    	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
-    	
-    	showCarsDetails(null);
-    	
-    	CarsTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showCarsDetails(newValue));
-    }
     private void showCarsDetails(Cars cars) {
 		if (cars==null) {
+			License_Plate_Label.setText(null);
+			Engine_id_Label.setText(null);
+			Frame_id_Label.setText(null);
+			Bus_type_Label.setText(null);
+			Car_population_Label.setText(null);
+			Bus_chair_Label.setText(null);
+		}else{
+			License_Plate_Column.setText(cars.getLicensePlate());
+			Engine_id_Label.setText(cars.getEingeId());
+			Frame_id_Label.setText(cars.getFrameId());
+			Bus_type_Label.setText(cars.getBusType());
+			Car_population_Label.setText(Integer.toString(cars.getCarPopulation()));
+			Bus_chair_Label.setText(Integer.toString(cars.getBusChair()));
 			
 		}
 	}
@@ -85,5 +93,16 @@ public class TransationManageCarsController implements ControlledStage {
 		}
     	
     }
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+    	connectAndSelectCarsInfor();
+    	License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
+    	
+    	showCarsDetails(null);
+    	
+    	CarsTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showCarsDetails(newValue));
+	}
 
 }
