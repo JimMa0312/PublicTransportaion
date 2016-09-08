@@ -7,10 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/JimMa0312/PublicTransportaion
 import java.util.List;
 import java.util.ResourceBundle;
 
