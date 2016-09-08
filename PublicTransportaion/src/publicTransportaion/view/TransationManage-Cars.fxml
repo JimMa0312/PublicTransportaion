@@ -18,6 +18,9 @@
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
+               <rotationAxis>
+                  <Point3D z="2.0" />
+               </rotationAxis>
             </Button>
             <Button mnemonicParsing="false" prefWidth="108.0" text="修改车辆信息" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="439.0" AnchorPane.topAnchor="479.0">
                <font>
@@ -26,6 +29,9 @@
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
+               <rotationAxis>
+                  <Point3D z="2.0" />
+               </rotationAxis>
             </Button>
             <Button mnemonicParsing="false" onAction="#handleDeleteCars" prefWidth="81.0" text="删除车辆">
                <font>
@@ -34,23 +40,35 @@
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
+               <rotationAxis>
+                  <Point3D z="2.0" />
+               </rotationAxis>
             </Button>
          </children>
+         <rotationAxis>
+            <Point3D z="2.0" />
+         </rotationAxis>
       </HBox>
-      <GridPane layoutX="49.0" layoutY="96.0" prefHeight="324.0" prefWidth="323.0">
+      <GridPane layoutX="49.0" layoutY="95.0" prefHeight="327.0" prefWidth="323.0">
          <children>
             <Label text="车牌照号：" />
-            <Label text="发动机号码：" GridPane.rowIndex="1" />
-            <Label text="车架编号：" GridPane.rowIndex="2" />
-            <Label text="车型：" GridPane.rowIndex="3" />
-            <Label text="车座：" GridPane.rowIndex="4" />
-            <Label text="核载人数：" GridPane.rowIndex="5" />
+            <Label text="发动机号码：" GridPane.rowIndex="2" />
+            <Label text="车架编号：" GridPane.rowIndex="4" />
+            <Label text="车型：" GridPane.rowIndex="6" />
+            <Label text="车座：" GridPane.rowIndex="8" />
+            <Label text="核载人数：" GridPane.rowIndex="10" />
             <TextField fx:id="License_Plate_TextField" GridPane.columnIndex="1" />
-            <TextField fx:id="Engine_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="Frame_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="Bus_type_TextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="Bus_chair_TextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="Car_population_TextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="Engine_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="Frame_id_TextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="Bus_type_TextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="Bus_chair_TextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="Car_population_TextField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label fx:id="License_Plate_Error" prefHeight="15.0" prefWidth="170.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="Engine_id_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="Frame_id_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="Bus_type_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="bus_chair_textField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="Car_population_textField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -58,11 +76,17 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="46.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="150.0" minHeight="5.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
       <TableView fx:id="CarsTable" layoutX="419.0" layoutY="95.0" prefHeight="327.0" prefWidth="194.0">

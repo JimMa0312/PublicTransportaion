@@ -1,5 +1,6 @@
 package publicTransportaion.view;
 
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
 
@@ -38,6 +43,19 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private TableView<Cars> CarsTable;
 	@FXML
 	private TableColumn<Cars, String> License_Plate_Column;
+	
+	@FXML
+	private Label License_Plate_Error;
+	@FXML
+	private Label Engine_id_error;
+	@FXML
+	private Label Frame_id_error;
+	@FXML
+	private Label Bus_type_error;
+	@FXML
+	private Label Car_population_textField;
+	@FXML
+	private Label bus_chair_textField;
 
 	@SuppressWarnings("unused")
 	private StageController myController;
@@ -168,9 +186,49 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	@FXML
 	private void handleNewCars(){
 		Cars newCar=new Cars();
-		showCarsDetails(newCar);
 		
 	}
 	
+	private boolean isLicensePlateVlid() {
+		String vehicleNoStyle="^[\u4e00-\u9fa5]{1}[A-Z0-9]{6}$";
+		java.util.regex.Pattern pattern=java.util.regex.Pattern.compile(vehicleNoStyle);
+		Matcher matcher=pattern.matcher(License_Plate_TextField.getText());
+		if (matcher.matches()) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
+	private boolean isInputVlid(){
+		String message=null;
+		if (License_Plate_TextField.getText().isEmpty()) {
+			message+="请输入车牌照号\n";
+		}
+		if (!isLicensePlateVlid()) {
+			message+="请输入正确的车牌照号\n";
+		}
+		if (Engine_id_TextField.getText().isEmpty()) {
+			message+="请输入发动机号\n";
+		}
+		if (Frame_id_TextField.getText().isEmpty()) {
+			message+="请输入车架编号\n";
+		}
+		if (Bus_type_TextField.getText().isEmpty()) {
+			message+="请输入车辆类型\n";
+		}
+		if (Car_population_TextField.getText().isEmpty()) {
+			message+="请输入核载人数\n";
+		}
+		if (Bus_chair_TextField.getText().isEmpty()) {
+			message+="请输入车座数量\n";
+		}
+		
+		if (message==null) {
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
 }

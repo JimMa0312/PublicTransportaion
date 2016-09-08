@@ -50,7 +50,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TextArea layoutX="387.0" layoutY="363.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;       对车辆信息、班线信息&#10;       以及站点信息进行的更改，&#10;       均为对发车计划的更改。" />
+      <TextArea layoutX="387.0" layoutY="363.0" prefHeight="77.0" prefWidth="200.0" text="*发车计划的更改：管理员&#10;  对车辆信息、班线信息&#10;  以及站点信息进行的更改，&#10;  均为对发车计划的更改。" />
       <Label layoutX="33.0" layoutY="433.0" text="单击车辆可以在右侧查看车辆详细的发车动态信息" />
       <Label layoutX="33.0" layoutY="89.0" text="以下为符合检索条件的车辆：">
          <font>
