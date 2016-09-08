@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Cars {
-	private final StringProperty licensePlate;//³µÅÆÕÕºÅ
-	private final StringProperty eingeId;//·¢¶¯»úºÅ
-	private final StringProperty frameId;//³µ¼Ü±àºÅ
-	private final StringProperty busType;//³µÐÍ
-	private final IntegerProperty busChair;//³µÁ¾×ùÎ»
-	private final IntegerProperty carPopulation;//³µÁ¾ºËÔØÈËÊý
+	private final StringProperty licensePlate;//ï¿½ï¿½ï¿½ï¿½ï¿½Õºï¿½
+	private final StringProperty eingeId;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private final StringProperty frameId;//ï¿½ï¿½ï¿½Ü±ï¿½ï¿½
+	private final StringProperty busType;//ï¿½ï¿½ï¿½ï¿½
+	private final IntegerProperty busChair;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
+	private final IntegerProperty carPopulation;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	public Cars() {
 		// TODO Auto-generated constructor stub
@@ -77,6 +77,10 @@ public class Cars {
 		this.busChair.set(Integer.parseInt(busChair));
 	}
 	
+	public void setBusChair(int busChair) {
+		this.busChair.set(busChair);
+	}
+	
 	public int getBusChair() {
 		return busChair.get();
 	}
@@ -85,8 +89,12 @@ public class Cars {
 		return busChair;
 	}
 	
-	public void setCarPopulation(String carPopulation) {
-		this.carPopulation.set(Integer.parseInt(carPopulation));
+	public void setCarPopulation(String i) {
+		this.carPopulation.set(Integer.parseInt(i));
+	}
+	
+	public void setCarPopulation(int i) {
+		this.carPopulation.set(i);
 	}
 
 	public int getCarPopulation() {

@@ -9,7 +9,6 @@ import publicTransportaion.MainApp;
 
 public class InToManagerController implements ControlledStage, Initializable {
 	
-	@SuppressWarnings("unused")
 	private StageController myController;
 
 	@Override
