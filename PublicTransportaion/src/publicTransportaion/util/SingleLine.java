@@ -17,5 +17,8 @@ public class SingleLine {
 		String[] strings=lienString.split("|");
 		line= Arrays.asList(strings);
 	}
-
+	
+	public List<String> getLine(){
+		return line;
+	}
 }
