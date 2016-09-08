@@ -27,7 +27,7 @@
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="81.0" text="删除车辆">
+            <Button mnemonicParsing="false" onAction="#handleDeleteCars" prefWidth="81.0" text="删除车辆">
                <font>
                   <Font size="14.0" />
                </font>
