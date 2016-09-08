@@ -42,7 +42,7 @@
             <Label text="班线编号：" />
             <Label text="起点：" GridPane.rowIndex="1" />
             <Label text="终点：" GridPane.rowIndex="2" />
-            <Label text="上下行路线：" GridPane.rowIndex="3" />
+            <Label text="发车间隔" GridPane.rowIndex="3" />
             <Label text="早班发车时间：" GridPane.rowIndex="4" />
             <Label text="末班发车时间：" GridPane.rowIndex="5" />
             <Label fx:id="Bus_No_Label" text="Label" GridPane.columnIndex="1" />
