@@ -1,6 +1,5 @@
 package publicTransportaion.view;
 
-import java.awt.TextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
@@ -98,6 +98,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		}
 
 	}
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -136,11 +137,6 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			alert.showAndWait();
 		}
 	}
-	
-	@FXML
-	private void handleNewCars(){
-		Cars newCar=new Cars();
-	}
 
 	private boolean DeleteCarsInformationfromSql(String Id) {
 		boolean isOk = false;
@@ -162,4 +158,19 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 
 		return isOk;
 	}
+	
+	private void getCarsInformation(Cars cars){
+		cars.setLicensePlate(License_Plate_TextField.getText());
+		
+		
+	}
+	
+	@FXML
+	private void handleNewCars(){
+		Cars newCar=new Cars();
+		showCarsDetails(newCar);
+		
+	}
+	
+	
 }
