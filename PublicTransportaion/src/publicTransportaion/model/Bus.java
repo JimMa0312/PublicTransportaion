@@ -2,6 +2,7 @@ package publicTransportaion.model;
 
 import java.sql.Time;
 import java.time.LocalTime;
+import publicTransportaion.model.Line;
 
 import com.sun.media.jfxmedia.control.VideoDataBuffer;
 
