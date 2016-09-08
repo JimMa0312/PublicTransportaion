@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -14,7 +15,23 @@
                <children>
                   <SplitPane dividerPositions="0.6" layoutX="-3.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="548.0" prefWidth="429.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="stationtable" layoutX="14.0" layoutY="124.0" prefHeight="185.0" prefWidth="399.0">
+                                <columns>
+                                  <TableColumn fx:id="zhanming" prefWidth="103.0" text="站名" />
+                                  <TableColumn fx:id="dizhi" prefWidth="295.0" text="地址" />
+                                </columns>
+                              </TableView>
+                              <TextField fx:id="neirong1" layoutX="53.0" layoutY="72.0" />
+                              <Button layoutX="214.0" layoutY="72.0" mnemonicParsing="false" onAction="#Search1" prefHeight="23.0" prefWidth="72.0" text="搜索" />
+                              <Label layoutX="36.0" layoutY="30.0" text="搜索站点">
+                                 <font>
+                                    <Font name="Microsoft YaHei UI" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="e1" layoutX="67.0" layoutY="103.0" text="Label" textFill="#e81818" />
+                           </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <GridPane layoutX="63.0" layoutY="14.0" prefHeight="189.0" prefWidth="301.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -25,21 +42,42 @@
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="公交班线：" />
-                                    <Label prefHeight="30.0" prefWidth="84.0" text="车辆位置信息：" GridPane.rowIndex="1" />
-                                    <Label text="上一站：" GridPane.rowIndex="2" />
-                                    <Label text="下一站：" GridPane.rowIndex="3" />
-                                    <Label text="距离本站还有几站：" GridPane.rowIndex="4" />
-                                    <Label fx:id="bus_no" text="Label" GridPane.columnIndex="1" />
-                                    <Label fx:id="position_information" prefHeight="15.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label fx:id="last_station" prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label fx:id="next_station" prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="how_many_station" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="公交班线：">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                    <Label prefHeight="30.0" prefWidth="133.0" text="车辆位置信息：" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font></Label>
+                                    <Label text="下一站：" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                    <Label text="距离本站还有几站：" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                    <Label fx:id="bus_no" text="Label" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <Label fx:id="position_information" prefHeight="15.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <Label fx:id="next_station" prefHeight="15.0" prefWidth="40.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <Label fx:id="how_many_station" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
                                  </children>
                               </GridPane>
                            </children></AnchorPane>
@@ -55,17 +93,27 @@
                            <children>
                               <HBox layoutX="80.0" layoutY="57.0">
                                  <children>
-                                    <TextField fx:id="neirong" layoutX="32.0" layoutY="57.0" />
-                                    <Button layoutX="226.0" layoutY="57.0" mnemonicParsing="false" text="搜索" />
+                                    <TextField fx:id="neirong2" layoutX="32.0" layoutY="57.0" />
+                                    <Button layoutX="226.0" layoutY="57.0" mnemonicParsing="false" onAction="#Search2" prefHeight="23.0" prefWidth="58.0" text="搜索" />
                                  </children>
                               </HBox>
-                              <Label layoutX="44.0" layoutY="23.0" text="搜索">
+                              <Label layoutX="44.0" layoutY="23.0" text="搜索班线">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="Microsoft YaHei UI" size="20.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="e2" layoutX="80.0" layoutY="93.0" text="Label" textFill="#e41a1a" />
                            </children></AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="bustable" layoutX="35.0" layoutY="43.0" prefHeight="319.0" prefWidth="273.0">
+                                <columns>
+                                  <TableColumn fx:id="firstcolumn" prefWidth="132.0" text="班线编号" />
+                                  <TableColumn fx:id="secondcolumn" minWidth="0.0" prefWidth="140.0" text="发车间隔（分钟）" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="20.0" layoutY="14.0" text="班线列表" />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
