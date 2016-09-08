@@ -95,6 +95,10 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private void initErrorMessageTextFill() {
 		License_Plate_Error.setTextFill(Color.RED);
 		Engine_id_error.setTextFill(Color.RED);
+		Frame_id_error.setTextFill(Color.RED);
+		Bus_type_error.setTextFill(Color.RED);
+		bus_chair_error.setTextFill(Color.RED);
+		Car_population_error.setTextFill(Color.RED);
 	}
 
 	@Override
@@ -130,7 +134,6 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 
@@ -138,6 +141,8 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		connectAndSelectCarsInfor();
+		initErrorMessageTextFill();
+		initErrorMessage();
 
 		CarsTable.setItems(carsList);
 		License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
@@ -202,7 +207,22 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	@FXML
 	private void handleNewCars(){
 		Cars newCar=new Cars();
-		
+		if (isInputVlid()) {
+			newCar.setLicensePlate(License_Plate_TextField.getText());
+			newCar.setEingeId(Engine_id_TextField.getText());
+			newCar.setFrameId(Frame_id_TextField.getText());
+			newCar.setBusType(Bus_type_TextField.getText());
+			newCar.setBusChair(Bus_chair_TextField.getText());
+			newCar.setCarPopulation(Car_population_TextField.getText());
+			if (InsertIntoSql(newCar)) {
+				carsList.add(newCar);
+			}else{
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.setTitle("数据库上传错误");
+				alert.setHeaderText("上聚酷新建信息错误");
+				alert.setContentText("数据可能重复");
+			}
+		}
 	}
 	
 	private boolean isLicensePlateVlid() {
@@ -217,34 +237,92 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	}
 	
 	private boolean isInputVlid(){
-		String message=null;
+		boolean message=true;
 		if (License_Plate_TextField.getText().isEmpty()) {
-			message+="请输入车牌照号\n";
+			License_Plate_Error.setText("请输入车牌照号");
+			message=false;
 		}
 		if (!isLicensePlateVlid()) {
-			message+="请输入正确的车牌照号\n";
+			License_Plate_Error.setText("请输入正确的车牌照号");
+			message=false;
+		}
+		if (IsCommedwhiLP()) {
+			License_Plate_Error.setText("输入的车牌照重复请重新输入");
+			message=false;
 		}
 		if (Engine_id_TextField.getText().isEmpty()) {
-			message+="请输入发动机号\n";
+			Engine_id_error.setText("请输入发动机号");
+			message=false;
 		}
 		if (Frame_id_TextField.getText().isEmpty()) {
-			message+="请输入车架编号\n";
+			Frame_id_error.setText("请输入车架编号");
+			message=false;
 		}
 		if (Bus_type_TextField.getText().isEmpty()) {
-			message+="请输入车辆类型\n";
+			Bus_type_error.setText("请输入车辆类型");
+			message=false;
 		}
 		if (Car_population_TextField.getText().isEmpty()) {
-			message+="请输入核载人数\n";
+			Car_population_error.setText("请输入核载人数");
+			message=false;
 		}
 		if (Bus_chair_TextField.getText().isEmpty()) {
-			message+="请输入车座数量\n";
+			bus_chair_error.setText("请输入车座数量");
+			message=false;
 		}
 		
-		if (message==null) {
-			return true;
-		}else{
+		return message;
+	}
+	
+	private boolean IsCommedwhiLP() {
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
+		
+		try{
+			PreparedStatement pStmt=connection.prepareStatement("Select License_Plate as num from Car_information where License_Plate=?");
+			pStmt.setString(1, License_Plate_TextField.getText());
+			ResultSet res=pStmt.executeQuery();
+			boolean isComLP;
+			if (res.next()) {
+				 isComLP=true;
+			}else{
+				isComLP=false;
+			}
+			
+			res.close();
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+			return isComLP;
+		}catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	private boolean InsertIntoSql(Cars cars) {
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
 		
+		try {
+			PreparedStatement pStmt=connection.prepareStatement("INSERT INTO Car_information (License_Plate,Einge_id,Frame_id,Bus_type,Can_population,Bus_Chair) VALUES (?,?,?,?,?,?)");
+			pStmt.setString(1, cars.getLicensePlate());
+			pStmt.setString(2, cars.getEingeId());
+			pStmt.setString(3, cars.getFrameId());
+			pStmt.setString(4, cars.getBusType());
+			pStmt.setInt(5, cars.getBusChair());
+			pStmt.setInt(6, cars.getCarPopulation());
+			int row=pStmt.executeUpdate();
+			if (row>0) {
+				return true;
+			}
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return false;
 	}
 }
