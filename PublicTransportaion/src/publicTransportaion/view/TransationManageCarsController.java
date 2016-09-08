@@ -1,6 +1,7 @@
 package publicTransportaion.view;
 
 
+import java.awt.Frame;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import publicTransportaion.model.Cars;
 import publicTransportaion.sql.SqlDeloy;
@@ -53,9 +55,9 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	@FXML
 	private Label Bus_type_error;
 	@FXML
-	private Label Car_population_textField;
+	private Label Car_population_error;
 	@FXML
-	private Label bus_chair_textField;
+	private Label bus_chair_error;
 
 	@SuppressWarnings("unused")
 	private StageController myController;
@@ -79,6 +81,20 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			Bus_chair_TextField.setText(Integer.toString(cars.getBusChair()));
 
 		}
+	}
+	
+	private void initErrorMessage() {
+		License_Plate_Error.setText(null);
+		Engine_id_error.setText(null);
+		Frame_id_error.setText(null);
+		Bus_type_error.setText(null);
+		bus_chair_error.setText(null);
+		Car_population_error.setText(null);
+	}
+	
+	private void initErrorMessageTextFill() {
+		License_Plate_Error.setTextFill(Color.RED);
+		Engine_id_error.setTextFill(Color.RED);
 	}
 
 	@Override

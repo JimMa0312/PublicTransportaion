@@ -67,8 +67,8 @@
             <Label fx:id="Engine_id_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="Frame_id_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="Bus_type_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label fx:id="bus_chair_textField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Label fx:id="Car_population_textField" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <Label fx:id="bus_chair_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="Car_population_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
