@@ -19,11 +19,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import publicTransportaion.model.Bus;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.util.SingleLine;
-import publicTransportaion.util.TImeUtil;
 import publicTransportaion.util.TimeConverter;
 
 public class TransationManageBusLineController implements ControlledStage,Initializable {
@@ -67,14 +67,14 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 	private void showBusDetails(Bus bus) {
 		if (bus == null) {
 			Bus_No_TextField.setText("");
-			Start_Station_TextField.setText("");
-			End_Station_TextField.setText("");
+			//Start_Station_TextField.setText("");
+			//End_Station_TextField.setText("");
 			Time_Lage_TextField.setText("");
 			Time_Start_TextField.setText("");
 			Time_End_TextField.setText("");
 		} else {
 			Bus_No_TextField.setText(bus.getBusNo());
-			showStartAndEndStation(bus);
+			//showStartAndEndStation(bus);
 			
 			Time_Lage_TextField.setText(bus.getTimeLag());
 			Time_Start_TextField.setText(TimeConverter.format(bus.getTimeStart1()));
@@ -92,39 +92,6 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		End_Station_TextField.setText(EndStation);
 	}
 	
-	private String  setStartStation(Bus bus) {
-		List<String> list=SingleLine.parse(bus.getLine());
-		String startStation=list.get(0);
-		return startStation;
-	}
-	
-	private String setEndStation(Bus bus) {
-		List<String> list=SingleLine.parse(bus.getLine());
-		String EndStation=list.get(list.size()-1);
-		return EndStation;
-		
-	}
-	
-	private String selectStation(String Id) {
-		String stationName = null;
-		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
-		try {
-			PreparedStatement pStmt=connection.prepareStatement("Select Station_Name from Station_information where Station_ID=?");
-			pStmt.setString(1, Id);
-			ResultSet rest=pStmt.executeQuery();
-			while(rest.next()){
-				stationName=rest.getString("Station_Name");
-				System.out.println(stationName);
-			}
-			return stationName;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	private void initErrorMessage() {
 		Bus_No_Error.setText(null);
 		Start_Station_error.setText(null);
@@ -135,32 +102,19 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 	}
 	
 	private void initErrorMessageTextFill() {
-		Bus_No_Error.setTextFill(javafx.scene.paint.Color.RED);
-		Start_Station_error.setTextFill(javafx.scene.paint.Color.RED);
-		End_Station_error.setTextFill(javafx.scene.paint.Color.RED);
-		Time_Lage_error.setTextFill(javafx.scene.paint.Color.RED);
-		Time_Start_error.setTextFill(javafx.scene.paint.Color.RED);
-		Time_End_error.setTextFill(javafx.scene.paint.Color.RED);
+		Bus_No_Error.setTextFill(Color.RED);
+		Start_Station_error.setTextFill(Color.RED);
+		End_Station_error.setTextFill(Color.RED);
+		Time_Lage_error.setTextFill(Color.RED);
+		Time_Start_error.setTextFill(Color.RED);
+		Time_End_error.setTextFill(Color.RED);
 	}
 	
 	@Override
 	public void setStageController(StageController stageController) {
 		this.myController=stageController;
     }
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		connectAndSelectBusInfor();
-		initErrorMessageTextFill();
-		initErrorMessage();
-		
-		showBusDetails(null);
-		
-		Bus_Line_ListTable.setItems(busList);
-		Bus_Line_Column.setCellValueFactory(cellData -> cellData.getValue().getBusNoProperty());
-    	Bus_Line_ListTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showBusDetails(newValue));
-	}
+	
 	private void connectAndSelectBusInfor() {
 		// TODO Auto-generated method stub
 		SqlDeloy sqlDeloy=new SqlDeloy();
@@ -178,11 +132,9 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 				bus.setBusNo(resultSet.getString("Bus_No"));
 				bus.setLine(resultSet.getNString(this.setStartStation(bus)));
 				bus.setLine(resultSet.getNString(this.setEndStation(bus)));
-				bus.setTimeLag(resultSet.getString("timeLag_stirng"));
-				bus.setStartTime(resultSet.getTime("timeStart"));
-				bus.setTimeEnd(resultSet.getTime("timeEnd"));
-			
-				
+				bus.setTimeLag(resultSet.getString("Time_Lag"));
+				bus.setStartTime(resultSet.getTime("Time_Start"));
+				bus.setTimeEnd(resultSet.getTime("Time_End"));		
 				busList.add(bus);
 			}
 	    	
@@ -192,6 +144,68 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		connectAndSelectBusInfor();
+		initErrorMessageTextFill();
+		initErrorMessage();
+		
+		showBusDetails(null);
+		
+		Bus_Line_ListTable.setItems(busList);
+		Bus_Line_Column.setCellValueFactory(cellData -> cellData.getValue().getBusNoProperty());
+    	Bus_Line_ListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showBusDetails(newValue));
+	}
+	
+	@FXML
+	private void handleNewBusLine(){
+		Bus newBus = new Bus();
+		if (isInputVlid()) {
+			initErrorMessage();
+			newBus.setBusNo(Bus_No_TextField.getText());
+			//newBus.setLine(Start_Station_TextField.getText());
+			//newBus.setLine(End_Station_TextField.getText());
+			newBus.setTimeLag(Time_Lage_TextField.getText());
+			newBus.setStartTime(TimeConverter.parse(Time_Start_TextField.getText()));
+			newBus.setTimeEnd(TimeConverter.parse(Time_End_TextField.getText()));
+			
+			if(InsertIntoSql(newBus)){
+				busList.add(newBus);
+			}
+			
+		} else {
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("数据库上传错误");
+			alert.setHeaderText("数据库新建信息错误");
+			alert.setContentText("数据可能重复");
+
+		}
+	}
+	
+	@FXML
+	private void handleEditBusLine(){
+		Bus editbus = Bus_Line_ListTable.getSelectionModel().getSelectedItem();
+		if(isInputVlid()){
+			initErrorMessage();
+			
+			if(UpDateSql()){
+				editbus.setBusNo(Bus_No_TextField.getText());
+				//editbus.setLine(Start_Station_TextField.getText());
+				//editbus.setLine(End_Station_TextField.getText());
+				editbus.setTimeLag(Time_Lage_TextField.getText());
+				editbus.setStartTime(TimeConverter.parse(Time_Start_TextField.getText()));
+				editbus.setTimeEnd(TimeConverter.parse(Time_End_TextField.getText()));
+			}else{
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.setTitle("数据库上传错误");
+				alert.setHeaderText("数据库新建信息错误");
+				alert.setContentText("数据可能重复");
+			}
 		}
 	}
 	
@@ -216,73 +230,6 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			alert.setHeaderText("删除失败");
 			alert.setContentText("请选择删除的对象");
 			alert.showAndWait();
-		}
-	}
-	
-	private boolean DeleteBusInformationfromSql(String Id) {
-		boolean isOk = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-		try {
-			PreparedStatement pStmt = connection.prepareStatement("Delete from Bus_information where Bus_No=?");
-			pStmt.setString(1, Id);
-			int rtn = pStmt.executeUpdate();
-			System.out.println(rtn);
-			isOk = (rtn == 0) ? false : true;
-			pStmt.close();
-			sqlDeloy.shotDownCon();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}	
-		return isOk;
-		
-	}
-	
-	@FXML
-	private void handleNewBusLine(){
-		Bus newBus = new Bus();
-		if (isInputVlid()) {
-			initErrorMessage();
-			newBus.setBusNo(Bus_No_TextField.getText());
-			newBus.setLine(Start_Station_TextField.getText());
-			newBus.setLine(End_Station_TextField.getText());
-			newBus.setTimeLag(Time_Lage_TextField.getText());
-		//	newBus.setStartTime((Time_Start_TextField.getText()));
-		//	newBus.setTimeEnd(Time_End_TextField.getText());
-			
-			if(InsertIntoSql(newBus)){
-				busList.add(newBus);
-			}
-			
-		} else {
-			Alert alert=new Alert(AlertType.ERROR);
-			alert.setTitle("数据库上传错误");
-			alert.setHeaderText("数据库新建信息错误");
-			alert.setContentText("数据可能重复");
-
-		}
-	}
-	
-	@FXML
-	private void handleEditBusLine(){
-		Bus editbus = Bus_Line_ListTable.getSelectionModel().getSelectedItem();
-		if(isInputVlid()){
-			initErrorMessage();
-			
-			if(UpDateSql()){
-				editbus.setBusNo(Bus_No_TextField.getText());
-				editbus.setLine(Start_Station_TextField.getText());
-				editbus.setLine(End_Station_TextField.getText());
-				editbus.setTimeLag(Time_Lage_TextField.getText());
-			//	editbus.setStartTime((Time_Start_TextField.getText()).toString());
-			//	editbus.setTimeEnd(Time_End_TextField.getText());
-			}else{
-				Alert alert=new Alert(AlertType.ERROR);
-				alert.setTitle("数据库上传错误");
-				alert.setHeaderText("数据库新建信息错误");
-				alert.setContentText("数据可能重复");
-			}
 		}
 	}
 	
@@ -322,11 +269,12 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		Connection connection=sqlDeloy.getConnection();
 		
 		try {
-			PreparedStatement pStmt=connection.prepareStatement("INSERT INTO Bus_information (Bus_No,Time_Start,Time_End,Time_Lag) VALUES (?,?,?,?)");
+			PreparedStatement pStmt=connection.prepareStatement(
+					"INSERT INTO Bus_information (Bus_No,Time_Start,Time_End,Time_Lag) VALUES (?,?,?,?)");
 			pStmt.setString(1, bus.getBusNo());
-			pStmt.setString(2, TimeConverter.format(bus.getTimeStart1()));
-			pStmt.setString(3, TimeConverter.format(bus.getTimeEnd1()) );
-			pStmt.setString(4, bus.getTimeLag());
+			pStmt.setTime(2, (bus.getTimeStart1()));
+			pStmt.setTime(3, (bus.getTimeEnd1()) );
+			pStmt.setInt(4, Integer.parseInt(bus.getTimeLag()));
 			
 			int row = pStmt.executeUpdate();
 			if(row>0)
@@ -348,9 +296,9 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			PreparedStatement pStmt=connection.prepareStatement(
 					"UPDATE Bus_information SET Bus_No=?,Time_Start=?,Time_End=?,Time_Lag=? where Bus_No=?");
 			pStmt.setString(1, Bus_No_TextField.getText());
-			pStmt.setString(2, Time_Start_TextField.getText());
-			pStmt.setString(3, Time_End_TextField.getText() );
-			pStmt.setString(4, Time_Lage_TextField.getText());
+			pStmt.setTime(2, TimeConverter.parse(Time_Start_TextField.getText()));
+			pStmt.setTime(3, TimeConverter.parse(Time_End_TextField.getText()) );
+			pStmt.setInt(4, Integer.parseInt(Time_Lage_TextField.getText()));
 			int row = pStmt.executeUpdate();
 			if(row>0)
 				return true;
@@ -364,5 +312,59 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		return false;
 		
 	}
+	
+	private boolean DeleteBusInformationfromSql(String Id) {
+		boolean isOk = false;
+		SqlDeloy sqlDeloy = new SqlDeloy();
+		Connection connection = sqlDeloy.getConnection();
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(
+					"Delete from Bus_information where Bus_No=?");
+			pStmt.setString(1, Id);
+			int rtn = pStmt.executeUpdate();
+			System.out.println(rtn);
+			isOk = (rtn == 0) ? false : true;
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}	
+		return isOk;
+		
+	}
+	
+	private String  setStartStation(Bus bus) {
+		List<String> list=SingleLine.parse(bus.getLine());
+		String startStation=list.get(0);
+		return startStation;
+	}
+	
+	private String setEndStation(Bus bus) {
+		List<String> list=SingleLine.parse(bus.getLine());
+		String EndStation=list.get(list.size()-1);
+		return EndStation;
+		
+	}
+	
+	private String selectStation(String Id) {
+		String stationName = null;
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
+		try {
+			PreparedStatement pStmt=connection.prepareStatement("Select Station_Name from Station_information where Station_ID=?");
+			pStmt.setString(1, Id);
+			ResultSet rest=pStmt.executeQuery();
+			while(rest.next()){
+				stationName=rest.getString("Station_Name");
+				System.out.println(stationName);
+			}
+			return stationName;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}	
 
 }
