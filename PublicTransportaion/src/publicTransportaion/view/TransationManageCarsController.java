@@ -152,6 +152,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private void handleNewCars() {
 		Cars newCar = new Cars();
 		if (isInputVlid()) {
+			initErrorMessage();
 			newCar.setLicensePlate(License_Plate_TextField.getText());
 			newCar.setEingeId(Engine_id_TextField.getText());
 			newCar.setFrameId(Frame_id_TextField.getText());
@@ -173,6 +174,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private void handleEditCars() {
 		Cars editCar = CarsTable.getSelectionModel().getSelectedItem();
 		if (isInputVlid()) {
+			initErrorMessage();
 			if (UpDateSql()) {
 				editCar.setLicensePlate(License_Plate_TextField.getText());
 				editCar.setEingeId(Engine_id_TextField.getText());
