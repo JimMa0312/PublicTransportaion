@@ -22,7 +22,7 @@
                   <Point3D z="2.0" />
                </rotationAxis>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="108.0" text="修改车辆信息" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="439.0" AnchorPane.topAnchor="479.0">
+            <Button mnemonicParsing="false" onAction="#handleEditCars" prefWidth="108.0" text="修改车辆信息" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="439.0" AnchorPane.topAnchor="479.0">
                <font>
                   <Font size="14.0" />
                </font>

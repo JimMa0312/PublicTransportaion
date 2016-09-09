@@ -220,6 +220,22 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	
 	@FXML
 	private void handleEditCars(){
+		Cars editCar=CarsTable.getSelectionModel().getSelectedItem();
+		if (isInputVlid()) {
+			editCar.setLicensePlate(License_Plate_TextField.getText());
+			editCar.setEingeId(Engine_id_TextField.getText());
+			editCar.setFrameId(Frame_id_TextField.getText());
+			editCar.setBusType(Bus_type_TextField.getText());
+			editCar.setBusChair(Bus_chair_TextField.getText());
+			editCar.setCarPopulation(Car_population_TextField.getText());
+			if (UpDateSql(editCar)) {
+			}else{
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.setTitle("数据库上传错误");
+				alert.setHeaderText("上聚酷新建信息错误");
+				alert.setContentText("数据可能重复");
+			}
+		}
 	}
 	
 	private boolean isLicensePlateVlid() {
@@ -247,23 +263,23 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			License_Plate_Error.setText("输入的车牌照重复请重新输入");
 			message=false;
 		}
-		if (Engine_id_TextField.getText().isEmpty()) {
+		if (Engine_id_TextField.getText().isEmpty() && Engine_id_TextField.getText()==null) {
 			Engine_id_error.setText("请输入发动机号");
 			message=false;
 		}
-		if (Frame_id_TextField.getText().isEmpty()) {
+		if (Frame_id_TextField.getText().isEmpty() && Frame_id_TextField.getText()==null) {
 			Frame_id_error.setText("请输入车架编号");
 			message=false;
 		}
-		if (Bus_type_TextField.getText().isEmpty()) {
+		if (Bus_type_TextField.getText().isEmpty()&&Bus_type_TextField.getText()==null) {
 			Bus_type_error.setText("请输入车辆类型");
 			message=false;
 		}
-		if (Car_population_TextField.getText().isEmpty()) {
+		if (Car_population_TextField.getText().isEmpty()&&Car_population_TextField.getText()==null) {
 			Car_population_error.setText("请输入核载人数");
 			message=false;
 		}
-		if (Bus_chair_TextField.getText().isEmpty()) {
+		if (Bus_chair_TextField.getText().isEmpty()&&Bus_chair_TextField.getText()==null) {
 			bus_chair_error.setText("请输入车座数量");
 			message=false;
 		}
@@ -309,6 +325,33 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			pStmt.setString(4, cars.getBusType());
 			pStmt.setInt(5, cars.getBusChair());
 			pStmt.setInt(6, cars.getCarPopulation());
+			int row=pStmt.executeUpdate();
+			if (row>0) {
+				return true;
+			}
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
+	private boolean UpDateSql(Cars cars) {
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
+		
+		try {
+			PreparedStatement pStmt=connection.prepareStatement("UPDATE Car_information SET License_Plate=?,Einge_id=?,Frame_id=?,Bus_type=?,Can_population=?,Bus_Chair =? where License_Plate=?");
+			pStmt.setString(1, cars.getLicensePlate());
+			pStmt.setString(2, cars.getEingeId());
+			pStmt.setString(3, cars.getFrameId());
+			pStmt.setString(4, cars.getBusType());
+			pStmt.setInt(5, cars.getBusChair());
+			pStmt.setInt(6, cars.getCarPopulation());
+			pStmt.setString(7, cars.getLicensePlate());
 			int row=pStmt.executeUpdate();
 			if (row>0) {
 				return true;
