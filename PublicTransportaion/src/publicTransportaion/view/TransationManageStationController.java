@@ -54,8 +54,6 @@ public class TransationManageStationController implements ControlledStage,Initia
     @FXML
     private TableColumn<Station, String> Station_Name_Column;
     
-    private List<Station> stationList=FXCollections.observableArrayList();
-    
     @SuppressWarnings("unused")
 	private StageController myController;
     
@@ -159,7 +157,7 @@ public class TransationManageStationController implements ControlledStage,Initia
 			setGPSValue();
 			newStation.setStationGPS(GPS.parseString(gps));
 			if (InsertIntoSql(newStation)) {
-				stationList.add(newStation);
+				stationsList.add(newStation);
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.setTitle("数据库上传错误");
@@ -193,7 +191,7 @@ public class TransationManageStationController implements ControlledStage,Initia
 	private void handleDeleteCars() {
 		int selectedIndex = stationsTable.getSelectionModel().getSelectedIndex();
 		if (selectedIndex>=0) {
-			Station station = stationList.get(selectedIndex);
+			Station station = stationsList.get(selectedIndex);
 
 			if (DeleteStationInformationfromSql(station.getStationID())) {
 				stationsTable.getItems().remove(selectedIndex);
