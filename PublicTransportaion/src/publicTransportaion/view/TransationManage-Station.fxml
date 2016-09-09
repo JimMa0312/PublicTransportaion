@@ -11,7 +11,7 @@
    <children>
       <HBox layoutX="348.0" layoutY="457.0">
          <children>
-            <Button mnemonicParsing="false" text="新增站点">
+            <Button mnemonicParsing="false" onAction="#handleNewStation" text="新增站点">
                <font>
                   <Font size="14.0" />
                </font>
@@ -19,7 +19,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="修改站点信息">
+            <Button mnemonicParsing="false" onAction="#handleEditCars" text="修改站点信息">
                <font>
                   <Font size="14.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="删除站点">
+            <Button mnemonicParsing="false" onAction="#handleDeleteCars" text="删除站点">
                <font>
                   <Font size="14.0" />
                </font>
@@ -46,23 +46,49 @@
             <TableColumn fx:id="Station_Name_Column" prefWidth="75.0" text="站点名称" />
          </columns>
       </TableView>
-      <GridPane layoutX="51.0" layoutY="114.0" prefHeight="159.0" prefWidth="315.0">
+      <GridPane layoutX="51.0" layoutY="114.0" prefHeight="244.0" prefWidth="315.0">
          <children>
             <Label text="站点名称：" />
-            <Label text="站点编号：" GridPane.rowIndex="1" />
-            <Label text="站点地址：" GridPane.rowIndex="2" />
-            <Label fx:id="Station_Name_Label" text="Label" GridPane.columnIndex="1" />
-            <Label fx:id="Station_ID_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="Station_Address_Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="站点编号：" GridPane.rowIndex="2" />
+            <Label text="站点地址：" GridPane.rowIndex="4" />
+            <Label text="站点GPS：" GridPane.rowIndex="6" />
+            <Label fx:id="Station_Name_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="Station_Name_TextFeild" GridPane.columnIndex="1" />
+            <TextField fx:id="Station_ID_TextFeild" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="Station_ID_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="Station_Address_TextFeild" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="Station_Address_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="Station_GPS_error" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <Label layoutX="66.0" layoutY="417.0" text="X:">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="Station_GPS_X_TextFeild" layoutX="83.0" layoutY="413.0" prefHeight="23.0" prefWidth="60.0" />
+                  <Label layoutX="152.0" layoutY="417.0" text="Y:">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="Station_GPS_Y_TextFeild" layoutX="167.0" layoutY="413.0" prefHeight="23.0" prefWidth="60.0" />
+               </children>
+            </HBox>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="61.0" minHeight="7.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
       <Label layoutX="386.0" layoutY="64.0" text="站点列表：">
