@@ -1,7 +1,6 @@
 package publicTransportaion.view;
 
 
-import java.awt.Frame;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,15 +61,16 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private StageController myController;
 
 	private ObservableList<Cars> carsList = FXCollections.observableArrayList();
+	
 
 	private void showCarsDetails(Cars cars) {
 		if (cars == null) {
-			License_Plate_TextField.setText(null);
-			Engine_id_TextField.setText(null);
-			Frame_id_TextField.setText(null);
-			Bus_type_TextField.setText(null);
-			Car_population_TextField.setText(null);
-			Bus_chair_TextField.setText(null);
+			License_Plate_TextField.setText("");
+			Engine_id_TextField.setText("");
+			Frame_id_TextField.setText("");
+			Bus_type_TextField.setText("");
+			Car_population_TextField.setText("");
+			Bus_chair_TextField.setText("");
 		} else {
 			License_Plate_TextField.setText(cars.getLicensePlate());
 			Engine_id_TextField.setText(cars.getEingeId());
@@ -143,11 +142,11 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		connectAndSelectCarsInfor();
 		initErrorMessageTextFill();
 		initErrorMessage();
+		
+		showCarsDetails(null);
 
 		CarsTable.setItems(carsList);
 		License_Plate_Column.setCellValueFactory(cellData -> cellData.getValue().getLicensePlateProperty());
-
-		showCarsDetails(null);
 
 		CarsTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showCarsDetails(newValue));
@@ -198,12 +197,6 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		return isOk;
 	}
 	
-	private void getCarsInformation(Cars cars){
-		cars.setLicensePlate(License_Plate_TextField.getText());
-		
-		
-	}
-	
 	@FXML
 	private void handleNewCars(){
 		Cars newCar=new Cars();
@@ -225,6 +218,10 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		}
 	}
 	
+	@FXML
+	private void handleEditCars(){
+	}
+	
 	private boolean isLicensePlateVlid() {
 		String vehicleNoStyle="^[\u4e00-\u9fa5]{1}[A-Z0-9]{6}$";
 		java.util.regex.Pattern pattern=java.util.regex.Pattern.compile(vehicleNoStyle);
@@ -238,7 +235,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	
 	private boolean isInputVlid(){
 		boolean message=true;
-		if (License_Plate_TextField.getText().isEmpty()) {
+		if (License_Plate_TextField.getText()==null && License_Plate_TextField.getText().isEmpty()) {
 			License_Plate_Error.setText("请输入车牌照号");
 			message=false;
 		}
