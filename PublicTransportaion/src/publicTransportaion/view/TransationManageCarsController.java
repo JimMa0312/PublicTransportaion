@@ -230,7 +230,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	
 	private boolean isInputVlid(){
 		boolean message=true;
-		if (License_Plate_TextField.getText()==null && License_Plate_TextField.getText().isEmpty()) {
+		if (License_Plate_TextField.getText()==null || License_Plate_TextField.getText().isEmpty()) {
 			License_Plate_Error.setText("请输入车牌照号");
 			message=false;
 		}
@@ -242,23 +242,23 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			License_Plate_Error.setText("输入的车牌照重复请重新输入");
 			message=false;
 		}
-		if (Engine_id_TextField.getText().isEmpty() && Engine_id_TextField.getText()==null) {
+		if (Engine_id_TextField.getText().isEmpty() || Engine_id_TextField.getText()==null) {
 			Engine_id_error.setText("请输入发动机号");
 			message=false;
 		}
-		if (Frame_id_TextField.getText().isEmpty() && Frame_id_TextField.getText()==null) {
+		if (Frame_id_TextField.getText().isEmpty() || Frame_id_TextField.getText()==null) {
 			Frame_id_error.setText("请输入车架编号");
 			message=false;
 		}
-		if (Bus_type_TextField.getText().isEmpty()&&Bus_type_TextField.getText()==null) {
+		if (Bus_type_TextField.getText().isEmpty()||Bus_type_TextField.getText()==null) {
 			Bus_type_error.setText("请输入车辆类型");
 			message=false;
 		}
-		if (Car_population_TextField.getText().isEmpty()&&Car_population_TextField.getText()==null) {
+		if (Car_population_TextField.getText().isEmpty()||Car_population_TextField.getText()==null) {
 			Car_population_error.setText("请输入核载人数");
 			message=false;
 		}
-		if (Bus_chair_TextField.getText().isEmpty()&&Bus_chair_TextField.getText()==null) {
+		if (Bus_chair_TextField.getText().isEmpty()||Bus_chair_TextField.getText()==null) {
 			bus_chair_error.setText("请输入车座数量");
 			message=false;
 		}
