@@ -11,7 +11,7 @@
    <children>
       <HBox layoutX="355.0" layoutY="436.0">
          <children>
-            <Button layoutX="150.0" layoutY="444.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="95.0" text="新增班线">
+            <Button layoutX="150.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleNewBusLine" prefHeight="31.0" prefWidth="95.0" text="新增班线">
                <font>
                   <Font size="14.0" />
                </font>
@@ -19,7 +19,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="242.0" layoutY="403.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" text="修改班线">
+            <Button layoutX="242.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleEditBusLine" prefHeight="32.0" prefWidth="84.0" text="修改班线">
                <font>
                   <Font size="14.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="364.0" layoutY="406.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="删除班线">
+            <Button layoutX="364.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleDeleteBusLine" prefHeight="31.0" prefWidth="80.0" text="删除班线">
                <font>
                   <Font size="14.0" />
                </font>

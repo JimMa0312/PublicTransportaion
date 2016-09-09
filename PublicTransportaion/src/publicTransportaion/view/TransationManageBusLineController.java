@@ -335,13 +335,10 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			pStmt.close();
 			sqlDeloy.shotDownCon();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return false;
-		}
-		
-		return false;
-		
+		}	
+		return false;	
 	}
 	private boolean UpDateSql(){
 		SqlDeloy sqlDeloy=new SqlDeloy();
