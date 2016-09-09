@@ -151,51 +151,6 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		CarsTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showCarsDetails(newValue));
 	}
-
-	@FXML
-	private void handleDeleteCars() {
-		int selectedIndex = CarsTable.getSelectionModel().getSelectedIndex();
-		if (selectedIndex>=0) {
-			Cars cars = carsList.get(selectedIndex);
-
-			if (DeleteCarsInformationfromSql(cars.getLicensePlate())) {
-				CarsTable.getItems().remove(selectedIndex);
-			} else {
-				Alert alert=new Alert(AlertType.ERROR);
-				alert.setTitle("数据库操作错误");
-				alert.setHeaderText("数据库操作失误");
-				alert.setContentText("数据库连接失败，或删除失败。\n请关闭界面稍后重试");
-				alert.showAndWait();
-			}
-		}else{
-			Alert alert=new Alert(AlertType.WARNING);
-			alert.setTitle("删除错误");
-			alert.setHeaderText("删除失败");
-			alert.setContentText("请选择删除的对象");
-			alert.showAndWait();
-		}
-	}
-
-	private boolean DeleteCarsInformationfromSql(String Id) {
-		boolean isOk = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-		try {
-			PreparedStatement pStmt = connection.prepareStatement("Delete from Car_information where License_Plate=?");
-			pStmt.setString(1, Id);
-			int rtn = pStmt.executeUpdate();
-			System.out.println(rtn);
-			isOk = (rtn == 0) ? false : true;
-
-			pStmt.close();
-			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isOk;
-	}
 	
 	@FXML
 	private void handleNewCars(){
@@ -222,19 +177,43 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	private void handleEditCars(){
 		Cars editCar=CarsTable.getSelectionModel().getSelectedItem();
 		if (isInputVlid()) {
-			editCar.setLicensePlate(License_Plate_TextField.getText());
-			editCar.setEingeId(Engine_id_TextField.getText());
-			editCar.setFrameId(Frame_id_TextField.getText());
-			editCar.setBusType(Bus_type_TextField.getText());
-			editCar.setBusChair(Bus_chair_TextField.getText());
-			editCar.setCarPopulation(Car_population_TextField.getText());
-			if (UpDateSql(editCar)) {
+			if (UpDateSql()) {
+				editCar.setLicensePlate(License_Plate_TextField.getText());
+				editCar.setEingeId(Engine_id_TextField.getText());
+				editCar.setFrameId(Frame_id_TextField.getText());
+				editCar.setBusType(Bus_type_TextField.getText());
+				editCar.setBusChair(Bus_chair_TextField.getText());
+				editCar.setCarPopulation(Car_population_TextField.getText());
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.setTitle("数据库上传错误");
 				alert.setHeaderText("上聚酷新建信息错误");
 				alert.setContentText("数据可能重复");
 			}
+		}
+	}
+	
+	@FXML
+	private void handleDeleteCars() {
+		int selectedIndex = CarsTable.getSelectionModel().getSelectedIndex();
+		if (selectedIndex>=0) {
+			Cars cars = carsList.get(selectedIndex);
+
+			if (DeleteCarsInformationfromSql(cars.getLicensePlate())) {
+				CarsTable.getItems().remove(selectedIndex);
+			} else {
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.setTitle("数据库操作错误");
+				alert.setHeaderText("数据库操作失误");
+				alert.setContentText("数据库连接失败，或删除失败。\n请关闭界面稍后重试");
+				alert.showAndWait();
+			}
+		}else{
+			Alert alert=new Alert(AlertType.WARNING);
+			alert.setTitle("删除错误");
+			alert.setHeaderText("删除失败");
+			alert.setContentText("请选择删除的对象");
+			alert.showAndWait();
 		}
 	}
 	
@@ -339,19 +318,19 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		return false;
 	}
 	
-	private boolean UpDateSql(Cars cars) {
+	private boolean UpDateSql() {
 		SqlDeloy sqlDeloy=new SqlDeloy();
 		Connection connection=sqlDeloy.getConnection();
 		
 		try {
 			PreparedStatement pStmt=connection.prepareStatement("UPDATE Car_information SET License_Plate=?,Einge_id=?,Frame_id=?,Bus_type=?,Can_population=?,Bus_Chair =? where License_Plate=?");
-			pStmt.setString(1, cars.getLicensePlate());
-			pStmt.setString(2, cars.getEingeId());
-			pStmt.setString(3, cars.getFrameId());
-			pStmt.setString(4, cars.getBusType());
-			pStmt.setInt(5, cars.getBusChair());
-			pStmt.setInt(6, cars.getCarPopulation());
-			pStmt.setString(7, cars.getLicensePlate());
+			pStmt.setString(1, License_Plate_TextField.getText());
+			pStmt.setString(2, Engine_id_TextField.getText());
+			pStmt.setString(3, Frame_id_TextField.getText());
+			pStmt.setString(4, Bus_type_TextField.getText());
+			pStmt.setInt(5, Integer.parseInt(Car_population_TextField.getText()));
+			pStmt.setInt(6, Integer.parseInt(Bus_chair_TextField.getText()));
+			pStmt.setString(7, License_Plate_TextField.getText());
 			int row=pStmt.executeUpdate();
 			if (row>0) {
 				return true;
@@ -364,5 +343,26 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			return false;
 		}
 		return false;
+	}
+	
+	private boolean DeleteCarsInformationfromSql(String Id) {
+		boolean isOk = false;
+		SqlDeloy sqlDeloy = new SqlDeloy();
+		Connection connection = sqlDeloy.getConnection();
+		try {
+			PreparedStatement pStmt = connection.prepareStatement("Delete from Car_information where License_Plate=?");
+			pStmt.setString(1, Id);
+			int rtn = pStmt.executeUpdate();
+			System.out.println(rtn);
+			isOk = (rtn == 0) ? false : true;
+
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return isOk;
 	}
 }
