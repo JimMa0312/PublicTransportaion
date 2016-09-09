@@ -1,7 +1,7 @@
 package publicTransportaion.util;
 
 public class GPS {
-	private static final String PANE="|";
+	private static final String PANE=" ";
 	private static String outString;
 	
 	public static double[] parseFloatList(String GPSString) {
@@ -16,11 +16,11 @@ public class GPS {
 	}
 	
 	public static String parseString(double[] GPSVale) {
-		outString = null;
+		outString = "";
 		for (int i = 0; i < GPSVale.length; i++) {
-			outString.concat(Double.toString(GPSVale[i]));
+			outString+=Double.toString(GPSVale[i]);
 			if (i!=GPSVale.length-1) {
-				outString.concat(PANE);
+				outString+=PANE;
 			}
 		}
 		return outString;
