@@ -3,6 +3,10 @@ package publicTransportaion.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -12,6 +16,7 @@ import publicTransportaion.MainApp;
 public class OutLayerControl implements ControlledStage, Initializable {
 	
 	private StageController myController;
+	private BooleanProperty isSignIn=new SimpleBooleanProperty(false);
 	
 	
 	@FXML

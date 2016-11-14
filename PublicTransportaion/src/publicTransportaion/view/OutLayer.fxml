@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.input.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -11,10 +12,35 @@
         <menus>
           <Menu mnemonicParsing="false" text="文件">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ShowSignIn" text="进入公交车管理系统" />
               <MenuItem mnemonicParsing="false" onAction="#handleExite" text="退出" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="管理系统">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ShowSignIn" text="登陆" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="注销" />
+                <MenuItem disable="true" mnemonicParsing="false" text="车辆管理">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="F3" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem disable="true" mnemonicParsing="false" text="站点管理">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem disable="true" mnemonicParsing="false" text="班线管理">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem disable="true" mnemonicParsing="false" text="计划与行车监视">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="F6" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="帮助">
             <items>
               <MenuItem mnemonicParsing="false" text="帮助" />
