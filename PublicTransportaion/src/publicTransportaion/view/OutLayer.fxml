@@ -17,24 +17,24 @@
           </Menu>
             <Menu mnemonicParsing="false" text="管理系统">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ShowSignIn" text="登陆" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="注销" />
-                <MenuItem disable="true" mnemonicParsing="false" text="车辆管理">
+                  <MenuItem fx:id="signInMenuItem" mnemonicParsing="false" onAction="#ShowSignIn" text="登陆" />
+                  <MenuItem fx:id="signOutMenuItem" disable="true" mnemonicParsing="false" onAction="#HandleSignOut" text="注销" />
+                <MenuItem fx:id="CarsManageMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowCarManager" text="车辆管理">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F3" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem disable="true" mnemonicParsing="false" text="站点管理">
+                  <MenuItem fx:id="StationManageMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowStationManager" text="站点管理">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem disable="true" mnemonicParsing="false" text="班线管理">
+                  <MenuItem fx:id="BusLineManageMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowBusLineManager" text="班线管理">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem disable="true" mnemonicParsing="false" text="计划与行车监视">
+                  <MenuItem fx:id="BusDyanmicMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowBusDyanmicManager" text="计划与行车监视">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F6" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

@@ -21,8 +21,6 @@ public class SignInController implements ControlledStage {
     private PasswordField Control_PWD_PasswordField;
     @FXML
     private Label returnMessage;
-
-    private boolean okClicked = false;
     
     private StageController myController;
     
@@ -30,10 +28,6 @@ public class SignInController implements ControlledStage {
     @FXML
     private void initialize() {
     	returnMessage.setText(null);
-    }
-
-    public boolean isOkClicked() {
-        return okClicked;
     }
 
     @FXML
@@ -45,14 +39,11 @@ public class SignInController implements ControlledStage {
            	returnMessage.setText("登陆成功");
            	returnMessage.setTextFill(Color.GREEN);
    			
-   			okClicked=true;
     		myController.shutDownStage(MainApp.SignInId);
     		Control_Id_TextField.setText(null);
     		Control_PWD_PasswordField.setText(null);
     		returnMessage.setText(null);
-//   			MainApp.showTranstationManageView();
-    		MainApp.showInToManageView();
-    		
+    		OutLayerControl.setSignin(true);
     	   }
     	   else {
               	returnMessage.setText("账号或密码错误！");

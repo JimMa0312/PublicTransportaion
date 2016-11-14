@@ -20,6 +20,7 @@ public class MainApp extends Application {
 	private static StageController stageController;
 	private Stage PrimaryStage;
 	private BorderPane rootLayout;
+	private OutLayerControl control;
 
 	public static final String OutLayerId = "OutLayer";
 	public static final String OutLayerRes = "view/OutLayer.fxml";
@@ -32,8 +33,6 @@ public class MainApp extends Application {
 	public static final String TransationManangeId = "TransationManange";
 	public static final String TransationManageRes = "TransationManage.fxml";
 	
-	public static final String InToManagerViewId="InToManagerView";
-	public static final String InToManagerViewRes="InToManagerView.fxml";
 	
 	public static final String TransationManage_BusDynamicId="TransationManage-BusDynamic";
 	public static final String TranstationManage_BusDynamicRes="TransationManage-BusDynamic.fxml";
@@ -59,8 +58,6 @@ public class MainApp extends Application {
 		ShowBusInformationOverView();
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
-//		stageController.loadStage(TransationManangeId, TransationManageRes);
-		stageController.loadStage(InToManagerViewId, InToManagerViewRes);
 		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
 		
 
@@ -72,8 +69,7 @@ public class MainApp extends Application {
 			loader.setLocation(MainApp.class.getResource(OutLayerRes));
 			rootLayout = (BorderPane) loader.load();
 
-			@SuppressWarnings("unused")
-			OutLayerControl control = new OutLayerControl();
+			this.control = new OutLayerControl();
 
 			Scene scene = new Scene(rootLayout);
 			PrimaryStage.setScene(scene);
@@ -99,13 +95,14 @@ public class MainApp extends Application {
 		}
 	}
 	
+	public void setSignInProperty(){
+		control.setSignin(true);
+	}
+	
 	public static void showSignInView() {
 		stageController.setStage(SignInId);
 	}
 	
-	public static void showInToManageView() {
-		stageController.setStage(InToManagerViewId);
-	}
 	
 	public static void showTransationManage_BusDyanmicView() {
 		stageController.setStage(TransationManage_BusDynamicId);
