@@ -96,7 +96,7 @@ public class MainApp extends Application {
 	}
 	
 	public void setSignInProperty(){
-		control.setSignin(true);
+		OutLayerControl.setSignin(true);
 	}
 	
 	public static void showSignInView() {
