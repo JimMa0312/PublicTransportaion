@@ -3,12 +3,12 @@ package publicTransportaion.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 
 public class TransationManageUser implements ControlledStage,Initializable {
 	private StageController myController;
-	
-	
 
 	public TransationManageUser() {
 		// TODO Auto-generated constructor stub

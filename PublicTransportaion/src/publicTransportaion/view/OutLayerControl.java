@@ -111,7 +111,6 @@ public class OutLayerControl implements ControlledStage, Initializable {
 
 	@Override
 	public void setStageController(StageController stageController) {
-		// TODO Auto-generated method stub
 		myController=stageController;
 	}
 	
