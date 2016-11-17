@@ -21,7 +21,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import publicTransportaion.model.Cars;
+import publicTransportaion.model.en.PatternEnum;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.util.Patterner;
 
 public class TransationManageCarsController implements ControlledStage, Initializable {
 	@FXML
@@ -215,24 +217,13 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 		}
 	}
 
-	private boolean isLicensePlateVlid() {
-		String vehicleNoStyle = "^[\u4e00-\u9fa5]{1}[A-Z0-9]{6}$";
-		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(vehicleNoStyle);
-		Matcher matcher = pattern.matcher(License_Plate_TextField.getText());
-		if (matcher.matches()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	private boolean isInputVlid() {
 		boolean message = true;
 		if (License_Plate_TextField.getText() == null || License_Plate_TextField.getText().isEmpty()) {
 			License_Plate_Error.setText("请输入车牌照号");
 			message = false;
 		}
-		if (!isLicensePlateVlid()) {
+		if (!Patterner.StringMatch(PatternEnum.vehicleNoStyle, License_Plate_TextField.getText())) {
 			License_Plate_Error.setText("请输入正确的车牌照号");
 			message = false;
 		}

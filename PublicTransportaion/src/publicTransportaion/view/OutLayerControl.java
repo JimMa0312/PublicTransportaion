@@ -1,6 +1,11 @@
 package publicTransportaion.view;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -15,6 +20,7 @@ import javafx.scene.control.MenuItem;
 import publicTransportaion.MainApp;
 import publicTransportaion.model.Cars;
 import publicTransportaion.model.Station;
+import publicTransportaion.sql.SqlDeloy;
 
 public class OutLayerControl implements ControlledStage, Initializable {
 	
@@ -81,7 +87,6 @@ public class OutLayerControl implements ControlledStage, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		isSignIn.addListener(ov->{
 			System.out.println("Changing");
 			if (isSignIn.getValue()) {
@@ -100,6 +105,8 @@ public class OutLayerControl implements ControlledStage, Initializable {
 				BusDyanmicMenuItem.setDisable(true);
 			}
 		});
+		
+		System.out.println(isNullWithUser());
 	}
 
 	@Override
@@ -114,5 +121,28 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	
 	public static void setSignin(boolean signin){
 		isSignIn.set(signin);
+	}
+	
+	private boolean isNullWithUser() {
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
+	
+		try {
+			Statement statement=connection.createStatement();
+			
+			String sql="select count(*) as num from admin_information";
+			ResultSet resultSet=statement.executeQuery(sql);
+			while(resultSet.next()){
+				if (resultSet.getInt("num")==0) {
+					return true;
+				}
+			}
+			resultSet.close();
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
