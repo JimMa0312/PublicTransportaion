@@ -40,6 +40,22 @@ public class SqlCon {
 			return encodeData;
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	public static byte[] getenptyUserNameByPrivateKey(String userName){
+		byte[] data=userName.getBytes();
+		
+		byte[] encodeData = null;
+		
+		try {
+			encodeData=RSACoder.encryByPricvateKey(data, privateKey);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			return encodeData;
+		}
+	}
 	/*
 	 * 使用公钥加密数据库用户密码
 	 * 
@@ -48,6 +64,22 @@ public class SqlCon {
 	 */
 	@SuppressWarnings("finally")
 	public static byte[] getenptyUserPwdByPublicKey() {
+		byte[] data=userPwd.getBytes();
+		
+		byte[] encodeData=null;
+		
+		try {
+			encodeData=RSACoder.encryptByPublicKey(data, publicKey);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			return encodeData;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public static byte[] getenptyUserPwdByPublicKey(String userPwd) {
 		byte[] data=userPwd.getBytes();
 		
 		byte[] encodeData=null;
