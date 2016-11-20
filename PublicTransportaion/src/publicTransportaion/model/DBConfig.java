@@ -1,19 +1,27 @@
 package publicTransportaion.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import publicTransportaion.sql.SqlCon;
 
+@XmlRootElement
 public class DBConfig {
-
+	@XmlElement
 	private static StringProperty publicUserName;
-	private static StringProperty privateUerName;
+	@XmlElement
+	private static StringProperty privateUserName;
+	@XmlElement
 	private static StringProperty publicKeyPwd;
-	private static StringProperty privateKePpwd;
+	@XmlElement
+	private static StringProperty privateKeyPwd;
+	@XmlElement
 	private static StringProperty DBName;
 	
 	private static void DBConfigNomal() {
-		privateUerName=new SimpleStringProperty();
+		privateUserName=new SimpleStringProperty();
 		publicKeyPwd=new SimpleStringProperty();
 		DBName=new SimpleStringProperty();
 	}
@@ -25,63 +33,59 @@ public class DBConfig {
 			try {
 				SqlCon.setUp();
 				publicUserName=new SimpleStringProperty(SqlCon.getPublicKey());
-				privateKePpwd=new SimpleStringProperty(SqlCon.getPrivateKey());
+				privateKeyPwd=new SimpleStringProperty(SqlCon.getPrivateKey());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 		}else{
 			publicUserName=new SimpleStringProperty();
-			privateKePpwd=new SimpleStringProperty();
+			privateKeyPwd=new SimpleStringProperty();
 		}
 	}
 
-	public StringProperty getPublicUserName() {
+	public StringProperty getPublicUserNameProperty() {
 		return publicUserName;
 	}
 
-	public void setPublicUserName(StringProperty publicUserName) {
+	public void setPublicUserNameProperty(StringProperty publicUserName) {
 		DBConfig.publicUserName = publicUserName;
 	}
 
-	public StringProperty getPrivateUerName() {
-		return privateUerName;
+	public StringProperty getPrivateUserNameProperty() {
+		return privateUserName;
 	}
 
-	public void setPrivateUerName(StringProperty privateUerName) {
-		DBConfig.privateUerName = privateUerName;
+	public void setPrivateUserNameProperty(StringProperty privateUserName) {
+		DBConfig.privateUserName = privateUserName;
 	}
 
-	public StringProperty getPublicKeyPwd() {
+	public StringProperty getPublicKeyPwdProperty() {
 		return publicKeyPwd;
 	}
 
-	public void setPublicKeyPwd(StringProperty publicKeyPwd) {
+	public void setPublicKeyPwdProperty(StringProperty publicKeyPwd) {
 		DBConfig.publicKeyPwd = publicKeyPwd;
 	}
 
-	public StringProperty getPrivateKePpwd() {
-		return privateKePpwd;
+	public StringProperty getprivateKeyPwdProperty() {
+		return privateKeyPwd;
 	}
 
-	public void setPrivateKePpwd(StringProperty privateKePpwd) {
-		DBConfig.privateKePpwd = privateKePpwd;
-	}
-	
-	public void setPwd(String password){
-		
+	public void setprivateKeyPwdProperty(StringProperty privateKeyPwd) {
+		DBConfig.privateKeyPwd = privateKeyPwd;
 	}
 
-	public StringProperty getDBName() {
+	public StringProperty getDBNameProperty() {
 		return DBName;
 	}
 
-	public void setDBName(StringProperty dBName) {
+	public void setDBNameProperty(StringProperty dBName) {
 		DBName = dBName;
 	}
 	
 	public static void setUserName(String userName){
-		privateUerName.set(
+		privateUserName.set(
 				new String(SqlCon.getenptyUserNameByPrivateKey(userName)));
 	}
 	
@@ -90,7 +94,47 @@ public class DBConfig {
 				new String(SqlCon.getenptyUserNameByPrivateKey(password)));
 	}
 	
-	public static void setDBName(String DBname){
-		DBName.set(DBname);
+	public static void setDBaseName(String dataBaseName){
+		DBName.set(dataBaseName);
+	}
+	
+	public String getPublicUserName(){
+		return publicUserName.get();
+	}
+	
+	public void setPublicUserName(String publicUserName) {
+		DBConfig.publicUserName.set(publicUserName);
+	}
+	
+	public String getPrivateUserName() {
+		return privateUserName.get();
+	}
+	
+	public void setPrivateUserName(String privateUserName) {
+		DBConfig.privateUserName.set(privateUserName);
+	}
+	
+	public String getPublicKeyPwd() {
+		return publicKeyPwd.get();
+	}
+	
+	public void setPublicKeyPwd(String publicKeyPwd) {
+		DBConfig.publicKeyPwd.set(publicKeyPwd);
+	}
+	
+	public String getPrivateKeyPwd() {
+		return privateKeyPwd.get();
+	}
+	
+	public void setPrivateKeyPwd(String privateKeyPwd) {
+		DBConfig.privateKeyPwd.set(privateKeyPwd);
+	}
+	
+	public String getDBName() {
+		return DBName.get();
+	}
+	
+	public void setDBName(String dBName) {
+		DBConfig.DBName.set(dBName);
 	}
 }
