@@ -1,15 +1,23 @@
 package publicTransportaion;
 
+import java.io.File;
 import java.io.IOException;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import publicTransportaion.model.Cars;
+import publicTransportaion.model.DBConfig;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
@@ -126,6 +134,55 @@ public class MainApp extends Application {
 //	public static void showTranstationManageView() {
 //		stageController.setStage(TransationManangeId);
 //	}
+	
+	
+	/*
+	 * 保存数据库的加密配置文件
+	 * @param file
+	 * @return null
+	 * */
+	public static void saveDBConfigToFile(File file){
+		try {
+			JAXBContext context=JAXBContext.newInstance(DBConfig.class);
+			
+			Marshaller marshaller=context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			DBConfig dbConfig=new DBConfig();
+			marshaller.marshal(dbConfig, file);
+			
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Cloud not save data to File:\n");
+			alert.setContentText(file.getPath());
+		}
+	}
+	
+	/*
+	 * 读取数据库加密配置文件
+	 * @param file
+	 * return null
+	 */
+	public static void loadFileToDBConfig(File file) {
+		try {
+			JAXBContext context=JAXBContext.newInstance(DBConfig.class);
+			
+			Unmarshaller unmarshaller=context.createUnmarshaller();
+			
+			DBConfig dbConfig=(DBConfig) unmarshaller.unmarshal(file);
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Cloud not load File to Object:\n");
+			alert.setContentText(file.getPath());
+		}
+		
+	}
 
 	public static void main(String[] args) {
 

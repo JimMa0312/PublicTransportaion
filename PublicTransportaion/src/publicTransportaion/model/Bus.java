@@ -1,14 +1,8 @@
 package publicTransportaion.model;
 
 import java.sql.Time;
-import java.time.*;
-import publicTransportaion.model.Line;
 
-import com.sun.media.jfxmedia.control.VideoDataBuffer;
-
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
