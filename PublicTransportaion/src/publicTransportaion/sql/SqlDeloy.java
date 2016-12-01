@@ -4,21 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import publicTransportaion.sql.Safety.RSACoder;
+import publicTransportaion.model.DBConfig;
+import publicTransportaion.safety.DESCoder;
+import publicTransportaion.safety.RSACoder;
 
 public class SqlDeloy {
 	private static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static String	DBURL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=Bus";
 	@SuppressWarnings("unused")
-	private static SqlCon sqlCon;
+	private static SqlConRSA sqlCon;
 	private static Connection connection=null;
 	
 	public SqlDeloy() {
 		try {
-			SqlCon.setUp();
 			Class.forName(DRIVERNAME);
-			connection=DriverManager.getConnection(DBURL,DenpytUserName(),DenpytUserPwd());
-			
+			connection=DriverManager.getConnection(DBURL,"sa","1230");
 			System.out.println("Connected");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -40,7 +40,8 @@ public class SqlDeloy {
 		byte[] decodeData=null;
 		
 		try {
-			decodeData=RSACoder.decryptByPublicKey(SqlCon.getenptyUserNameByPrivateKey(), SqlCon.getPublicKey());
+//			decodeData=RSACoder.decryptByPublicKey(null, null);
+			decodeData=DESCoder.decrypt(DBConfig.getUserName().getBytes(), DBConfig.getKey());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -53,7 +54,8 @@ public class SqlDeloy {
 		byte[] decodeData=null;
 		
 		try {
-			decodeData=RSACoder.decryptyByPrivateKey(SqlCon.getenptyUserPwdByPublicKey(), SqlCon.getPrivateKey());
+//			decodeData=RSACoder.decryptyByPrivateKey(null, null);
+			decodeData=DESCoder.decrypt(DBConfig.getPWD().getBytes(), DBConfig.getKey());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

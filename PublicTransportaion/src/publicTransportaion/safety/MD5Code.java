@@ -1,4 +1,4 @@
-package publicTransportaion.sql.Safety;
+package publicTransportaion.safety;
 
 public class MD5Code {
 

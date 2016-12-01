@@ -2,6 +2,7 @@ package publicTransportaion;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import publicTransportaion.model.DBConfig;
+import publicTransportaion.model.DBconfigXml;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
@@ -29,6 +31,12 @@ public class MainApp extends Application {
 	private Stage PrimaryStage;
 	private BorderPane rootLayout;
 	private OutLayerControl control;
+	
+	
+	public static String path="bin\\config.xml";
+	private static File file;
+	
+	public static final String filePath="scr/DBConfig.xml";
 
 	public static final String OutLayerId = "OutLayer";
 	public static final String OutLayerRes = "view/OutLayer.fxml";
@@ -54,6 +62,12 @@ public class MainApp extends Application {
 	public static final String TransationManage_StationId="TransationManage-Station";
 	public static final String TransationManage_StationRes="TransationManage-Station.fxml";
 	
+	public static final String ConfigLayout_stationId="ConfigLayout";
+	public static final String ConfigLayout_stationRes="ConfigLayout.fxml";
+	
+	public static final String InitAdminUser_stationId="InitAdminUser";
+	public static final String initAdminUser_stationRes="InitAdminUser.fxml";
+	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -61,14 +75,14 @@ public class MainApp extends Application {
 		this.PrimaryStage = primaryStage;
 		this.PrimaryStage.setTitle("公交车查询系统");
 		stageController.setPrimaryStage(OutLayerId, primaryStage);
-
+		SaveXml();
+		LoadXml();
+		
 		initRootLayout();
 		ShowBusInformationOverView();
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
 		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
-		
-
 	}
 
 	private void initRootLayout() {
@@ -130,11 +144,16 @@ public class MainApp extends Application {
 		stageController.loadStage(TransationManage_StationId, TransationManage_StationRes);
 		stageController.setStage(TransationManage_StationId);
 	}
-
-//	public static void showTranstationManageView() {
-//		stageController.setStage(TransationManangeId);
-//	}
 	
+	public static void showConfigLayoutView() {
+		stageController.loadStage(ConfigLayout_stationId, ConfigLayout_stationRes,StageStyle.UNDECORATED);
+		stageController.setStage(ConfigLayout_stationId);
+	}
+	
+	public static void showInitAdminUserView(){
+		stageController.loadStage(InitAdminUser_stationId, initAdminUser_stationRes, StageStyle.UNDECORATED);
+		stageController.setStage(InitAdminUser_stationId);
+	}
 	
 	/*
 	 * 保存数据库的加密配置文件
@@ -143,12 +162,17 @@ public class MainApp extends Application {
 	 * */
 	public static void saveDBConfigToFile(File file){
 		try {
-			JAXBContext context=JAXBContext.newInstance(DBConfig.class);
+			JAXBContext context=JAXBContext.newInstance(DBconfigXml.class);
 			
 			Marshaller marshaller=context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			
-			DBConfig dbConfig=new DBConfig();
+			DBConfig.initDBConfig();
+			DBConfig.setuserName("sa");
+			DBConfig.setPWD("1230");
+			DBConfig.setDBname("Bus");
+			DBconfigXml dbConfig=new DBconfigXml();
+			dbConfig.LoadDBconfig();
 			marshaller.marshal(dbConfig, file);
 			
 			
@@ -158,6 +182,7 @@ public class MainApp extends Application {
 			alert.setTitle("Error");
 			alert.setHeaderText("Cloud not save data to File:\n");
 			alert.setContentText(file.getPath());
+			alert.showAndWait();
 		}
 	}
 	
@@ -168,27 +193,44 @@ public class MainApp extends Application {
 	 */
 	public static void loadFileToDBConfig(File file) {
 		try {
-			JAXBContext context=JAXBContext.newInstance(DBConfig.class);
+			JAXBContext context=JAXBContext.newInstance(DBconfigXml.class);
 			
 			Unmarshaller unmarshaller=context.createUnmarshaller();
 			
-			DBConfig dbConfig=(DBConfig) unmarshaller.unmarshal(file);
+			DBConfig.initDBConfig();
+			DBconfigXml dbConfig=(DBconfigXml) unmarshaller.unmarshal(file);
 			
+			dbConfig.WriteDBconfig();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
-			Alert alert=new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Cloud not load File to Object:\n");
-			alert.setContentText(file.getPath());
+//			Alert alert=new Alert(AlertType.ERROR);
+//			alert.setTitle("Error");
+//			alert.setHeaderText("Cloud not load File to Object:\n");
+//			alert.setContentText(file.getPath()+"\n"+e.getMessage());
+//			alert.showAndWait();
+			System.out.println(e);
 		}
 		
 	}
+	
+	/*
+	 * 保存为
+	 * @return null
+	 */
+	public static void SaveXml(){
+		file=new File(path);
+		saveDBConfigToFile(file);
+	}
+	
+	public static void LoadXml(){
+		file=new File(path);
+		loadFileToDBConfig(file);
+	}
 
 	public static void main(String[] args) {
-
-		SqlDeloy testsqlDeloy = new SqlDeloy();
-		testsqlDeloy.shotDownCon();
-
+		
+		//SqlDeloy testsqlDeloy = new SqlDeloy();
+		//testsqlDeloy.shotDownCon();
 		launch(args);
 	}
 }

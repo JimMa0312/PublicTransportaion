@@ -1,4 +1,4 @@
-package publicTransportaion.sql.Safety;
+package publicTransportaion.safety;
 
 import java.security.MessageDigest;
 

@@ -62,10 +62,9 @@ public class ConfigLayoutController implements Initializable, ControlledStage {
 		
 		if (isInputVlid()) {
 			initErrorMessage();
-			DBConfig.setUserName(userName);
+			DBConfig.setuserName(userName);
 			DBConfig.setPWD(PWD);
-			DBConfig.setDBaseName(DBName);
-			
+			DBConfig.setDBname(DBName);
 		}
 	}
 	

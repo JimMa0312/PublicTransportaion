@@ -1,140 +1,99 @@
 package publicTransportaion.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import publicTransportaion.sql.SqlCon;
+import publicTransportaion.safety.DESCoder;
+import publicTransportaion.sql.SqlConRSA;
 
-@XmlRootElement
+
 public class DBConfig {
-	@XmlElement
-	private static StringProperty publicUserName;
-	@XmlElement
-	private static StringProperty privateUserName;
-	@XmlElement
-	private static StringProperty publicKeyPwd;
-	@XmlElement
-	private static StringProperty privateKeyPwd;
-	@XmlElement
+	private static StringProperty UserName;
+	private static StringProperty Pwd;
 	private static StringProperty DBName;
+	private static StringProperty Key;
 	
-	private static void DBConfigNomal() {
-		privateUserName=new SimpleStringProperty();
-		publicKeyPwd=new SimpleStringProperty();
-		DBName=new SimpleStringProperty();
+	public static void initDBConfig(){
+		UserName=new SimpleStringProperty("123");
+		Pwd=new SimpleStringProperty("123");
+		DBName=new SimpleStringProperty("123");
+		Key=new SimpleStringProperty("");
 	}
 	
-	public static void DBConfigSwitch(boolean isConfig)
+	public static void DBConfigSwitch()
 	{
-		DBConfigNomal();
-		if (isConfig) {
-			try {
-				SqlCon.setUp();
-				publicUserName=new SimpleStringProperty(SqlCon.getPublicKey());
-				privateKeyPwd=new SimpleStringProperty(SqlCon.getPrivateKey());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			Key.set(DESCoder.initKey());
+			setuserName(new String(DESCoder.encrypt(getUserName().getBytes(), getKey())));
+			setPWD(new String(DESCoder.encrypt(getPWD().getBytes(), getKey())));
 			
-		}else{
-			publicUserName=new SimpleStringProperty();
-			privateKeyPwd=new SimpleStringProperty();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 
-	public StringProperty getPublicUserNameProperty() {
-		return publicUserName;
+	public static StringProperty getUserNameProperty() {
+		return UserName;
 	}
 
-	public void setPublicUserNameProperty(StringProperty publicUserName) {
-		DBConfig.publicUserName = publicUserName;
+	public static void setUserNameProperty(StringProperty userName) {
+		UserName = userName;
 	}
 
-	public StringProperty getPrivateUserNameProperty() {
-		return privateUserName;
+	public static StringProperty getPwdProperty() {
+		return Pwd;
 	}
 
-	public void setPrivateUserNameProperty(StringProperty privateUserName) {
-		DBConfig.privateUserName = privateUserName;
+	public static void setPwdProperty(StringProperty pwd) {
+		Pwd = pwd;
 	}
 
-	public StringProperty getPublicKeyPwdProperty() {
-		return publicKeyPwd;
-	}
-
-	public void setPublicKeyPwdProperty(StringProperty publicKeyPwd) {
-		DBConfig.publicKeyPwd = publicKeyPwd;
-	}
-
-	public StringProperty getprivateKeyPwdProperty() {
-		return privateKeyPwd;
-	}
-
-	public void setprivateKeyPwdProperty(StringProperty privateKeyPwd) {
-		DBConfig.privateKeyPwd = privateKeyPwd;
-	}
-
-	public StringProperty getDBNameProperty() {
+	public static StringProperty getDBNameProperty() {
 		return DBName;
 	}
 
-	public void setDBNameProperty(StringProperty dBName) {
+	public static void setDBNameProperty(StringProperty dBName) {
 		DBName = dBName;
 	}
-	
-	public static void setUserName(String userName){
-		privateUserName.set(
-				new String(SqlCon.getenptyUserNameByPrivateKey(userName)));
+
+	public static StringProperty getKeyProperty() {
+		return Key;
+	}
+
+	public static void setKeyProperty(StringProperty key) {
+		Key = key;
 	}
 	
-	public static void setPWD(String password){
-		publicKeyPwd.set(
-				new String(SqlCon.getenptyUserNameByPrivateKey(password)));
+	public static String getUserName() {
+		return UserName.get();
 	}
 	
-	public static void setDBaseName(String dataBaseName){
-		DBName.set(dataBaseName);
+	public static void setuserName(String userName){
+		UserName.set(userName);
 	}
 	
-	public String getPublicUserName(){
-		return publicUserName.get();
+	public static String getPWD(){
+		return Pwd.get();
 	}
 	
-	public void setPublicUserName(String publicUserName) {
-		DBConfig.publicUserName.set(publicUserName);
+	public static void setPWD(String pwd) {
+		Pwd.set(pwd);
 	}
 	
-	public String getPrivateUserName() {
-		return privateUserName.get();
-	}
-	
-	public void setPrivateUserName(String privateUserName) {
-		DBConfig.privateUserName.set(privateUserName);
-	}
-	
-	public String getPublicKeyPwd() {
-		return publicKeyPwd.get();
-	}
-	
-	public void setPublicKeyPwd(String publicKeyPwd) {
-		DBConfig.publicKeyPwd.set(publicKeyPwd);
-	}
-	
-	public String getPrivateKeyPwd() {
-		return privateKeyPwd.get();
-	}
-	
-	public void setPrivateKeyPwd(String privateKeyPwd) {
-		DBConfig.privateKeyPwd.set(privateKeyPwd);
-	}
-	
-	public String getDBName() {
+	public static String getDBname() {
 		return DBName.get();
 	}
 	
-	public void setDBName(String dBName) {
-		DBConfig.DBName.set(dBName);
+	public static void setDBname(String dbName) {
+		DBName.set(dbName);
+	}
+	
+	public static String getKey() {
+		return Key.get();
+	}
+	
+	public static void setKey(String key) {
+		Key.set(key);
 	}
 }
