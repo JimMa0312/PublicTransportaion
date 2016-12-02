@@ -47,7 +47,6 @@ public class TransationManageBusDyanmic implements ControlledStage, Initializabl
 
 	@Override
 	public void setStageController(StageController stageController) {
-		// TODO Auto-generated method stub
 		this.myController=stageController;
 	}
 

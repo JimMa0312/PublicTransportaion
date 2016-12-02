@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import publicTransportaion.MainApp;
+import publicTransportaion.model.User;
 import publicTransportaion.sql.SqlDeloy;
 
 public class SignInController implements ControlledStage {
@@ -73,7 +74,7 @@ public class SignInController implements ControlledStage {
     		System.out.println(list);
     		
     		for (String TruePwd : list) {
-				if (TruePwd.equals(Control_PWD_PasswordField.getText())) {
+				if (TruePwd.equals(User.encrytpMD5PWD(Control_PWD_PasswordField.getText()))) {
 					isOk=true;
 				}
 			}

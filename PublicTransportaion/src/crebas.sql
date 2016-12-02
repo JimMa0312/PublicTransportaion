@@ -1,21 +1,21 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2012                    */
-/* Created on:     2016/9/2 9:26:00                             */
+/* Created on:     2016/12/2 14:49:36                           */
 /*==============================================================*/
-
+use [Bus]
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Map_information') and o.name = 'FK_Map_INFO_HAVE1_STATION_')
-alter table Map_information
-   drop constraint FK_Map_INFO_HAVE1_STATION_
+   where r.fkeyid = object_id('Mao_information') and o.name = 'FK_MAO_INFO_NODENO1_STATION_')
+alter table Mao_information
+   drop constraint FK_MAO_INFO_NODENO1_STATION_
 go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Map_information') and o.name = 'FK_Map_INFO_HAVE2_STATION_')
-alter table Map_information
-   drop constraint FK_Map_INFO_HAVE2_STATION_
+   where r.fkeyid = object_id('Mao_information') and o.name = 'FK_MAO_INFO_NODENO2_STATION_')
+alter table Mao_information
+   drop constraint FK_MAO_INFO_NODENO2_STATION_
 go
 
 if exists (select 1
@@ -23,13 +23,6 @@ if exists (select 1
    where r.fkeyid = object_id('Route_Planning') and o.name = 'FK_ROUTE_PL_PLANNING_BUS_INFO')
 alter table Route_Planning
    drop constraint FK_ROUTE_PL_PLANNING_BUS_INFO
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Route_Planning') and o.name = 'FK_ROUTE_PL_PLANNING2_BUS_INFO')
-alter table Route_Planning
-   drop constraint FK_ROUTE_PL_PLANNING2_BUS_INFO
 go
 
 if exists (select 1
@@ -69,36 +62,27 @@ go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('Map_information')
-            and   name  = 'have2_FK'
+           where  id    = object_id('Mao_information')
+            and   name  = 'NodeNo2_FK'
             and   indid > 0
             and   indid < 255)
-   drop index Map_information.have2_FK
+   drop index Mao_information.NodeNo2_FK
 go
 
 if exists (select 1
             from  sysindexes
-           where  id    = object_id('Map_information')
-            and   name  = 'have1_FK'
+           where  id    = object_id('Mao_information')
+            and   name  = 'NodeNo1_FK'
             and   indid > 0
             and   indid < 255)
-   drop index Map_information.have1_FK
+   drop index Mao_information.NodeNo1_FK
 go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('Map_information')
+           where  id = object_id('Mao_information')
             and   type = 'U')
-   drop table Map_information
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('Route_Planning')
-            and   name  = 'Planning_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index Route_Planning.Planning_FK
+   drop table Mao_information
 go
 
 if exists (select 1
@@ -169,52 +153,52 @@ go
 /* Table: Bus_information                                       */
 /*==============================================================*/
 create table Bus_information (
-   Bus_No               varchar(10)           not null,
-   Time_Start           time             not null,
-   Time_End             time             not null,
-   Time_Lag             int             not null,
+   Bus_No               varchar(1)           not null,
+   Time_Start           datetime             not null,
+   Time_End             datetime             not null,
+   Time_Lag             datetime             not null,
    constraint PK_BUS_INFORMATION primary key nonclustered (Bus_No)
 )
 go
 
 /*==============================================================*/
-/* Table: Car_information                                        */
+/* Table: Car_information                                       */
 /*==============================================================*/
 create table Car_information (
    License_Plate        varchar(9)           not null,
    Einge_id             char(18)             not null,
    Frame_id             char(10)             not null,
-   Bus_type             varchar(20)          not null,
+   Bus_tyoe             varchar(20)          not null,
    Can_population       int                  not null,
    Bus_Chair            int                  not null,
-   constraint PK_CAR_information primary key nonclustered (License_Plate)
+   constraint PK_CAR_INFORMATION primary key nonclustered (License_Plate)
 )
 go
 
 /*==============================================================*/
-/* Table: Map_information                                       */
+/* Table: Mao_information                                       */
 /*==============================================================*/
-create table Map_information (
+create table Mao_information (
    Station_ID           char(10)             not null,
    Sta_Station_ID       char(10)             not null,
    Station_distence2    float(8)             not null,
    Station_State2       int                  not null,
-   constraint PK_Map_INFORMATION primary key nonclustered (Station_ID, Sta_Station_ID)
+   constraint PK_MAO_INFORMATION primary key nonclustered (Station_ID, Sta_Station_ID)
 )
 go
 
 /*==============================================================*/
-/* Index: have1_FK                                              */
+/* Index: NodeNo1_FK                                            */
 /*==============================================================*/
-create index have1_FK on Map_information (
+create index NodeNo1_FK on Mao_information (
 Station_ID ASC
 )
 go
 
 /*==============================================================*/
-/* Index: have2_FK                                              */
+/* Index: NodeNo2_FK                                            */
 /*==============================================================*/
-create index have2_FK on Map_information (
+create index NodeNo2_FK on Mao_information (
 Sta_Station_ID ASC
 )
 go
@@ -223,7 +207,7 @@ go
 /* Table: Route_Planning                                        */
 /*==============================================================*/
 create table Route_Planning (
-   Bus_No               varchar(10)           null,
+   Bus_No               varchar(1)           not null,
    UpStream             text                 not null,
    DownStream           text                 not null
 )
@@ -232,27 +216,22 @@ go
 /*==============================================================*/
 /* Index: Planning2_FK                                          */
 /*==============================================================*/
-create index Planning_FK on Route_Planning (
+create index Planning2_FK on Route_Planning (
 Bus_No ASC
 )
 go
 
 /*==============================================================*/
-/* Index: Planning_FK                                           */
-/*==============================================================*/
-
-/*==============================================================*/
 /* Table: SID                                                   */
 /*==============================================================*/
 create table SID (
-   Bus_No               varchar(10)           not null,
+   Bus_No               varchar(1)           not null,
    Station_ID           char(10)             not null,
    License_Plate        varchar(9)           not null,
-   Engine_start         time            	 not null,
+   Engine_start         datetime             not null,
    GPS                  text                 not null,
-   CarrOut_Date         date				 not null,
+   CarrOut_Date         datetime             not null,
    Line_Layer           int                  not null,
-   planning_type			int					 not null
    constraint PK_SID primary key nonclustered (Bus_No, Station_ID, License_Plate)
 )
 go
@@ -297,25 +276,29 @@ go
 /* Table: admin_information                                     */
 /*==============================================================*/
 create table admin_information (
-   Control_Id           char(10)             not null,
-   Control_PWD          varchar(50)          not null,
+   COntrol_Id           char(10)             not null,
+   Control_PWD          varchar(60)          not null,
    Control_Limit        int                  not null,
-   constraint PK_ADMIN_INFORMATION primary key nonclustered (Control_Id)
+   Tel                  varchar(20)          not null,
+   Name                 varchar(10)          null,
+   Give_Name            varchar(20)          null,
+   gender               int                  null,
+   constraint PK_ADMIN_INFORMATION primary key nonclustered (COntrol_Id)
 )
 go
 
-alter table Map_information
-   add constraint FK_Map_INFO_HAVE1_STATION_ foreign key (Station_ID)
+alter table Mao_information
+   add constraint FK_MAO_INFO_NODENO1_STATION_ foreign key (Station_ID)
       references Station_information (Station_ID)
 go
 
-alter table Map_information
-   add constraint FK_Map_INFO_HAVE2_STATION_ foreign key (Sta_Station_ID)
+alter table Mao_information
+   add constraint FK_MAO_INFO_NODENO2_STATION_ foreign key (Sta_Station_ID)
       references Station_information (Station_ID)
 go
 
 alter table Route_Planning
-   add constraint FK_ROUTE_PL_PLANNING2_BUS_INFO foreign key (Bus_No)
+   add constraint FK_ROUTE_PL_PLANNING_BUS_INFO foreign key (Bus_No)
       references Bus_information (Bus_No)
 go
 

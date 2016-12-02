@@ -106,7 +106,9 @@ public class OutLayerControl implements ControlledStage, Initializable {
 			}
 		});
 		
-		System.out.println(isNullWithUser());
+		if (isNullWithUser()) {
+			MainApp.showInitAdminUserView();
+		}
 	}
 
 	@Override
@@ -125,7 +127,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	private boolean isNullWithUser() {
 		SqlDeloy sqlDeloy=new SqlDeloy();
 		Connection connection=sqlDeloy.getConnection();
-		boolean isHaveUser=true;
+		boolean isHaveUser=false;
 	
 		try {
 			Statement statement=connection.createStatement();
@@ -135,7 +137,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 			while(resultSet.next()){
 				System.out.println(resultSet.getInt("num"));
 				if (resultSet.getInt("num")==0) {
-					isHaveUser=false;
+					isHaveUser=true;
 				}
 			}
 			resultSet.close();

@@ -14,4 +14,15 @@ public enum GenderEnum {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 	}
+	
+	public static int getGenderValue(GenderEnum genderEnum) {
+		switch (genderEnum) {
+		case sir:
+			return 1;
+		case lady:
+			return 2;
+		default:
+			throw new ArrayIndexOutOfBoundsException();
+		}
+	}
 }

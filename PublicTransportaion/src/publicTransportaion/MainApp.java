@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import publicTransportaion.model.DBConfig;
 import publicTransportaion.model.DBconfigXml;
+import publicTransportaion.model.User;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
@@ -31,6 +34,8 @@ public class MainApp extends Application {
 	private Stage PrimaryStage;
 	private BorderPane rootLayout;
 	private OutLayerControl control;
+	
+	public static User AdminUser=new User();
 	
 	
 	public static String path="bin\\config.xml";
@@ -152,7 +157,7 @@ public class MainApp extends Application {
 	
 	public static void showInitAdminUserView(){
 		stageController.loadStage(InitAdminUser_stationId, initAdminUser_stationRes, StageStyle.UNDECORATED);
-		stageController.setStage(InitAdminUser_stationId);
+		stageController.setWaitStage(InitAdminUser_stationId);
 	}
 	
 	/*
@@ -202,12 +207,11 @@ public class MainApp extends Application {
 			
 			dbConfig.WriteDBconfig();
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-//			Alert alert=new Alert(AlertType.ERROR);
-//			alert.setTitle("Error");
-//			alert.setHeaderText("Cloud not load File to Object:\n");
-//			alert.setContentText(file.getPath()+"\n"+e.getMessage());
-//			alert.showAndWait();
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Cloud not load File to Object:\n");
+			alert.setContentText(file.getPath()+"\n"+e.getMessage());
+			alert.showAndWait();
 			System.out.println(e);
 		}
 		

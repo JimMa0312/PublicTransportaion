@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 
 public class TransationManageUser implements ControlledStage,Initializable {
 	private StageController myController;
+	
 
 	public TransationManageUser() {
 		// TODO Auto-generated constructor stub

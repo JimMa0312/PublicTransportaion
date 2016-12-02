@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.initAdminUserControl">
    <children>
-      <Label fx:id="labelErrorUserName" text="Label" textFill="RED" AnchorPane.bottomAnchor="144.0" AnchorPane.rightAnchor="170.0" />
-      <Label fx:id="labelErrorCheckUserPwd" text="Label" textFill="RED" AnchorPane.bottomAnchor="104.0" AnchorPane.rightAnchor="170.0" />
-      <Label fx:id="labelErrorUserPwd" text="Label" textFill="RED" AnchorPane.bottomAnchor="188.0" AnchorPane.rightAnchor="170.0" />
+      <Label fx:id="labelErrorUserPwd" text="Label" textFill="RED" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="99.0" />
+      <Label fx:id="labelErrorCheckUserPwd" text="Label" textFill="RED" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="99.0" />
+      <Label fx:id="labelErrorUserName" text="Label" textFill="RED" AnchorPane.bottomAnchor="188.0" AnchorPane.leftAnchor="99.0" />
       <Label layoutX="14.0" layoutY="7.0" text="请设置超级管理员用户" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="7.0">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -36,6 +36,6 @@
             <PasswordField fx:id="textFieldCheckUserPwd" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button layoutX="231.0" layoutY="237.0" mnemonicParsing="false" text="确定" />
+      <Button layoutX="231.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleCreateAdminUser" text="确定" />
    </children>
 </AnchorPane>
