@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="360.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="360.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.TransationManageUserControl">
    <children>
       <HBox layoutX="295.0" layoutY="33.0" prefHeight="21.0" prefWidth="235.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -16,10 +15,10 @@
             <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="52.0" text="搜索" />
          </children>
       </HBox>
-      <TableView layoutX="305.0" layoutY="61.0" prefHeight="264.0" prefWidth="200.0">
+      <TableView fx:id="tableViewusers" layoutX="305.0" layoutY="61.0" prefHeight="264.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="账号" />
-          <TableColumn prefWidth="75.0" text="姓名" />
+          <TableColumn fx:id="tableColumnUserId" prefWidth="75.0" text="账号" />
+          <TableColumn fx:id="tableColumnUsersName" prefWidth="75.0" text="姓名" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -44,13 +43,13 @@
             <Label text="名称：" GridPane.rowIndex="2" />
             <Label text="性别：" GridPane.rowIndex="3" />
             <Label text="联系电话：" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="textFieldId" GridPane.columnIndex="1" />
+            <TextField fx:id="textFieldFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textFieldSecondName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textFieldTel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="choiceBoxGender" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="权限身份" GridPane.rowIndex="5" />
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="choiceBoxLimits" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox layoutX="28.0" layoutY="292.0" prefHeight="33.0" prefWidth="252.0">

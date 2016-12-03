@@ -67,6 +67,9 @@ public class MainApp extends Application {
 	public static final String TransationManage_StationId="TransationManage-Station";
 	public static final String TransationManage_StationRes="TransationManage-Station.fxml";
 	
+	public static final String TransationManage_UserId="TransationManage-User";
+	public static final String TransationManage_UserRes="TransationManage-User.fxml";
+	
 	public static final String ConfigLayout_stationId="ConfigLayout";
 	public static final String ConfigLayout_stationRes="ConfigLayout.fxml";
 	
@@ -150,6 +153,11 @@ public class MainApp extends Application {
 		stageController.setStage(TransationManage_StationId);
 	}
 	
+	public static void showTranastionManage_UserView(){
+		stageController.loadStage(TransationManage_UserId, TransationManage_UserRes);
+		stageController.setStage(TransationManage_UserId);
+	}
+	
 	public static void showConfigLayoutView() {
 		stageController.loadStage(ConfigLayout_stationId, ConfigLayout_stationRes,StageStyle.UNDECORATED);
 		stageController.setStage(ConfigLayout_stationId);
@@ -159,6 +167,7 @@ public class MainApp extends Application {
 		stageController.loadStage(InitAdminUser_stationId, initAdminUser_stationRes, StageStyle.UNDECORATED);
 		stageController.setWaitStage(InitAdminUser_stationId);
 	}
+	
 	
 	/*
 	 * 保存数据库的加密配置文件

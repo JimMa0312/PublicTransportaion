@@ -2,6 +2,9 @@
 /* DBMS name:      Microsoft SQL Server 2012                    */
 /* Created on:     2016/12/2 14:49:36                           */
 /*==============================================================*/
+create database Bus
+go
+
 use [Bus]
 
 if exists (select 1

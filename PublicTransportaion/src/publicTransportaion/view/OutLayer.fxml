@@ -19,6 +19,7 @@
               <items>
                   <MenuItem fx:id="signInMenuItem" mnemonicParsing="false" onAction="#ShowSignIn" text="登陆" />
                   <MenuItem fx:id="signOutMenuItem" disable="true" mnemonicParsing="false" onAction="#HandleSignOut" text="注销" />
+                  <MenuItem fx:id="UserMessageMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowUserManager" text="账户管理" />
                 <MenuItem fx:id="CarsManageMenuItem" disable="true" mnemonicParsing="false" onAction="#handleShowCarManager" text="车辆管理">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F3" control="UP" meta="UP" shift="UP" shortcut="UP" />

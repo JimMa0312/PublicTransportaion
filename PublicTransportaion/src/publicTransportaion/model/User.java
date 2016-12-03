@@ -131,7 +131,7 @@ public class User {
 		return ControlLimit.get();
 	}
 	
-	public void getControlLimit(Jurisdtion controlLimit) {
+	public void setControlLimit(Jurisdtion controlLimit) {
 		this.ControlLimit.set(controlLimit);
 	}
 	

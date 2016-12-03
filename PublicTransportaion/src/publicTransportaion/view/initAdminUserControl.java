@@ -104,7 +104,7 @@ public class initAdminUserControl implements Initializable,ControlledStage {
 			pStatement.setString(4, user.getTel());
 			pStatement.setString(5, user.getFirstName());
 			pStatement.setString(6, user.getSecondName());
-			pStatement.setInt(7, GenderEnum.getGenderValue(user.getGarde()));
+			pStatement.setInt(7, user.getGarde().getIndex());
 			
 			int row=pStatement.executeUpdate();
 			if (row>0) {

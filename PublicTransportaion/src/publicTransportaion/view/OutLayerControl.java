@@ -39,6 +39,8 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	private MenuItem BusLineManageMenuItem;
 	@FXML
 	private MenuItem BusDyanmicMenuItem;
+	@FXML
+	private MenuItem UserMessageMenuItem;
 	
 	
 	@FXML
@@ -84,6 +86,11 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	private void handleShowBusDyanmicManager(){
 		MainApp.showTransationManage_BusDyanmicView();
 	}
+	
+	@FXML
+	private void handleShowUserManager(){
+		MainApp.showTranastionManage_UserView();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -96,6 +103,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 				StationManageMenuItem.setDisable(false);
 				BusLineManageMenuItem.setDisable(false);
 				BusDyanmicMenuItem.setDisable(false);
+				UserMessageMenuItem.setDisable(false);
 			} else {
 				signInMenuItem.setDisable(false);
 				signOutMenuItem.setDisable(true);
@@ -103,6 +111,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 				StationManageMenuItem.setDisable(true);
 				BusLineManageMenuItem.setDisable(true);
 				BusDyanmicMenuItem.setDisable(true);
+				UserMessageMenuItem.setDisable(true);
 			}
 		});
 		
