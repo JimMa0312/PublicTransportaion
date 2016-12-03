@@ -349,6 +349,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			isOk = (rtn == 0) ? false : true;
 
 			pStmt.close();
+			connection.close();
 			sqlDeloy.shotDownCon();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
