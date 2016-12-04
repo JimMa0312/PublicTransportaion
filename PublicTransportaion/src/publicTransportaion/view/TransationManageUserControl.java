@@ -19,10 +19,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import publicTransportaion.MainApp;
 import publicTransportaion.model.User;
 import publicTransportaion.model.en.GenderEnum;
+import publicTransportaion.model.en.HintEnum;
 import publicTransportaion.model.en.Jurisdtion;
+import publicTransportaion.model.en.PatternEnum;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.util.Patterner;
 
 public class TransationManageUserControl implements ControlledStage, Initializable {
 	@SuppressWarnings("unused")
@@ -63,7 +67,6 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 	private Jurisdtion jurisdtion;
 
 	public TransationManageUserControl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@FXML
@@ -95,20 +98,32 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 
 	@FXML
 	private void handleSaveUser() {
-		if (isHadThisUserFrom()) {
-			createNewUser();
-		} else {
-			editUser();
+		if (inInputValid()) {
+			if (!isHadThisUserFrom()) {
+				createNewUser();
+			} else {
+				editUser();
+			}
 		}
+	}
+	
+	@FXML
+	private void handleChangePassWord(){
+		if (tableViewusers.getSelectionModel().getSelectedIndex()>=0) {
+			ChangePasswordControl.setUser(users.get(tableViewusers.getSelectionModel().getSelectedIndex()));
+			
+			MainApp.showChangePasswordView();
+		}
+		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initErrorMessage();
 		users = FXCollections.observableArrayList();
-		connectAndSelectUserInfor();
 		choiceBoxGender.setItems(GenderEnum.getGenderList());
-		choiceBoxLimits.setItems(Jurisdtion.getJurList());
+		initJur();
+		connectAndSelectUserInfor();
 		showUserDetails(null);
 
 		tableViewusers.setItems(users);
@@ -134,15 +149,78 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 		myController = stageController;
 	}
 
+	private boolean inInputValid() {
+		boolean isInputvalid = true;
+		if (textFieldId.getText() == null || textFieldId.getText().isEmpty()) {
+			isInputvalid = false;
+			labelErrorId.setText(HintEnum.UserNameEmpty.getName());
+		}
+		if (textFieldId.getText().length() < 6 || textFieldId.getText().length() > 16) {
+			isInputvalid = false;
+			labelErrorId.setText(HintEnum.ErrorStringLegth.getName());
+		}
+		if (textFieldFirstName.getText() == null || textFieldFirstName.getText().isEmpty()) {
+			isInputvalid = false;
+			labelErrorFirstName.setText(HintEnum.EmptyFirstName.getName());
+		}
+		if (textFieldSecondName.getText() == null || textFieldSecondName.getText().isEmpty()) {
+			isInputvalid = false;
+			labelErrorSecondName.setText(HintEnum.EmptySecondName.getName());
+		}
+		if (textFieldTel.getText() == null || textFieldTel.getText().isEmpty()) {
+			isInputvalid = false;
+			labelErrorTel.setText(HintEnum.EmptyTel.getName());
+		}
+		if (!Patterner.StringMatch(PatternEnum.ChinsesTelStyle, textFieldTel.getText())) {
+			isInputvalid = false;
+			labelErrorTel.setText(HintEnum.UnCatchTel.getName());
+		}
+		return isInputvalid;
+	}
+
 	private void createNewUser() {
-		if (CreateuserInformationSql()) {
-			User user=new User();
+		if (MainApp.getJurisdtion().equals(Jurisdtion.admin) && CreateuserInformationSql()) {
+			User user = new User();
 			user.setUserId(textFieldId.getText());
+			user.setPwd(User.encrytpMD5PWD("111111"));
+			user.setFirstName(textFieldFirstName.getText());
+			user.setSecondName(textFieldSecondName.getText());
+			user.setTel(textFieldTel.getText());
+			user.setControlLimit(jurisdtion);
+			user.setGarde(genderEnum);
+
+			users.add(user);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("提示！！");
+			alert.setHeaderText("账号新建成功！");
+			alert.setContentText("初始密码为\'111111\'\n请登录该账户，修改密码。");
+			alert.showAndWait();
+			initErrorMessage();
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("错误!!");
+			alert.setHeaderText("账号创建失败!");
+			alert.setContentText("权限不够或者网络问题，请联系超级管理员");
+			alert.showAndWait();
 		}
 	}
 
 	private void editUser() {
+		User user = users.get(tableViewusers.getSelectionModel().getFocusedIndex());
+		if (UpdateUserInformationSql(user.getUserId())) {
+			user.setUserId(textFieldId.getText());
+			user.setFirstName(textFieldFirstName.getText());
+			user.setSecondName(textFieldSecondName.getText());
+			user.setTel(textFieldTel.getText());
+			user.setControlLimit(jurisdtion);
+			user.setGarde(genderEnum);
 
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("提示！！");
+			alert.setHeaderText("账号修改成功！");
+			alert.showAndWait();
+			initErrorMessage();
+		}
 	}
 
 	private void initErrorMessage() {
@@ -163,6 +241,8 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			textFieldFirstName.setText(user.getFirstName());
 			textFieldSecondName.setText(user.getSecondName());
 			textFieldTel.setText(user.getTel());
+			jurisdtion = user.getControlLimit();
+			genderEnum = user.getGarde();
 		}
 	}
 
@@ -173,6 +253,9 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			users.clear();
 			Statement statement = connection.createStatement();
 			String selectCommand = "Select * from admin_information";
+			if (!MainApp.getJurisdtion().equals(Jurisdtion.admin)) {
+				selectCommand += " where COntrol_Id='" + MainApp.getUserName() + "'";
+			}
 			ResultSet resultSet = statement.executeQuery(selectCommand);
 
 			while (resultSet.next()) {
@@ -184,6 +267,7 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 				user.setSecondName(resultSet.getString("Give_Name"));
 				user.setControlLimit(Jurisdtion.getJur(resultSet.getInt("Control_Limit")));
 				user.setGarde(GenderEnum.valueOf(resultSet.getInt("gender")));
+				user.setTel(resultSet.getString("Tel"));
 
 				users.add(user);
 			}
@@ -191,7 +275,6 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			resultSet.close();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		sqlDeloy.shotDownCon();
@@ -213,7 +296,6 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			connection.close();
 			sqlDeloy.shotDownCon();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return isDeleted;
@@ -223,7 +305,7 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 		boolean ishad = false;
 		SqlDeloy sqlDeloy = new SqlDeloy();
 		Connection connection = sqlDeloy.getConnection();
-		String sql = "select COntrol_Id from admin_information where COntrol_Id='" + textFieldId + "'";
+		String sql = "select COntrol_Id from admin_information where COntrol_Id='" + textFieldId.getText() + "'";
 		Statement statement;
 		try {
 			statement = connection.createStatement();
@@ -241,15 +323,15 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 		}
 		return ishad;
 	}
-	
-	private boolean CreateuserInformationSql(){
-		boolean isDone=false;
-		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
-		String createCommand="INSERT INTO admin_information (Control_Id,Control_PWD,Control_Limit,Tel,Name,Give_Name,gender) VALUES (?,?,?,?,?,?,?)";
-		
+
+	private boolean CreateuserInformationSql() {
+		boolean isDone = false;
+		SqlDeloy sqlDeloy = new SqlDeloy();
+		Connection connection = sqlDeloy.getConnection();
+		String createCommand = "INSERT INTO admin_information (Control_Id,Control_PWD,Control_Limit,Tel,Name,Give_Name,gender) VALUES (?,?,?,?,?,?,?)";
+
 		try {
-			PreparedStatement PreStat=connection.prepareStatement(createCommand);
+			PreparedStatement PreStat = connection.prepareStatement(createCommand);
 			PreStat.setString(1, textFieldId.getText());
 			PreStat.setString(2, User.encrytpMD5PWD("111111"));
 			PreStat.setInt(3, jurisdtion.getIndex());
@@ -257,10 +339,10 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			PreStat.setString(5, textFieldFirstName.getText());
 			PreStat.setString(6, textFieldSecondName.getText());
 			PreStat.setInt(7, genderEnum.getIndex());
-			
-			int row=PreStat.executeUpdate();
-			if (row>0) {
-				isDone=true;
+
+			int row = PreStat.executeUpdate();
+			if (row > 0) {
+				isDone = true;
 			}
 			PreStat.close();
 			connection.close();
@@ -270,10 +352,45 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 		}
 		return isDone;
 	}
-	
-	private boolean UpdateUserInformationSql(){
-		boolean isDone=false;
-		
+
+	private boolean UpdateUserInformationSql(String ControlId) {
+		boolean isDone = false;
+		SqlDeloy sqlDeloy = new SqlDeloy();
+		Connection connection = sqlDeloy.getConnection();
+		String upDateCommand = "UPDATE admin_information SET Control_Limit = ? ,Tel = ? ,Name = ? ,Give_Name = ? ,gender = ? WHERE COntrol_Id = ?";
+
+		try {
+			PreparedStatement preStat = connection.prepareStatement(upDateCommand);
+			preStat.setInt(1, jurisdtion.getIndex());
+			preStat.setString(2, textFieldTel.getText());
+			preStat.setString(3, textFieldFirstName.getText());
+			preStat.setString(4, textFieldSecondName.getText());
+			preStat.setInt(5, genderEnum.getIndex());
+			preStat.setString(6, ControlId);
+			int row = preStat.executeUpdate();
+			if (row > 0) {
+				isDone = true;
+			}
+			preStat.close();
+			connection.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return isDone;
+	}
+	
+	private void initJur(){
+		switch(MainApp.getJurisdtion()){
+		case admin:
+			choiceBoxLimits.setItems(Jurisdtion.getJurList());
+			break;
+		case manage:
+			choiceBoxLimits.setItems(FXCollections.observableArrayList(Jurisdtion.manage.getName(),Jurisdtion.nomal.getName()));
+			break;
+		case nomal:
+			textFieldId.setDisable(true);
+			choiceBoxLimits.setDisable(true);
+		}
 	}
 }

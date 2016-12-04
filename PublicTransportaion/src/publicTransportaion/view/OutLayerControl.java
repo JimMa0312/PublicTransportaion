@@ -20,14 +20,16 @@ import javafx.scene.control.MenuItem;
 import publicTransportaion.MainApp;
 import publicTransportaion.model.Cars;
 import publicTransportaion.model.Station;
+import publicTransportaion.model.en.Jurisdtion;
 import publicTransportaion.sql.SqlDeloy;
+import sun.applet.Main;
 
 public class OutLayerControl implements ControlledStage, Initializable {
-	
+
 	private StageController myController;
-	private static BooleanProperty isSignIn=new SimpleBooleanProperty(false);
-	
-	@FXML 
+	private static BooleanProperty isSignIn = new SimpleBooleanProperty(false);
+
+	@FXML
 	private MenuItem signInMenuItem;
 	@FXML
 	private MenuItem signOutMenuItem;
@@ -41,61 +43,60 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	private MenuItem BusDyanmicMenuItem;
 	@FXML
 	private MenuItem UserMessageMenuItem;
-	
-	
+
 	@FXML
-	private void handleExite(){
+	private void handleExite() {
 		System.exit(0);
 	}
-	
+
 	@FXML
-	private void ShowAbout(){
-		Alert alert=new Alert(AlertType.INFORMATION);
+	private void ShowAbout() {
+		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("关于");
 		alert.setHeaderText("开发小组：黑石开发");
 		alert.setContentText("项目组长：马玉琛\n项目成员：王瀚、甘孟坤、王婷\n\n软件版本：DateV 0.5.1");
 		alert.showAndWait();
 	}
+
 	@FXML
-	private void ShowSignIn(){
+	private void ShowSignIn() {
 		MainApp.showSignInView();
 	}
-	
+
 	@FXML
-	private void HandleSignOut(){
+	private void HandleSignOut() {
 		System.out.println("Singout seccess");
 		isSignIn.set(false);
 	}
-	
+
 	@FXML
-	private void handleShowCarManager(){
+	private void handleShowCarManager() {
 		MainApp.showTransationManage_CarsView();
 	}
-	
+
 	@FXML
-	private void handleShowBusLineManager(){
+	private void handleShowBusLineManager() {
 		MainApp.showTranastionManage_BusLineView();
 	}
-	
+
 	@FXML
-	private void handleShowStationManager(){
+	private void handleShowStationManager() {
 		MainApp.showTransationManage_StationView();
 	}
-	
+
 	@FXML
-	private void handleShowBusDyanmicManager(){
+	private void handleShowBusDyanmicManager() {
 		MainApp.showTransationManage_BusDyanmicView();
 	}
-	
+
 	@FXML
-	private void handleShowUserManager(){
+	private void handleShowUserManager() {
 		MainApp.showTranastionManage_UserView();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		isSignIn.addListener(ov->{
-			System.out.println("Changing");
+		isSignIn.addListener(ov -> {
 			if (isSignIn.getValue()) {
 				signInMenuItem.setDisable(true);
 				signOutMenuItem.setDisable(false);
@@ -114,7 +115,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 				UserMessageMenuItem.setDisable(true);
 			}
 		});
-		
+
 		if (isNullWithUser()) {
 			MainApp.showInitAdminUserView();
 		}
@@ -122,31 +123,31 @@ public class OutLayerControl implements ControlledStage, Initializable {
 
 	@Override
 	public void setStageController(StageController stageController) {
-		myController=stageController;
+		myController = stageController;
 	}
-	
-	public void goToMain(){
+
+	public void goToMain() {
 		myController.setStage(MainApp.OutLayerId);
 	}
-	
-	public static void setSignin(boolean signin){
+
+	public static void setSignin(boolean signin) {
 		isSignIn.set(signin);
 	}
-	
+
 	private boolean isNullWithUser() {
-		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
-		boolean isHaveUser=false;
-	
+		SqlDeloy sqlDeloy = new SqlDeloy();
+		Connection connection = sqlDeloy.getConnection();
+		boolean isHaveUser = false;
+
 		try {
-			Statement statement=connection.createStatement();
-			
-			String sql="select count(*) as num from admin_information";
-			ResultSet resultSet=statement.executeQuery(sql);
-			while(resultSet.next()){
+			Statement statement = connection.createStatement();
+
+			String sql = "select count(*) as num from admin_information";
+			ResultSet resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
 				System.out.println(resultSet.getInt("num"));
-				if (resultSet.getInt("num")==0) {
-					isHaveUser=true;
+				if (resultSet.getInt("num") == 0) {
+					isHaveUser = true;
 				}
 			}
 			resultSet.close();

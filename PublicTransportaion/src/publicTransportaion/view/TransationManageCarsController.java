@@ -288,7 +288,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 
 		try {
 			PreparedStatement pStmt = connection.prepareStatement(
-					"INSERT INTO Car_information (License_Plate,Einge_id,Frame_id,Bus_type,Can_population,Bus_Chair) VALUES (?,?,?,?,?,?)");
+					"INSERT INTO Car_information (License_Plate,Einge_id,Frame_id,Bus_tyoe,Can_population,Bus_Chair) VALUES (?,?,?,?,?,?)");
 			pStmt.setString(1, cars.getLicensePlate());
 			pStmt.setString(2, cars.getEingeId());
 			pStmt.setString(3, cars.getFrameId());
@@ -315,7 +315,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 
 		try {
 			PreparedStatement pStmt = connection.prepareStatement(
-					"UPDATE Car_information SET License_Plate=?,Einge_id=?,Frame_id=?,Bus_type=?,Can_population=?,Bus_Chair =? where License_Plate=?");
+					"UPDATE Car_information SET License_Plate=?,Einge_id=?,Frame_id=?,Bus_tyoe=?,Can_population=?,Bus_Chair =? where License_Plate=?");
 			pStmt.setString(1, License_Plate_TextField.getText());
 			pStmt.setString(2, Engine_id_TextField.getText());
 			pStmt.setString(3, Frame_id_TextField.getText());

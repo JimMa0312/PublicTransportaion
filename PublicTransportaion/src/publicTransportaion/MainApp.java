@@ -23,6 +23,7 @@ import javafx.stage.StageStyle;
 import publicTransportaion.model.DBConfig;
 import publicTransportaion.model.DBconfigXml;
 import publicTransportaion.model.User;
+import publicTransportaion.model.en.Jurisdtion;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
@@ -35,7 +36,8 @@ public class MainApp extends Application {
 	private BorderPane rootLayout;
 	private OutLayerControl control;
 	
-	public static User AdminUser=new User();
+	private static String UserName;
+	private static Jurisdtion jurisdtion;
 	
 	
 	public static String path="bin\\config.xml";
@@ -75,6 +77,9 @@ public class MainApp extends Application {
 	
 	public static final String InitAdminUser_stationId="InitAdminUser";
 	public static final String initAdminUser_stationRes="InitAdminUser.fxml";
+	
+	public static final String ChangePWD_stationId="ChangePwd";
+	public static final String ChangePWD_stationRes="ChangePwd.fxml";
 	
 
 	@Override
@@ -168,6 +173,11 @@ public class MainApp extends Application {
 		stageController.setWaitStage(InitAdminUser_stationId);
 	}
 	
+	public static void showChangePasswordView(){
+		stageController.loadStage(ChangePWD_stationId, ChangePWD_stationRes);
+		stageController.setWaitStage(ChangePWD_stationId);
+	}
+	
 	
 	/*
 	 * 保存数据库的加密配置文件
@@ -238,6 +248,24 @@ public class MainApp extends Application {
 	public static void LoadXml(){
 		file=new File(path);
 		loadFileToDBConfig(file);
+	}
+	
+	
+
+	public static String getUserName() {
+		return UserName;
+	}
+
+	public static void setUserName(String userName) {
+		UserName = userName;
+	}
+
+	public static Jurisdtion getJurisdtion() {
+		return jurisdtion;
+	}
+
+	public static void setJurisdtion(Jurisdtion jurisdtion) {
+		MainApp.jurisdtion = jurisdtion;
 	}
 
 	public static void main(String[] args) {

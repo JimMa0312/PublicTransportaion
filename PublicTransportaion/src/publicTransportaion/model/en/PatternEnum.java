@@ -2,7 +2,7 @@ package publicTransportaion.model.en;
 
 public enum PatternEnum {
 	vehicleNoStyle("^[\u4e00-\u9fa5]{1}[A-Z0-9]{6}$",0),
-	ChinsesTelStyle("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$",1);
+	ChinsesTelStyle("^((13[0-9])|(15[^4,\\D])|(18[0,2,5-9]))\\d{8}$",1);
 	
 	private String name;
 	private int index;

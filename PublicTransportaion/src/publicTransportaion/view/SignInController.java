@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import publicTransportaion.MainApp;
 import publicTransportaion.model.User;
+import publicTransportaion.model.en.Jurisdtion;
 import publicTransportaion.sql.SqlDeloy;
 
 public class SignInController implements ControlledStage {
@@ -39,11 +40,9 @@ public class SignInController implements ControlledStage {
     	   {
            	returnMessage.setText("登陆成功");
            	returnMessage.setTextFill(Color.GREEN);
-   			
+           	initTextField();
     		myController.shutDownStage(MainApp.SignInId);
-    		Control_Id_TextField.setText(null);
-    		Control_PWD_PasswordField.setText(null);
-    		returnMessage.setText(null);
+
     		OutLayerControl.setSignin(true);
     	   }
     	   else {
@@ -59,25 +58,22 @@ public class SignInController implements ControlledStage {
     	Connection connection=sqlDeloy.getConnection();
     	
     	
-    	String sql="select Control_PWD from admin_information where Control_Id='"+Control_Id_TextField.getText()+"'";
+    	String sql="select Control_PWD,COntrol_Id,Control_Limit from admin_information where Control_Id='"+Control_Id_TextField.getText()+"'";
     	
     	try {
     		Statement stmt=connection.createStatement();
     		ResultSet resultSet=stmt.executeQuery(sql);
     		
-    		List<String> list=new ArrayList<String>();
-    		
     		while(resultSet.next()){
-    			list.add(resultSet.getString("Control_PWD"));
-    		}
-    		
-    		System.out.println(list);
-    		
-    		for (String TruePwd : list) {
-				if (TruePwd.equals(User.encrytpMD5PWD(Control_PWD_PasswordField.getText()))) {
+    			if (resultSet.getString("Control_PWD").equals(User.encrytpMD5PWD(Control_PWD_PasswordField.getText()))) {
+					System.out.println("Success!");
+					OutLayerControl.setSignin(true);
+					MainApp.setUserName(resultSet.getString("COntrol_Id"));
+					MainApp.setJurisdtion(Jurisdtion.getJur(resultSet.getInt("Control_Limit")));
+					System.out.println(MainApp.getJurisdtion());
 					isOk=true;
 				}
-			}
+    		}
     		resultSet.close();
     		stmt.close();
     		sqlDeloy.shotDownCon();
@@ -92,6 +88,7 @@ public class SignInController implements ControlledStage {
     
     @FXML
     private void handleCancel() {
+    	initTextField();
     	myController.shutDownStage(MainApp.SignInId);
     }
 
@@ -116,6 +113,12 @@ public class SignInController implements ControlledStage {
        
         return isInputvalid;
         
+    }
+    
+    private void initTextField(){
+		Control_Id_TextField.setText(null);
+		Control_PWD_PasswordField.setText(null);
+		returnMessage.setText(null);
     }
 
 	@Override

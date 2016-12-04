@@ -53,31 +53,31 @@ public class initAdminUserControl implements Initializable,ControlledStage {
 		initErrorMessageLabel();
 		if (textFieldUserName.getText().isEmpty()||textFieldUserName.getText()==null) {
 			isLegal=false;
-			labelErrorUserName.setText(HintEnum.printHint(HintEnum.UserNameEmpty));
+			labelErrorUserName.setText(HintEnum.UserNameEmpty.getName());
 		}
 		if (textFieldUserName.getText().length()<6||textFieldUserName.getText().length()>16) {
 			isLegal=false;
-			labelErrorUserName.setText("用户名"+HintEnum.printHint(HintEnum.ErrorStringLegth));
+			labelErrorUserName.setText("用户名"+HintEnum.ErrorStringLegth.getName());
 		}
 		if (textFieldUserPwd.getText().isEmpty()||textFieldUserPwd.getText()==null) {
 			isLegal=false;
-			labelErrorUserPwd.setText(HintEnum.printHint(HintEnum.PwdEmpty));
+			labelErrorUserPwd.setText(HintEnum.PwdEmpty.getName());
 		}
 		if (textFieldUserPwd.getText().length()<6||textFieldUserPwd.getText().length()>16) {
 			isLegal=false;
-			labelErrorUserPwd.setText("密码"+HintEnum.printHint(HintEnum.ErrorStringLegth));
+			labelErrorUserPwd.setText("密码"+HintEnum.ErrorStringLegth.getName());
 		}
 		if (textFieldUserPwd.getText().equals(textFieldUserName.getText())) {
 			isLegal=false;
-			labelErrorUserPwd.setText(HintEnum.printHint(HintEnum.CommeBetweenUserNameAndPWD));
+			labelErrorUserPwd.setText(HintEnum.CommeBetweenUserNameAndPWD.getName());
 		}
 		if (textFieldCheckUserPwd.getText().isEmpty()||textFieldCheckUserPwd.getText()==null) {
 			isLegal=false;
-			labelErrorCheckUserPwd.setText(HintEnum.printHint(HintEnum.PwdEmpty));
+			labelErrorCheckUserPwd.setText(HintEnum.PwdEmpty.getName());
 		}
 		if (!textFieldCheckUserPwd.getText().equals(textFieldUserPwd.getText())) {
 			isLegal=false;
-			labelErrorCheckUserPwd.setText(HintEnum.printHint(HintEnum.ChPwdEmpty));
+			labelErrorCheckUserPwd.setText(HintEnum.ChPwdEmpty.getName());
 		}
 		
 		return isLegal;
