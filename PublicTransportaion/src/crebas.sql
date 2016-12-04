@@ -182,8 +182,8 @@ go
 /* Table: Mao_information                                       */
 /*==============================================================*/
 create table Mao_information (
-   Station_ID           char(10)             not null,
-   Sta_Station_ID       char(10)             not null,
+   Station_ID           varchar(10)             not null,
+   Sta_Station_ID       varchar(10)             not null,
    Station_distence2    float(8)             not null,
    Station_State2       int                  not null,
    constraint PK_MAO_INFORMATION primary key nonclustered (Station_ID, Sta_Station_ID)
@@ -228,8 +228,8 @@ go
 /* Table: SID                                                   */
 /*==============================================================*/
 create table SID (
-   Bus_No               varchar(1)           not null,
-   Station_ID           char(10)             not null,
+   Bus_No               varchar(10)           not null,
+   Station_ID           varchar(10)             not null,
    License_Plate        varchar(9)           not null,
    Engine_start         datetime             not null,
    GPS                  text                 not null,
@@ -267,10 +267,11 @@ go
 /* Table: Station_information                                   */
 /*==============================================================*/
 create table Station_information (
-   Station_ID           char(10)             not null,
-   Station_Name         varchar(10)          not null,
-   Station_Address      varchar(20)          not null,
-   Station_GPS          text                 not null,
+   Station_ID           varchar(10)             not null,
+   Station_Name         varchar(50)          not null,
+   Station_Address      varchar(50)          not null,
+   Station_GPS_X          float                 not null,
+   Station_GPS_Y          float                 not null,
    constraint PK_STATION_INFORMATION primary key nonclustered (Station_ID)
 )
 go

@@ -119,7 +119,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 				car.setLicensePlate(resultSet.getString("License_Plate"));
 				car.setEingeId(resultSet.getString("Einge_id"));
 				car.setFrameId(resultSet.getString("Frame_id"));
-				car.setBusType(resultSet.getString("Bus_type"));
+				car.setBusType(resultSet.getString("Bus_tyoe"));
 				car.setCarPopulation(resultSet.getInt("Can_population"));
 				car.setBusChair(resultSet.getInt("Bus_Chair"));
 				carsList.add(car);

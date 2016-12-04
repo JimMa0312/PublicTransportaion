@@ -11,7 +11,6 @@ public class Station {
 	private final StringProperty stationName;
 	private final StringProperty stationID;
 	private final StringProperty stationAddress;
-	private final StringProperty stationGPS;
 	private final DoubleProperty StationGPSX;
 	private final DoubleProperty StationGPSY;
 
@@ -24,7 +23,6 @@ public class Station {
 		this.stationName=new SimpleStringProperty(stationName);
 		this.stationID=new SimpleStringProperty(null);
 		this.stationAddress=new SimpleStringProperty(null);
-		this.stationGPS=new SimpleStringProperty(null);
 		this.StationGPSX=new SimpleDoubleProperty(0);
 		this.StationGPSY=new SimpleDoubleProperty(0);
 	}
@@ -63,20 +61,6 @@ public class Station {
 	
 	public StringProperty getStationAddressProperty() {
 		return stationAddress;
-	}
-	
-	public void setStationGPS(String GPSValue) {
-		this.stationGPS.set(GPSValue);
-		double[] gps=GPS.parseFloatList(stationGPS.get());
-		setStationGPSX(gps[0]);
-		setStationGPSY(gps[1]);
-	}
-	public String getStationGPS() {
-		return stationGPS.get();
-	}
-	
-	public StringProperty getStationGPSProperty() {
-		return stationGPS;
 	}
 	
 	public void setStationGPSX(String X){

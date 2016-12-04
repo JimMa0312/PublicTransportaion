@@ -57,7 +57,6 @@ public class TransationManageStationController implements ControlledStage,Initia
     
     
     private ObservableList<Station> stationsList=FXCollections.observableArrayList();
-    private double[] gps=new double[2];
     
 	private void showStationDetails(Station station) {
 		if (station==null) {
@@ -126,7 +125,8 @@ public class TransationManageStationController implements ControlledStage,Initia
 				station.setStationName(resultSet.getString("Station_Name"));
 				station.setStationID(resultSet.getString("Station_ID"));
 				station.setStationAddress(resultSet.getString("Station_Address"));
-				
+				station.setStationGPSX(resultSet.getFloat("Station_GPS_X"));
+				station.setStationGPSY(resultSet.getFloat("Station_GPS_Y"));
 				stationsList.add(station);
 			}
 	    	
@@ -139,22 +139,18 @@ public class TransationManageStationController implements ControlledStage,Initia
 		}
 	}
 	
-	private void setGPSValue(){
-		gps[0]=Double.parseDouble(Station_GPS_X_TextFeild.getText());
-		gps[1]=Double.parseDouble(Station_GPS_Y_TextFeild.getText());
-	}
-	
 	@FXML
 	private void handleNewStation(){
-		Station newStation=new Station();
 		if (isInputVlid()) {
 			initErrorMessage();
-			newStation.setStationName(Station_Name_TextFeild.getText());
-			newStation.setStationID(Station_ID_TextFeild.getText());
-			newStation.setStationAddress(Station_Address_TextFeild.getText());
-			setGPSValue();
-			newStation.setStationGPS(GPS.parseString(gps));
-			if (InsertIntoSql(newStation)) {
+
+			if (InsertIntoSql()) {
+				Station newStation=new Station();
+				newStation.setStationName(Station_Name_TextFeild.getText());
+				newStation.setStationID(Station_ID_TextFeild.getText());
+				newStation.setStationAddress(Station_Address_TextFeild.getText());
+				newStation.setStationGPSX(Station_GPS_X_TextFeild.getText());
+				newStation.setStationGPSY(Station_GPS_Y_TextFeild.getText());
 				stationsList.add(newStation);
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
@@ -168,14 +164,14 @@ public class TransationManageStationController implements ControlledStage,Initia
 	@FXML
 	private void handleEditCars(){
 		Station editStation=stationsTable.getSelectionModel().getSelectedItem();
-		setGPSValue();
 		if (isInputVlid()) {
 			initErrorMessage();
-			editStation.setStationName(Station_Name_TextFeild.getText());
-			editStation.setStationID(Station_ID_TextFeild.getText());
-			editStation.setStationAddress(Station_Address_TextFeild.getText());
-			editStation.setStationGPS(GPS.parseString(gps));
 			if (UpDateSql()) {
+				editStation.setStationName(Station_Name_TextFeild.getText());
+				editStation.setStationID(Station_ID_TextFeild.getText());
+				editStation.setStationAddress(Station_Address_TextFeild.getText());
+				editStation.setStationGPSX(Station_GPS_X_TextFeild.getText());
+				editStation.setStationGPSY(Station_GPS_Y_TextFeild.getText());
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.setTitle("数据库上传错误");
@@ -193,6 +189,7 @@ public class TransationManageStationController implements ControlledStage,Initia
 
 			if (DeleteStationInformationfromSql(station.getStationID())) {
 				stationsTable.getItems().remove(selectedIndex);
+				showStationDetails(null);
 			} else {
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.setTitle("数据库操作错误");
@@ -244,6 +241,7 @@ public class TransationManageStationController implements ControlledStage,Initia
 			isOk = (rtn == 0) ? false : true;
 
 			pStmt.close();
+			connection.close();
 			sqlDeloy.shotDownCon();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -253,59 +251,65 @@ public class TransationManageStationController implements ControlledStage,Initia
 		return isOk;
 	}
 	
-	private boolean InsertIntoSql(Station station) {
-		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
+	private boolean InsertIntoSql() {
+		boolean isDone=false;
 		
 		try {
-			PreparedStatement pStmt=connection.prepareStatement("INSERT INTO Station_information (Station_ID,Station_Name,Station_Address,Station_GPS) VALUES (?,?,?,?)");
-			pStmt.setString(1, station.getStationID());
-			pStmt.setString(2, station.getStationName());
-			pStmt.setString(3, station.getStationAddress());
-			pStmt.setString(4, station.getStationGPS());
-			int row=pStmt.executeUpdate();
-			if (row>0) {
-				System.out.println("成功");
-				return true;
-			}
-			pStmt.close();
-			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			System.out.println("失败");
-			return false;
-		}
-		System.out.println("失败");
-		return false;
-	}
-	
-	private boolean UpDateSql() {
-		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
-		
-		try {
-			PreparedStatement pStmt=connection.prepareStatement("UPDATE Station_information SET Station_ID=?,Station_Name=?,Station_Address=?,Station_GPS=? WHERE Station_ID=?");
+			SqlDeloy sqlDeloy=new SqlDeloy();
+			Connection connection=sqlDeloy.getConnection();
+			PreparedStatement pStmt=connection.prepareStatement("INSERT INTO Station_information (Station_ID,Station_Name,Station_Address,Station_GPS_X,Station_GPS_Y) VALUES (?,?,?,?,?)");
 			pStmt.setString(1, Station_ID_TextFeild.getText());
 			pStmt.setString(2, Station_Name_TextFeild.getText());
 			pStmt.setString(3, Station_Address_TextFeild.getText());
-			pStmt.setString(4, GPS.parseString(gps));
-			pStmt.setString(5, Station_ID_TextFeild.getText());
+			pStmt.setString(4, Station_GPS_X_TextFeild.getText());
+			pStmt.setString(5, Station_GPS_Y_TextFeild.getText());
 			int row=pStmt.executeUpdate();
 			if (row>0) {
 				System.out.println("成功");
-				return true;
+				isDone=true;
 			}
 			pStmt.close();
+			connection.close();
 			sqlDeloy.shotDownCon();
 		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			System.out.println("失败");
-			return false;
+			System.out.println(e.getMessage());
+			drawErrorView();
 		}
-		System.out.println("失败");
-		return false;
+		return isDone;
 	}
-
+	
+	private boolean UpDateSql() {
+		boolean isDone=false;
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		Connection connection=sqlDeloy.getConnection();
+		
+		try {
+			PreparedStatement pStmt=connection.prepareStatement("UPDATE Station_information SET Station_ID=?,Station_Name=?,Station_Address=?,Station_GPS_X=?,Station_GPS_Y=? WHERE Station_ID=?");
+			pStmt.setString(1, Station_ID_TextFeild.getText());
+			pStmt.setString(2, Station_Name_TextFeild.getText());
+			pStmt.setString(3, Station_Address_TextFeild.getText());
+			pStmt.setString(4, Station_GPS_X_TextFeild.getText());
+			pStmt.setString(5, Station_GPS_Y_TextFeild.getText());
+			pStmt.setString(6, Station_ID_TextFeild.getText());
+			int row=pStmt.executeUpdate();
+			if (row>0) {
+				System.out.println("成功");
+				isDone=true;
+			}
+			pStmt.close();
+			connection.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			drawErrorView();
+		}
+		return isDone;
+	}
+	
+	private void drawErrorView(){
+		Alert alert=new Alert(AlertType.ERROR);
+		alert.setTitle("错误！！！");
+		alert.setHeaderText("上传失败");
+		alert.setContentText("信息可能重复或者网络问题，请稍后重试！");
+		alert.showAndWait();
+	}
 }
