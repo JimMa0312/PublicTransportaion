@@ -29,16 +29,6 @@ public class TransationManageBusDyanmic implements ControlledStage, Initializabl
 	private TextField hourTextField;
 	@FXML
 	private TextField minuteTextField;
-	@FXML
-	private TableView<Bus> busTableView;
-	@FXML
-	private TableColumn<Bus, String> BusTableBusIdColumn;
-	@FXML
-	private TableView<Cars> CarsTabelView;
-	@FXML
-	private TableColumn<Cars, String> CarsTableIdColumn;
-	@FXML
-	private TableColumn<Cars, Integer> carsTableChairColun;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

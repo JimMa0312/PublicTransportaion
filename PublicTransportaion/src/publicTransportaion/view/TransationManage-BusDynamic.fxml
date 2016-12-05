@@ -9,17 +9,7 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="publicTransportaion.view.TransationManageBusDyanmic">
    <children>
-      <TableView layoutX="31.0" layoutY="124.0" prefHeight="286.0" prefWidth="268.0">
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-         <columns>
-            <TableColumn prefWidth="89.0" text="车牌照号" />
-            <TableColumn prefWidth="139.0" text="班线编号" />
-            <TableColumn prefWidth="75.0" text="车座" />
-         </columns>
-      </TableView>
-      <GridPane layoutX="387.0" layoutY="138.0" prefHeight="230.0" prefWidth="248.0">
+      <GridPane layoutX="498.0" layoutY="143.0" prefHeight="230.0" prefWidth="248.0">
          <children>
             <Label text="车牌照号：">
                <GridPane.margin>
@@ -52,8 +42,8 @@
                </children>
             </HBox>
             <DatePicker fx:id="WorkeDatePicker" prefHeight="23.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField editable="false" GridPane.columnIndex="1" />
+            <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefHeight="15.0" prefWidth="168.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <columnConstraints>
@@ -69,14 +59,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TextArea layoutX="461.0" layoutY="368.0" prefHeight="57.0" prefWidth="200.0" text="*发车计划的更改：管理员务必先&#10;添加车辆信息、班线信息  以及站&#10;点信息，才能对发车计划的更改。" />
-      <Label layoutX="33.0" layoutY="433.0" text="单击车辆可以在右侧查看详细的发车动态信息" />
-      <Label layoutX="33.0" layoutY="89.0" text="以下为符合检索条件的车辆：">
+      <TextArea layoutX="498.0" layoutY="384.0" prefHeight="57.0" prefWidth="200.0" text="*发车计划的更改：管理员务必先&#10;添加车辆信息、班线信息  以及站&#10;点信息，才能对发车计划的更改。" />
+      <Label layoutX="33.0" layoutY="433.0" prefHeight="30.0" prefWidth="200.0" text="单击车辆可以在右侧查看详细的发车动态信息" wrapText="true" />
+      <Label layoutX="33.0" layoutY="89.0" text="    ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="367.0" layoutY="89.0" text="发车实时/计划信息：">
+      <Label layoutX="498.0" layoutY="89.0" text="发车实时/计划信息：">
          <font>
             <Font name="Microsoft YaHei Bold" size="18.0" />
          </font>
@@ -103,7 +93,7 @@
             </Button>
          </children>
       </HBox>
-      <HBox layoutX="420.0" layoutY="448.0" spacing="15.0">
+      <HBox layoutX="498.0" layoutY="476.0" spacing="15.0">
          <children>
             <Button layoutX="420.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="新增计划">
                <font>
@@ -124,5 +114,30 @@
       </HBox>
       <Text layoutX="77.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <TextArea layoutX="50.0" layoutY="467.0" prefHeight="68.0" prefWidth="200.0" text="*说明：右边的详细信息，可更改&#10;的项均是用来添加或修改计划的项，&#10;编辑完后点击相应功能按钮即可。" />
+      <TableView layoutX="268.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="班线" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="361.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="车牌照" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView layoutX="33.0" layoutY="90.0" prefHeight="337.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="班线" />
+          <TableColumn prefWidth="75.0" text="车牌照号" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>

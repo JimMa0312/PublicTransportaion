@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,8 +16,6 @@ import publicTransportaion.MainApp;
 import publicTransportaion.model.Bus;
 import publicTransportaion.model.Station;
 import publicTransportaion.sql.SqlDeloy;
-import publicTransportaion.util.TimeConverter;
-import sun.security.krb5.internal.crypto.crc32;
 
 public class ShowBusInforMationController {
 	@FXML

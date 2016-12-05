@@ -1,27 +1,23 @@
 package publicTransportaion.util;
 
-import java.time.DateTimeException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class TImeUtil {
-	private static final String TIME_PATTER="HH:mm";
-	private static final DateTimeFormatter TIME_FORMATTER=DateTimeFormatter.ofPattern(TIME_PATTER);
+	private static final String PANE=":";
 	
-	public static String format(LocalTime time) {
-		if (time==null) {
-			return null;
-		}
-		return TIME_FORMATTER.format(time);
+	public static String[] parseStringList(String stationText) {
+		String[] tempString=stationText.split(PANE);
+		return tempString;
 	}
 	
-	public static LocalTime parse(String TimeString) {
-		try {
-			return TIME_FORMATTER.parse(TimeString,LocalTime::from);
-		} catch (DateTimeException e) {
-			// TODO: handle exception
-			return null;
+	public static String parseString(String[] stations) {
+		String TimeString="";
+		for(int i=0;i<stations.length;i++){
+			TimeString+=stations[i];
+			if (i!=stations.length-1) {
+				TimeString+=PANE;
+			}
 		}
+		
+		return TimeString;
 	}
-
 }

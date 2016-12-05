@@ -156,10 +156,10 @@ go
 /* Table: Bus_information                                       */
 /*==============================================================*/
 create table Bus_information (
-   Bus_No               varchar(1)           not null,
-   Time_Start           datetime             not null,
-   Time_End             datetime             not null,
-   Time_Lag             datetime             not null,
+   Bus_No               varchar(10)           not null,
+   Time_Start           varChar(20)             not null,
+   Time_End             varChar(20)            not null,
+   Time_Lag             varchar(10)             not null,
    constraint PK_BUS_INFORMATION primary key nonclustered (Bus_No)
 )
 go
@@ -210,7 +210,7 @@ go
 /* Table: Route_Planning                                        */
 /*==============================================================*/
 create table Route_Planning (
-   Bus_No               varchar(1)           not null,
+   Bus_No               varchar(10)           not null,
    UpStream             text                 not null,
    DownStream           text                 not null
 )
@@ -231,9 +231,9 @@ create table SID (
    Bus_No               varchar(10)           not null,
    Station_ID           varchar(10)             not null,
    License_Plate        varchar(9)           not null,
-   Engine_start         datetime             not null,
+   Engine_start         varChar(25)             not null,
    GPS                  text                 not null,
-   CarrOut_Date         datetime             not null,
+   CarrOut_Date         varChar(25)             not null,
    Line_Layer           int                  not null,
    constraint PK_SID primary key nonclustered (Bus_No, Station_ID, License_Plate)
 )

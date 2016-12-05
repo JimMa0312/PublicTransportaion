@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.util.List;
+import java.sql.Time;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,9 +24,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import publicTransportaion.model.Bus;
+import publicTransportaion.model.Station;
+import publicTransportaion.model.en.PatternEnum;
+import publicTransportaion.model.en.eSqlCommand;
 import publicTransportaion.sql.SqlDeloy;
-import publicTransportaion.util.SingleLine;
-import publicTransportaion.util.TimeConverter;
+import publicTransportaion.util.Patterner;
+import publicTransportaion.util.StationsConverter;
+import publicTransportaion.util.TImeUtil;
 
 public class TransationManageBusLineController implements ControlledStage,Initializable {
 	@FXML
@@ -36,14 +42,30 @@ public class TransationManageBusLineController implements ControlledStage,Initia
     @FXML
     private TextField Time_Lage_TextField;
     @FXML
-    private TextField Time_Start_TextField;
+    private TextField Time_Start_Hour_TextField;
     @FXML
-    private TextField Time_End_TextField;
+    private TextField Time_Start_Mintue_TextField;
+    @FXML
+    private TextField Time_End__Hour_TextField;
+    @FXML
+    private TextField Time_End__Mintue_TextField;
+    
+    
     
     @FXML
     private TableView<Bus> Bus_Line_ListTable;
     @FXML
     private TableColumn<Bus, String> Bus_Line_Column;
+    
+    @FXML
+    private TableView<Station> tableViewSelectedStation;
+    @FXML
+    private TableColumn<Station, String> tableColumnSelctionStation;
+    
+    @FXML
+    private TableView<Station> tableViewUnSelectedStation;
+    @FXML
+    private TableColumn<Station, String> tableColumnUnSelection;
     
     @FXML
 	private Label Bus_No_Error;
@@ -62,34 +84,39 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 	private StageController myController;
     
     private ObservableList<Bus> busList=FXCollections.observableArrayList();
+    
+    private ObservableList<Station> selectedStations=FXCollections.observableArrayList();
+    
+    private ObservableList<Station> unselectedStation=FXCollections.observableArrayList();
+    
+    private Map<String, Station> UnselectStationMap=new HashMap<String,Station>();
    
     
 	private void showBusDetails(Bus bus) {
 		if (bus == null) {
+			selectedStations.clear();
 			Bus_No_TextField.setText("");
-			//Start_Station_TextField.setText("");
-			//End_Station_TextField.setText("");
+			Start_Station_TextField.setText("");
+			End_Station_TextField.setText("");
 			Time_Lage_TextField.setText("");
-			Time_Start_TextField.setText("");
-			Time_End_TextField.setText("");
+			Time_Start_Hour_TextField.setText("");
+			Time_Start_Mintue_TextField.setText("");
+			Time_End__Hour_TextField.setText("");
+			Time_End__Mintue_TextField.setText("");
 		} else {
-			Bus_No_TextField.setText(bus.getBusNo());
-			//showStartAndEndStation(bus);
-			
+			selectedStations.clear();
+			getStationsWithSql(bus.getBusNo());
+			Bus_No_TextField.setText(bus.getBusNo());			
 			Time_Lage_TextField.setText(bus.getTimeLag());
-			Time_Start_TextField.setText(TimeConverter.format(bus.getTimeStart1()));
-			Time_End_TextField.setText(TimeConverter.format(bus.getTimeEnd1()));
-
+			String[] startTime=TImeUtil.parseStringList(bus.getTimeStart1());
+			Time_Start_Hour_TextField.setText(startTime[0]);
+			Time_Start_Mintue_TextField.setText(startTime[1]);
+			String[] endTime=TImeUtil.parseStringList(bus.getTimeEnd1());
+			Time_End__Hour_TextField.setText(endTime[0]);
+			Time_End__Mintue_TextField.setText(endTime[1]);
+			setTextStartStation();
+			setTextEndStation();
 		}
-	}
-	
-	private void showStartAndEndStation(Bus bus){
-		List<String> list=SingleLine.parse(bus.getLine());
-		String startStation=list.get(0);
-		String EndStation=list.get(list.size()-1);
-		
-		Start_Station_TextField.setText(selectStation(startStation));
-		End_Station_TextField.setText(EndStation);
 	}
 	
 	private void initErrorMessage() {
@@ -116,7 +143,6 @@ public class TransationManageBusLineController implements ControlledStage,Initia
     }
 	
 	private void connectAndSelectBusInfor() {
-		// TODO Auto-generated method stub
 		SqlDeloy sqlDeloy=new SqlDeloy();
     	Connection connection=sqlDeloy.getConnection();
     	busList.clear();
@@ -130,11 +156,9 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 				Bus bus=new Bus();
 				
 				bus.setBusNo(resultSet.getString("Bus_No"));
-				bus.setLine(resultSet.getNString(this.setStartStation(bus)));
-				bus.setLine(resultSet.getNString(this.setEndStation(bus)));
 				bus.setTimeLag(resultSet.getString("Time_Lag"));
-				bus.setStartTime(resultSet.getTime("Time_Start"));
-				bus.setTimeEnd(resultSet.getTime("Time_End"));		
+				bus.setStartTime(resultSet.getString("Time_Start"));
+				bus.setTimeEnd(resultSet.getString("Time_End"));		
 				busList.add(bus);
 			}
 	    	
@@ -142,14 +166,12 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			stmt.close();
 			sqlDeloy.shotDownCon();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		connectAndSelectBusInfor();
 		initErrorMessageTextFill();
 		initErrorMessage();
@@ -159,7 +181,20 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		Bus_Line_ListTable.setItems(busList);
 		Bus_Line_Column.setCellValueFactory(cellData -> cellData.getValue().getBusNoProperty());
     	Bus_Line_ListTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showBusDetails(newValue));
+                (observable, oldValue, newValue) -> {showBusDetails(newValue);});
+    	initTableUnselected();
+    	initTableSelected();
+	}
+	
+	private void initTableUnselected(){
+		connectionStationTabel();
+		tableViewUnSelectedStation.setItems(unselectedStation);
+		tableColumnUnSelection.setCellValueFactory(cellData->cellData.getValue().getStationNameProperty());
+	}
+	
+	private void initTableSelected(){
+		tableViewSelectedStation.setItems(selectedStations);
+		tableColumnSelctionStation.setCellValueFactory(cellData->cellData.getValue().getStationNameProperty());
 	}
 	
 	@FXML
@@ -168,13 +203,11 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		if (isInputVlid()) {
 			initErrorMessage();
 			newBus.setBusNo(Bus_No_TextField.getText());
-			//newBus.setLine(Start_Station_TextField.getText());
-			//newBus.setLine(End_Station_TextField.getText());
 			newBus.setTimeLag(Time_Lage_TextField.getText());
-			newBus.setStartTime(TimeConverter.parse(Time_Start_TextField.getText()));
-			newBus.setTimeEnd(TimeConverter.parse(Time_End_TextField.getText()));
+			newBus.setStartTime(enStartTime());
+			newBus.setTimeEnd(enEndTime());
 			
-			if(InsertIntoSql(newBus)){
+			if(InsertIntoSql(newBus)&&InsertIntoRoute(newBus.getBusNo())){
 				busList.add(newBus);
 			}
 			
@@ -193,13 +226,11 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 		if(isInputVlid()){
 			initErrorMessage();
 			
-			if(UpDateSql()){
+			if(UpDateSql()&&UpDateRoute()){
 				editbus.setBusNo(Bus_No_TextField.getText());
-				//editbus.setLine(Start_Station_TextField.getText());
-				//editbus.setLine(End_Station_TextField.getText());
 				editbus.setTimeLag(Time_Lage_TextField.getText());
-				editbus.setStartTime(TimeConverter.parse(Time_Start_TextField.getText()));
-				editbus.setTimeEnd(TimeConverter.parse(Time_End_TextField.getText()));
+				editbus.setStartTime(enStartTime());
+				editbus.setTimeEnd(enEndTime());
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.setTitle("数据库上传错误");
@@ -212,10 +243,8 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 	@FXML
 	private void handleDeleteBusLine(){
 		int selectedIndex = Bus_Line_ListTable.getSelectionModel().getSelectedIndex();
-		if(selectedIndex>=0){
-			Bus bus = busList.get(selectedIndex);
-			
-			if(DeleteBusInformationfromSql(bus.getBusNo())){
+		if(selectedIndex>=0){			
+			if(DeleteRoute()&&DeleteBusInformationfromSql()){
 				Bus_Line_ListTable.getItems().remove(selectedIndex);
 			}else{
 				Alert alert=new Alert(AlertType.ERROR);
@@ -231,6 +260,64 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			alert.setContentText("请选择删除的对象");
 			alert.showAndWait();
 		}
+	}
+	
+	private String enStartTime(){
+		String[] startTime={Time_Start_Hour_TextField.getText(), Time_Start_Mintue_TextField.getText()};
+		
+		return TImeUtil.parseString(startTime);
+	}
+	
+	private String enEndTime(){
+		String[] endTime={
+				Time_End__Hour_TextField.getText(),
+				Time_End__Mintue_TextField.getText()
+		};
+		
+		return TImeUtil.parseString(endTime);
+	}
+	
+	@FXML
+	private void handleAddStation(){
+		selectedStations.add(unselectedStation.get(tableViewUnSelectedStation.getSelectionModel().getSelectedIndex()));
+		setTextEndStation();
+		setTextStartStation();
+	}
+	
+	@FXML
+	private void handleRemoveStation(){
+		selectedStations.remove(selectedStations.get(tableViewSelectedStation.getSelectionModel().getSelectedIndex()));
+		setTextEndStation();
+		setTextStartStation();
+	}
+	
+	@FXML
+	private void handleUp(){
+		int index=tableViewSelectedStation.getSelectionModel().getSelectedIndex();
+		if (index>0) {
+			selectedStations.add(index-1, selectedStations.get(index));
+			selectedStations.remove(index+1);
+			setTextEndStation();
+			setTextStartStation();
+		}
+	}
+	
+	@FXML
+	private void handleDown(){
+		int index=tableViewSelectedStation.getSelectionModel().getSelectedIndex();
+		if (index<selectedStations.size()) {
+			selectedStations.add(index+2,selectedStations.get(index));
+			selectedStations.remove(index);
+			setTextEndStation();
+			setTextStartStation();
+		}
+	}
+	
+	@FXML
+	private void handleClear(){
+		selectedStations.clear();
+		Start_Station_TextField.setText("");
+		End_Station_TextField.setText("");
 	}
 	
 	private boolean isInputVlid(){
@@ -251,120 +338,223 @@ public class TransationManageBusLineController implements ControlledStage,Initia
 			Time_Lage_error.setText("请输入发车间隔");
 			message = false;
 		}
-		if (Time_Start_TextField.getText()==null && Time_Start_TextField.getText().isEmpty()) {
+		if (Time_Start_Hour_TextField.getText()==null && Time_Start_Hour_TextField.getText().isEmpty()&&Time_Start_Mintue_TextField.getText()==null&&Time_Start_Mintue_TextField.getText().isEmpty()) {
 			Time_Start_error.setText("请输入发车时间");
 			message = false;
 		}
-		if (Time_End_TextField.getText()==null && Time_End_TextField.getText().isEmpty()) {
-			Time_End_error.setText("请输入下班时间");
+		if (!Patterner.StringMatch(PatternEnum.OnlyNUM, Time_Start_Hour_TextField.getText())&&!Patterner.StringMatch(PatternEnum.OnlyNUM, Time_Start_Mintue_TextField.getText())) {
+			Time_Start_error.setText("请正确输入发车时间");
 			message = false;
 		}
-		
+		if (Time_End__Hour_TextField.getText()==null && Time_End__Hour_TextField.getText().isEmpty()&&Time_End__Mintue_TextField.getText()==null&&Time_End__Mintue_TextField.getText().isEmpty()) {
+			Time_End_error.setText("请输入末班时间");
+			message = false;
+		}
+		if (!Patterner.StringMatch(PatternEnum.OnlyNUM, Time_End__Hour_TextField.getText())&&!Patterner.StringMatch(PatternEnum.OnlyNUM, Time_End__Mintue_TextField.getText())) {
+			Time_End_error.setText("请输入末班时间");
+			message = false;
+		}
+		if (selectedStations.size()==0) {
+			message=false;
+			Alert alert=new Alert(AlertType.ERROR);
+			alert.setTitle("错误!!");
+			alert.setHeaderText("站点列表为空");
+			alert.setContentText("请添加站点");
+			alert.showAndWait();
+		}
 		return message;
 		
 	}
 	
 	private boolean InsertIntoSql(Bus bus){
+		boolean isDone=false;
 		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
 		
 		try {
-			PreparedStatement pStmt=connection.prepareStatement(
+			PreparedStatement pStmt=sqlDeloy.getConnection().prepareStatement(
 					"INSERT INTO Bus_information (Bus_No,Time_Start,Time_End,Time_Lag) VALUES (?,?,?,?)");
 			pStmt.setString(1, bus.getBusNo());
-			pStmt.setTime(2, (bus.getTimeStart1()));
-			pStmt.setTime(3, (bus.getTimeEnd1()) );
+			pStmt.setString(2, bus.getTimeStart1());
+			pStmt.setString(3, bus.getTimeEnd1());
 			pStmt.setInt(4, Integer.parseInt(bus.getTimeLag()));
 			
 			int row = pStmt.executeUpdate();
 			if(row>0)
-				return true;
+				isDone=true;
 			
 			pStmt.close();
 			sqlDeloy.shotDownCon();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}	
-		return false;	
+		return isDone;
 	}
-	private boolean UpDateSql(){
+	
+	private Boolean InsertIntoRoute(String busNo){
+		boolean isDone=false;
 		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
+		try {
+			PreparedStatement pStmt=sqlDeloy.getConnection().prepareStatement(
+					"INSERT INTO Route_Planning (Bus_No,UpStream,DownStream) VALUES(?,?,?)");
+			pStmt.setString(1, busNo);
+			pStmt.setString(2, StationsConverter.parseString(selectedStations));
+			FXCollections.reverse(selectedStations);
+			pStmt.setString(3, StationsConverter.parseString(selectedStations));
+			FXCollections.reverse(selectedStations);
+			
+			int row=pStmt.executeUpdate();
+			if (row>0) {
+				isDone=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isDone;
+	}
+	
+	
+	private boolean UpDateSql(){
+		boolean isDone=false;
+		SqlDeloy sqlDeloy=new SqlDeloy();
 		
 		try {
-			PreparedStatement pStmt=connection.prepareStatement(
+			PreparedStatement pStmt=sqlDeloy.getConnection().prepareStatement(
 					"UPDATE Bus_information SET Bus_No=?,Time_Start=?,Time_End=?,Time_Lag=? where Bus_No=?");
-			pStmt.setString(1, Bus_No_TextField.getText());
-			pStmt.setTime(2, TimeConverter.parse(Time_Start_TextField.getText()));
-			pStmt.setTime(3, TimeConverter.parse(Time_End_TextField.getText()) );
-			pStmt.setInt(4, Integer.parseInt(Time_Lage_TextField.getText()));
+			pStmt.setString(1, enStartTime());
+			pStmt.setString(2, enEndTime());
+			pStmt.setInt(3, Integer.parseInt(busList.get(Bus_Line_ListTable.getSelectionModel().getFocusedIndex()).getBusNo()));
 			int row = pStmt.executeUpdate();
 			if(row>0)
-				return true;
+				isDone=true;
 			pStmt.close();
 			sqlDeloy.shotDownCon();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-			return false;
 		}	
-		return false;
+		return isDone;
 		
 	}
 	
-	private boolean DeleteBusInformationfromSql(String Id) {
+	private boolean UpDateRoute(){
+		boolean isDone=false;
+		SqlDeloy sqlDeloy=new SqlDeloy();
+		try {
+			PreparedStatement pStmt=sqlDeloy.getConnection().prepareStatement("UPDATE Route_Planning SET UpStream = ?,DownStream = ? WHERE Bus_No=?");
+			pStmt.setString(1, StationsConverter.parseString(selectedStations));
+			FXCollections.reverse(selectedStations);
+			pStmt.setString(2, StationsConverter.parseString(selectedStations));
+			FXCollections.reverse(selectedStations);
+			pStmt.setInt(3, Integer.parseInt(busList.get(Bus_Line_ListTable.getSelectionModel().getFocusedIndex()).getBusNo()));
+			
+			int row=pStmt.executeUpdate();
+			if (row>0) {
+				isDone=true;
+			}
+			
+			pStmt.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return isDone;
+	}
+	
+	
+	private boolean DeleteBusInformationfromSql() {
 		boolean isOk = false;
 		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
 		try {
-			PreparedStatement pStmt = connection.prepareStatement(
+			PreparedStatement pStmt = sqlDeloy.getConnection().prepareStatement(
 					"Delete from Bus_information where Bus_No=?");
-			pStmt.setString(1, Id);
+			pStmt.setString(1, busList.get(Bus_Line_ListTable.getSelectionModel().getFocusedIndex()).getBusNo());
 			int rtn = pStmt.executeUpdate();
 			System.out.println(rtn);
 			isOk = (rtn == 0) ? false : true;
 			pStmt.close();
 			sqlDeloy.shotDownCon();
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		return isOk;
 		
 	}
 	
-	private String  setStartStation(Bus bus) {
-		List<String> list=SingleLine.parse(bus.getLine());
-		String startStation=list.get(0);
-		return startStation;
-	}
-	
-	private String setEndStation(Bus bus) {
-		List<String> list=SingleLine.parse(bus.getLine());
-		String EndStation=list.get(list.size()-1);
-		return EndStation;
-		
-	}
-	
-	private String selectStation(String Id) {
-		String stationName = null;
+	private boolean DeleteRoute(){
+		boolean isDone=false;
 		SqlDeloy sqlDeloy=new SqlDeloy();
-		Connection connection=sqlDeloy.getConnection();
+		
 		try {
-			PreparedStatement pStmt=connection.prepareStatement("Select Station_Name from Station_information where Station_ID=?");
-			pStmt.setString(1, Id);
-			ResultSet rest=pStmt.executeQuery();
-			while(rest.next()){
-				stationName=rest.getString("Station_Name");
-				System.out.println(stationName);
-			}
-			return stationName;
+			PreparedStatement pStmt=sqlDeloy.getConnection().prepareStatement("DELETE FROM Route_Planning WHERE Bus_No=?");
+			pStmt.setString(1, busList.get(Bus_Line_ListTable.getSelectionModel().getFocusedIndex()).getBusNo());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
-	}	
-
+		
+		return isDone;
+	}
+	
+	private boolean getStationsWithSql(String Busid){
+		boolean isDone=false;
+		String selectStations = "SELECT UpStream FROM Route_Planning where Bus_No='"+Busid+"'";
+		try {
+			SqlDeloy sqlDeloy=new SqlDeloy();
+			Connection connection=sqlDeloy.getConnection();
+			Statement statement=connection.createStatement();
+			ResultSet resultSet=statement.executeQuery(selectStations);
+			while(resultSet.next()){
+				String[] stationStringArray=StationsConverter.parseStringList(resultSet.getString("UpStream"));
+				StationEnArrayList(stationStringArray);			
+			}
+		} catch (SQLException e) {
+		}
+		
+		return isDone;
+	}
+	private void setTextStartStation() {
+		Start_Station_TextField.setText(selectedStations.get(0).getStationName());
+	}
+	
+	private void setTextEndStation() {
+		End_Station_TextField.setText(selectedStations.get(selectedStations.size()-1).getStationName());
+	}
+	
+	private boolean connectionStationTabel(){
+		boolean isDone=false;
+		
+		try {
+			unselectedStation.clear();
+			SqlDeloy sqlDeloy=new SqlDeloy();
+			Connection connection=sqlDeloy.getConnection();
+			Statement statement=connection.createStatement();
+			
+			ResultSet resultSet=statement.executeQuery(eSqlCommand.SelectStation.getName());
+			while(resultSet.next()){
+				Station station=new Station();
+				station.setStationName(resultSet.getString("Station_Name"));
+				station.setStationID(resultSet.getString("Station_ID"));
+				station.setStationAddress(resultSet.getString("Station_Address"));
+				station.setStationGPSX(resultSet.getFloat("Station_GPS_X"));
+				station.setStationGPSY(resultSet.getFloat("Station_GPS_Y"));
+				unselectedStation.add(station);
+				UnselectStationMap.put(station.getStationID(), station);
+			}
+			
+			resultSet.close();
+			statement.close();
+			connection.close();
+			sqlDeloy.shotDownCon();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return isDone;
+	}
+	
+	private void StationEnArrayList(String[] stations){
+		for (int i = 0; i < stations.length; i++) {
+			selectedStations.add(UnselectStationMap.get(stations[i]));
+		}
+	}
 }

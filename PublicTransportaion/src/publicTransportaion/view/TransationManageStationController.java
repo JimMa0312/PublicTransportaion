@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import publicTransportaion.model.Station;
+import publicTransportaion.model.en.eSqlCommand;
 import publicTransportaion.sql.SqlDeloy;
 import publicTransportaion.util.GPS;
 
@@ -110,16 +111,14 @@ public class TransationManageStationController implements ControlledStage,Initia
 	}
 
 	private void connectAndSelectStationInfor() {
-		// TODO Auto-generated method stub
 		SqlDeloy sqlDeloy=new SqlDeloy();
     	Connection connection=sqlDeloy.getConnection();
     	stationsList.clear();
     	
     	try {
     		Statement stmt=connection.createStatement();
-	    	String sql="select * from Station_information";
 	    	
-	    	ResultSet resultSet=stmt.executeQuery(sql);
+	    	ResultSet resultSet=stmt.executeQuery(eSqlCommand.SelectStation.getName());
 	    	while (resultSet.next()) {
 				Station station=new Station();
 				station.setStationName(resultSet.getString("Station_Name"));
