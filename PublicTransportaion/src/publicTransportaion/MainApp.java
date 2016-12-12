@@ -58,7 +58,6 @@ public class MainApp extends Application {
 	public static final String TransationManangeId = "TransationManange";
 	public static final String TransationManageRes = "TransationManage.fxml";
 	
-	
 	public static final String TransationManage_BusDynamicId="TransationManage-BusDynamic";
 	public static final String TranstationManage_BusDynamicRes="TransationManage-BusDynamic.fxml";
 	
@@ -83,7 +82,6 @@ public class MainApp extends Application {
 	public static final String ChangePWD_stationId="ChangePwd";
 	public static final String ChangePWD_stationRes="ChangePwd.fxml";
 	
-
 	@Override
 	public void start(Stage primaryStage) {
 		stageController = new StageController();
@@ -248,8 +246,6 @@ public class MainApp extends Application {
 		file=new File(path);
 		loadFileToDBConfig(file);
 	}
-	
-	
 
 	public static String getUserName() {
 		return UserName;

@@ -96,6 +96,9 @@ public class OutLayerControl implements ControlledStage, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if (isNullWithUser()) {
+			MainApp.showInitAdminUserView();
+		}
 		isSignIn.addListener(ov -> {
 			if (isSignIn.getValue()) {
 				signInMenuItem.setDisable(true);
@@ -115,10 +118,6 @@ public class OutLayerControl implements ControlledStage, Initializable {
 				UserMessageMenuItem.setDisable(true);
 			}
 		});
-
-		if (isNullWithUser()) {
-			MainApp.showInitAdminUserView();
-		}
 	}
 
 	@Override
