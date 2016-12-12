@@ -81,6 +81,36 @@ public class Plane {
 	public void setStationId(String stationId) {
 		this.stationId.set(stationId);
 	}
+	public String getLicense_Plate() {
+		return License_Plate.get();
+	}
+	public void setLicense_Plate(String license_Plate) {
+		License_Plate.set(license_Plate);
+	}
+	public String getEngine_start() {
+		return Engine_start.get();
+	}
+	public void setEngine_start(String engine_start) {
+		Engine_start.set(engine_start);;
+	}
+	public String getCarOut_Date() {
+		return CarOut_Date.get();
+	}
+	public void setCarOut_Date(String carOut_Date) {
+		CarOut_Date.set(carOut_Date);;
+	}
+	public Boolean getLine_Layer() {
+		return Line_Layer.get();
+	}
+	public void setLine_Layer(boolean line_Layer) {
+		Line_Layer.set(line_Layer);
+	}
+	public String getGPS() {
+		return GPS.get();
+	}
+	public void setGPS(String gPS) {
+		GPS.set(gPS);
+	}	
 	
 	
 }

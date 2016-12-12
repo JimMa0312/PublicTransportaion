@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import publicTransportaion.model.DBConfig;
-import publicTransportaion.safety.DESCoder;
-import publicTransportaion.safety.RSACoder;
+import publicTransportaion.safety.SefDES;
+import publicTransportaion.safety.SefRSA;
 
 public class SqlDeloy {
 	private static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -41,7 +41,7 @@ public class SqlDeloy {
 		
 		try {
 //			decodeData=RSACoder.decryptByPublicKey(null, null);
-			decodeData=DESCoder.decrypt(DBConfig.getUserName().getBytes(), DBConfig.getKey());
+			decodeData=SefDES.decrypt(DBConfig.getUserName().getBytes(), DBConfig.getKey());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class SqlDeloy {
 		
 		try {
 //			decodeData=RSACoder.decryptyByPrivateKey(null, null);
-			decodeData=DESCoder.decrypt(DBConfig.getPWD().getBytes(), DBConfig.getKey());
+			decodeData=SefDES.decrypt(DBConfig.getPWD().getBytes(), DBConfig.getKey());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

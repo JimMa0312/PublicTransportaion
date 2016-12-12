@@ -24,7 +24,7 @@
             <ChoiceBox fx:id="typeOfLineChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <HBox alignment="CENTER_LEFT" prefHeight="13.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="hourTextField1" layoutX="23.0" layoutY="386.0" prefHeight="23.0" prefWidth="40.0">
+                  <TextField fx:id="hourTextField" layoutX="23.0" layoutY="386.0" prefHeight="23.0" prefWidth="40.0">
                      <HBox.margin>
                         <Insets top="4.0" />
                      </HBox.margin>
@@ -34,7 +34,7 @@
                         <Insets top="4.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="minuteTextField1" layoutX="85.0" layoutY="386.0" prefHeight="23.0" prefWidth="40.0">
+                  <TextField fx:id="minuteTextField" layoutX="85.0" layoutY="386.0" prefHeight="23.0" prefWidth="40.0">
                      <HBox.margin>
                         <Insets top="4.0" />
                      </HBox.margin>
@@ -42,8 +42,8 @@
                </children>
             </HBox>
             <DatePicker fx:id="WorkeDatePicker" prefHeight="23.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField editable="false" GridPane.columnIndex="1" />
-            <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="carPosIdTextfield" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="busIdTextfield" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefHeight="15.0" prefWidth="168.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <columnConstraints>
@@ -95,17 +95,17 @@
       </HBox>
       <HBox layoutX="498.0" layoutY="476.0" spacing="15.0">
          <children>
-            <Button layoutX="420.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="新增计划">
+            <Button layoutX="420.0" layoutY="448.0" mnemonicParsing="false" onAction="#handlerCreatePlane" prefHeight="38.0" prefWidth="84.0" text="新增计划">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="511.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="修改计划">
+            <Button disable="true" layoutX="511.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="修改计划">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="取消">
+            <Button layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="删除">
                <font>
                   <Font size="15.0" />
                </font>
@@ -114,30 +114,34 @@
       </HBox>
       <Text layoutX="77.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <TextArea layoutX="50.0" layoutY="467.0" prefHeight="68.0" prefWidth="200.0" text="*说明：右边的详细信息，可更改&#10;的项均是用来添加或修改计划的项，&#10;编辑完后点击相应功能按钮即可。" />
-      <TableView layoutX="268.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
+      <TableView fx:id="tableBus" layoutX="268.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="班线" />
+          <TableColumn fx:id="tableColumnBusNo" prefWidth="75.0" text="班线" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView layoutX="361.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
+      <TableView fx:id="tableCar" layoutX="361.0" layoutY="90.0" prefHeight="337.0" prefWidth="76.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="车牌照" />
+          <TableColumn fx:id="tableColumnCarLicense" prefWidth="75.0" text="车牌照" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView layoutX="33.0" layoutY="90.0" prefHeight="337.0" prefWidth="200.0">
+      <TableView fx:id="tablePlanes" layoutX="33.0" layoutY="90.0" prefHeight="337.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="班线" />
-          <TableColumn prefWidth="75.0" text="车牌照号" />
+          <TableColumn fx:id="tableColumnPlanesBusNo" prefWidth="75.0" text="班线" />
+          <TableColumn fx:id="tableColumnPlanesLicense" prefWidth="75.0" text="车牌照号" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Label fx:id="errorCarLisLabel" layoutX="567.0" layoutY="14.0" text="Label" textFill="RED" AnchorPane.leftAnchor="566.0" AnchorPane.topAnchor="174.0" />
+      <Label fx:id="errorBusIdLabel" layoutX="577.0" layoutY="24.0" text="Label" textFill="RED" AnchorPane.leftAnchor="566.0" AnchorPane.topAnchor="214.0" />
+      <Label fx:id="errorTimeLabel" layoutX="587.0" layoutY="34.0" text="Label" textFill="RED" AnchorPane.leftAnchor="566.0" AnchorPane.topAnchor="253.0" />
+      <Label fx:id="errorlayerLabel" layoutX="597.0" layoutY="44.0" text="Label" textFill="RED" AnchorPane.leftAnchor="566.0" AnchorPane.topAnchor="330.0" />
    </children>
 </AnchorPane>

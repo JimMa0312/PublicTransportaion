@@ -12,7 +12,7 @@ import sun.misc.BASE64Encoder;
 
 /*基础加密组件*/
 
-public abstract class Coder {
+public abstract class Safetier {
 	public static final String KEY_SHA="SHA";
 	public static final String KEY_MD5="MD5";
 	/*

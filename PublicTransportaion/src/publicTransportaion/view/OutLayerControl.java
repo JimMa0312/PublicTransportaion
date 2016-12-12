@@ -54,7 +54,7 @@ public class OutLayerControl implements ControlledStage, Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("关于");
 		alert.setHeaderText("开发小组：黑石开发");
-		alert.setContentText("项目组长：马玉琛\n项目成员：王瀚、甘孟坤、王婷\n\n软件版本：DateV 0.5.1");
+		alert.setContentText("项目组长：马玉琛\n项目成员：王瀚、甘孟坤、王婷\n\n软件版本：A0.5.1");
 		alert.showAndWait();
 	}
 

@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import publicTransportaion.model.en.GenderEnum;
 import publicTransportaion.model.en.Jurisdtion;
-import publicTransportaion.safety.Coder;
+import publicTransportaion.safety.Safetier;
 
 public class User {
 	
@@ -144,7 +144,7 @@ public class User {
 	
 	public static String encrytpMD5PWD(String Pwd){
 		try {
-			return Coder.encryptBASE64(Coder.encryptMD5(Pwd.getBytes()));
+			return Safetier.encryptBASE64(Safetier.encryptMD5(Pwd.getBytes()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

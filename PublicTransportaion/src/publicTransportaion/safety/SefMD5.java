@@ -1,8 +1,8 @@
 package publicTransportaion.safety;
 
-public class MD5Code {
+public class SefMD5 {
 
-	public MD5Code() {
+	public SefMD5() {
 		// TODO Auto-generated constructor stub
 	}
 

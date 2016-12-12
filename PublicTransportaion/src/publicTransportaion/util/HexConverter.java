@@ -36,31 +36,27 @@ public class HexConverter {
 	}
 	
 	public static String byteToHex(byte[] b) {
-		String hString="";
-		String temp="";
-		for(int n=0;n<b.length;n++){
-			temp=Integer.toHexString(b[0]&0xff);
-			if (temp.length()==1) {
-				hString+="0"+temp;
-			}else{
-				hString+=temp;
+		StringBuffer sBuffer=new StringBuffer(b.length*2);
+		for (int i = 0; i < b.length; i++) {
+			if ((b[i] & 0xff) < 0x10) {
+				sBuffer.append("0");
 			}
+			sBuffer.append(Integer.toHexString(b[i]&0xFF));
 		}
-		temp=null;
-		return hString.toUpperCase();
+		
+		return sBuffer.toString();
 	}
 	
-	public static byte[] hexToByte(byte[] b) {
-		if ((b.length%2)!=0) {
-			throw new IllegalArgumentException("长度不是偶数");
+	public static byte[] hexToByte(String str) {
+		byte[] bytes=str.getBytes();
+		
+		int len=bytes.length;
+		byte[] arr=new byte[len/2];
+		for (int i = 0; i < len; i+=2) {
+			String tmp=new String(bytes, i, 2);
+			arr[i/2]=(byte)Integer.parseInt(tmp, 16);
 		}
-		byte[] b2=new byte[b.length/2];
-		for(int n=0;n<b.length;n+=2){
-			String item=new String(b, n, 2);
-			
-			b2[n/2]=(byte)Integer.parseInt(item,16);
-		}
-		b=null;
-		return b2;
+		
+		return arr;
 	}
 }

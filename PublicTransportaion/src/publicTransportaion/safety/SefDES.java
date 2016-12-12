@@ -9,12 +9,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-public class DESCoder extends Coder {
+public class SefDES extends Safetier {
 	
 	public static final String ALGORITHM="DES";
 	
 
-	public DESCoder() {
+	public SefDES() {
 		// TODO Auto-generated constructor stub
 	}
 

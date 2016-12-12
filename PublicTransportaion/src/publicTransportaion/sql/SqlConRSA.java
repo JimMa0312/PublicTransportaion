@@ -2,7 +2,7 @@ package publicTransportaion.sql;
 
 import java.util.Map;
 
-import publicTransportaion.safety.RSACoder;
+import publicTransportaion.safety.SefRSA;
 
 public class SqlConRSA {
 	
@@ -10,10 +10,10 @@ public class SqlConRSA {
 	private static String privateKey;
 	
 	public static void setUp() throws Exception{
-		Map<String, Object> keyMap=RSACoder.initKey();
+		Map<String, Object> keyMap=SefRSA.initKey();
 		
-		publicKey=RSACoder.getPublicKey(keyMap);
-		privateKey=RSACoder.getPrivateKey(keyMap);
+		publicKey=SefRSA.getPublicKey(keyMap);
+		privateKey=SefRSA.getPrivateKey(keyMap);
 	}
 	
 	
@@ -30,7 +30,7 @@ public class SqlConRSA {
 		byte[] encodeData = null;
 		
 		try {
-			encodeData=RSACoder.encryByPricvateKey(data, privateKey);
+			encodeData=SefRSA.encryByPricvateKey(data, privateKey);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class SqlConRSA {
 		byte[] encodeData=null;
 		
 		try {
-			encodeData=RSACoder.encryptByPublicKey(data, publicKey);
+			encodeData=SefRSA.encryptByPublicKey(data, publicKey);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -24,7 +24,9 @@ import publicTransportaion.model.DBConfig;
 import publicTransportaion.model.DBconfigXml;
 import publicTransportaion.model.User;
 import publicTransportaion.model.en.Jurisdtion;
+import publicTransportaion.safety.SefDES;
 import publicTransportaion.sql.SqlDeloy;
+import publicTransportaion.util.HexConverter;
 import publicTransportaion.view.OutLayerControl;
 import publicTransportaion.view.ShowBusInforMationController;
 import publicTransportaion.view.StageController;
@@ -110,7 +112,6 @@ public class MainApp extends Application {
 			PrimaryStage.setScene(scene);
 			PrimaryStage.show();
 		} catch (IOException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -269,9 +270,37 @@ public class MainApp extends Application {
 	}
 
 	public static void main(String[] args) {
-		
+		try {
+			test();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//SqlDeloy testsqlDeloy = new SqlDeloy();
 		//testsqlDeloy.shotDownCon();
 		launch(args);
+	}
+	
+	public static void test() throws Exception{
+		String inputer="DES";
+		String key=SefDES.initKey();
+		System.out.println("原文：\t"+inputer);
+		System.out.println("密钥:\t"+key);
+		key=HexConverter.binToHex(key);
+		System.out.println("H密钥:\t"+key);
+		key=HexConverter.hexToBin(key);
+		System.out.println("D密钥:\t"+key);
+		byte[] inputData=inputer.getBytes();
+		inputData=SefDES.encrypt(inputData, key);
+		System.out.println("加密后：\t" + SefDES.encryptBASE64(inputData));
+		String inputDataStr=HexConverter.byteToHex(inputData);
+		System.out.println("加密后：\t" + inputDataStr);
+		inputData=HexConverter.hexToByte(inputDataStr);
+		System.out.println("加密后：\t" + SefDES.encryptBASE64(inputData));
+		byte[] outputData=SefDES.decrypt(inputData, key);
+		
+		String outputStr=new String(outputData);
+		
+		System.out.println("解密后：\t"+outputStr);
 	}
 }

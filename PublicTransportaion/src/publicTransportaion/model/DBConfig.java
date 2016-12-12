@@ -2,7 +2,7 @@ package publicTransportaion.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import publicTransportaion.safety.DESCoder;
+import publicTransportaion.safety.SefDES;
 import publicTransportaion.sql.SqlConRSA;
 
 
@@ -22,9 +22,9 @@ public class DBConfig {
 	public static void DBConfigSwitch()
 	{
 		try {
-			Key.set(DESCoder.initKey());
-			setuserName(new String(DESCoder.encrypt(getUserName().getBytes(), getKey())));
-			setPWD(new String(DESCoder.encrypt(getPWD().getBytes(), getKey())));
+			Key.set(SefDES.initKey());
+			setuserName(new String(SefDES.encrypt(getUserName().getBytes(), getKey())));
+			setPWD(new String(SefDES.encrypt(getPWD().getBytes(), getKey())));
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
