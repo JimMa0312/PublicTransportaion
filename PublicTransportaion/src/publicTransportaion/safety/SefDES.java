@@ -9,6 +9,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import publicTransportaion.util.HexConverter;
+
 public class SefDES extends Safetier {
 	
 	public static final String ALGORITHM="DES";
@@ -100,5 +102,17 @@ public class SefDES extends Safetier {
 		return encryptBASE64(secretKey.getEncoded());
 	}
 	
+	public static String hexStrEncrypt(String data, String key) throws Exception {
+
+		byte[] bytes = data.getBytes();
+		String HexString = HexConverter.byteToHex(encrypt(bytes, key));
+		return HexString;
+	}
 	
+	public static String strArrDecrypt(String data, String key)throws Exception {
+		byte[] bytes=HexConverter.hexToByte(data);
+		String stringArr=new String(decrypt(bytes, key));
+		
+		return stringArr;
+	}
 }

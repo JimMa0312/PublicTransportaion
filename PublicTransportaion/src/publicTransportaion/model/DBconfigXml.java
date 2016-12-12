@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import publicTransportaion.safety.SefDES;
 import publicTransportaion.util.HexConverter;
 
 @XmlRootElement(name="DBconfig")
@@ -22,11 +23,12 @@ public class DBconfigXml {
 	public DBconfigXml() {
 	}
 	
-	public void LoadDBconfig(){
-		UserName=HexConverter.binToHex(DBConfig.getUserName());
-		Pwd=HexConverter.binToHex(DBConfig.getPWD());
+	public void LoadDBconfig()throws Exception{
+		String factKey=SefDES.initKey();
+		Key=HexConverter.binToHex(factKey);
+		UserName=SefDES.hexStrEncrypt(DBConfig.getUserName(), factKey);
+		Pwd=SefDES.hexStrEncrypt(DBConfig.getPWD(), factKey);
 		DBName=DBConfig.getDBname();
-		Key=HexConverter.binToHex(DBConfig.getKey());
 	}
 	
 	public void WriteDBconfig(){

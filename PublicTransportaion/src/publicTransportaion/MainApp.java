@@ -191,7 +191,6 @@ public class MainApp extends Application {
 			
 			Marshaller marshaller=context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			
 			DBConfig.initDBConfig();
 			DBConfig.setuserName("sa");
 			DBConfig.setPWD("1230");
@@ -199,15 +198,14 @@ public class MainApp extends Application {
 			DBconfigXml dbConfig=new DBconfigXml();
 			dbConfig.LoadDBconfig();
 			marshaller.marshal(dbConfig, file);
-			
-			
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
 			Alert alert=new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Cloud not save data to File:\n");
 			alert.setContentText(file.getPath());
 			alert.showAndWait();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -270,37 +268,8 @@ public class MainApp extends Application {
 	}
 
 	public static void main(String[] args) {
-		try {
-			test();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		//SqlDeloy testsqlDeloy = new SqlDeloy();
 		//testsqlDeloy.shotDownCon();
 		launch(args);
-	}
-	
-	public static void test() throws Exception{
-		String inputer="DES";
-		String key=SefDES.initKey();
-		System.out.println("原文：\t"+inputer);
-		System.out.println("密钥:\t"+key);
-		key=HexConverter.binToHex(key);
-		System.out.println("H密钥:\t"+key);
-		key=HexConverter.hexToBin(key);
-		System.out.println("D密钥:\t"+key);
-		byte[] inputData=inputer.getBytes();
-		inputData=SefDES.encrypt(inputData, key);
-		System.out.println("加密后：\t" + SefDES.encryptBASE64(inputData));
-		String inputDataStr=HexConverter.byteToHex(inputData);
-		System.out.println("加密后：\t" + inputDataStr);
-		inputData=HexConverter.hexToByte(inputDataStr);
-		System.out.println("加密后：\t" + SefDES.encryptBASE64(inputData));
-		byte[] outputData=SefDES.decrypt(inputData, key);
-		
-		String outputStr=new String(outputData);
-		
-		System.out.println("解密后：\t"+outputStr);
 	}
 }
