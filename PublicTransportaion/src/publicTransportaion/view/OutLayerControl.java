@@ -134,12 +134,11 @@ public class OutLayerControl implements ControlledStage, Initializable {
 	}
 
 	private boolean isNullWithUser() {
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
 		boolean isHaveUser = false;
 
 		try {
-			Statement statement = connection.createStatement();
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			Statement statement = sqlDeloy.getConnection().createStatement();
 
 			String sql = "select count(*) as num from admin_information";
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -151,8 +150,8 @@ public class OutLayerControl implements ControlledStage, Initializable {
 			}
 			resultSet.close();
 			statement.close();
-			connection.close();
-		} catch (SQLException e) {
+			sqlDeloy.shotDownCon();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return isHaveUser;

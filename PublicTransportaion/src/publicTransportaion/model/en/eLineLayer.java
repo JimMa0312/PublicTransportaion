@@ -1,16 +1,15 @@
 package publicTransportaion.model.en;
 
 public enum eLineLayer {
-	
-	up(true, 1),
-	down(false, 2);
-	
+
+	up(true, 1), down(false, 2);
+
 	private boolean bool;
 	private int index;
-	
-	private eLineLayer(boolean bool,int index){
-		this.bool=bool;
-		this.index=index;
+
+	private eLineLayer(boolean bool, int index) {
+		this.bool = bool;
+		this.index = index;
 	}
 
 	public boolean getBool() {
@@ -28,7 +27,7 @@ public enum eLineLayer {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	
+
 	public static eLineLayer getBoLineLayer(int index) {
 		switch (index) {
 		case 1:

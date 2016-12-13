@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 import publicTransportaion.model.en.PatternEnum;
 
 public class Patterner {
-	public static boolean StringMatch(PatternEnum patternEnum,String string){
-		Pattern pattern=Pattern.compile(patternEnum.getName());
-		Matcher matcher=pattern.matcher(string);
+	public static boolean StringMatch(PatternEnum patternEnum, String string) {
+		Pattern pattern = Pattern.compile(patternEnum.getName());
+		Matcher matcher = pattern.matcher(string);
 		return matcher.matches();
 	}
-	
+
 }

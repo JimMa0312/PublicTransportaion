@@ -106,15 +106,15 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			}
 		}
 	}
-	
+
 	@FXML
-	private void handleChangePassWord(){
-		if (tableViewusers.getSelectionModel().getSelectedIndex()>=0) {
+	private void handleChangePassWord() {
+		if (tableViewusers.getSelectionModel().getSelectedIndex() >= 0) {
 			ChangePasswordControl.setUser(users.get(tableViewusers.getSelectionModel().getSelectedIndex()));
-			
+
 			MainApp.showChangePasswordView();
 		}
-		
+
 	}
 
 	@Override
@@ -247,8 +247,8 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 	}
 
 	private void connectAndSelectUserInfor() {
-		SqlDeloy sqlDeloy = new SqlDeloy();
 		try {
+			SqlDeloy sqlDeloy = new SqlDeloy();
 			Connection connection = sqlDeloy.getConnection();
 			users.clear();
 			Statement statement = connection.createStatement();
@@ -274,16 +274,16 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 
 			resultSet.close();
 			statement.close();
-		} catch (SQLException e) {
+			sqlDeloy.shotDownCon();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		sqlDeloy.shotDownCon();
 	}
 
 	private boolean DeleteuserIformationWithSql(String id) {
 		boolean isDeleted = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
 		try {
+			SqlDeloy sqlDeloy = new SqlDeloy();
 			Connection connection = sqlDeloy.getConnection();
 			String deleteCommand = "Delete from admin_information where COntrol_Id=?";
 			PreparedStatement pStmt = connection.prepareStatement(deleteCommand);
@@ -295,7 +295,7 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			pStmt.close();
 			connection.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return isDeleted;
@@ -303,12 +303,11 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 
 	private boolean isHadThisUserFrom() {
 		boolean ishad = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-		String sql = "select COntrol_Id from admin_information where COntrol_Id='" + textFieldId.getText() + "'";
-		Statement statement;
 		try {
-			statement = connection.createStatement();
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			Connection connection = sqlDeloy.getConnection();
+			String sql = "select COntrol_Id from admin_information where COntrol_Id='" + textFieldId.getText() + "'";
+			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				ishad = true;
@@ -318,7 +317,7 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			statement.close();
 			connection.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ishad;
@@ -326,11 +325,11 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 
 	private boolean CreateuserInformationSql() {
 		boolean isDone = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-		String createCommand = "INSERT INTO admin_information (Control_Id,Control_PWD,Control_Limit,Tel,Name,Give_Name,gender) VALUES (?,?,?,?,?,?,?)";
-
 		try {
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			Connection connection = sqlDeloy.getConnection();
+			String createCommand = "INSERT INTO admin_information (Control_Id,Control_PWD,Control_Limit,Tel,Name,Give_Name,gender) VALUES (?,?,?,?,?,?,?)";
+
 			PreparedStatement PreStat = connection.prepareStatement(createCommand);
 			PreStat.setString(1, textFieldId.getText());
 			PreStat.setString(2, User.encrytpMD5PWD("111111"));
@@ -345,9 +344,8 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 				isDone = true;
 			}
 			PreStat.close();
-			connection.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return isDone;
@@ -355,11 +353,11 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 
 	private boolean UpdateUserInformationSql(String ControlId) {
 		boolean isDone = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
 		String upDateCommand = "UPDATE admin_information SET Control_Limit = ? ,Tel = ? ,Name = ? ,Give_Name = ? ,gender = ? WHERE COntrol_Id = ?";
 
 		try {
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			Connection connection = sqlDeloy.getConnection();
 			PreparedStatement preStat = connection.prepareStatement(upDateCommand);
 			preStat.setInt(1, jurisdtion.getIndex());
 			preStat.setString(2, textFieldTel.getText());
@@ -374,19 +372,20 @@ public class TransationManageUserControl implements ControlledStage, Initializab
 			preStat.close();
 			connection.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return isDone;
 	}
-	
-	private void initJur(){
-		switch(MainApp.getJurisdtion()){
+
+	private void initJur() {
+		switch (MainApp.getJurisdtion()) {
 		case admin:
 			choiceBoxLimits.setItems(Jurisdtion.getJurList());
 			break;
 		case manage:
-			choiceBoxLimits.setItems(FXCollections.observableArrayList(Jurisdtion.manage.getName(),Jurisdtion.nomal.getName()));
+			choiceBoxLimits.setItems(
+					FXCollections.observableArrayList(Jurisdtion.manage.getName(), Jurisdtion.nomal.getName()));
 			break;
 		case nomal:
 			textFieldId.setDisable(true);

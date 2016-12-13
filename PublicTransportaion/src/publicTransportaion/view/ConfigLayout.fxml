@@ -56,6 +56,6 @@
             </Button>
          </children>
       </HBox>
-      <CheckBox fx:id="CreateDataBaseCheckBox" layoutX="34.0" layoutY="218.0" mnemonicParsing="false" text="创建数据库" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="188.0" />
+      <CheckBox fx:id="CreateDataBaseCheckBox" disable="true" layoutX="34.0" layoutY="218.0" mnemonicParsing="false" text="创建数据库" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="188.0" />
    </children>
 </AnchorPane>

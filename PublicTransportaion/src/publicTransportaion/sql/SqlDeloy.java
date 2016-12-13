@@ -9,63 +9,27 @@ import publicTransportaion.safety.SefDES;
 import publicTransportaion.safety.SefRSA;
 
 public class SqlDeloy {
-	private static String DRIVERNAME="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static String	DBURL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=Bus";
-	@SuppressWarnings("unused")
-	private static SqlConRSA sqlCon;
-	private static Connection connection=null;
-	
-	public SqlDeloy() {
-		try {
-			Class.forName(DRIVERNAME);
-			connection=DriverManager.getConnection(DBURL,"sa","1230");
-			System.out.println("Connected");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private String DRIVERNAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private String DBURL = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=";
+	private Connection connection = null;
+
+	public SqlDeloy() throws SQLException, ClassNotFoundException {
+		Class.forName(DRIVERNAME);
+		String factURL = DBURL + DBConfig.getDBname();
+		connection = DriverManager.getConnection(factURL, DBConfig.getUserName(), DBConfig.getPWD());
+		System.out.println("Connected");
 	}
-	
+
 	public void shotDownCon() {
 		try {
 			connection.close();
 			System.out.println("ShotDown!");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	private String DenpytUserName(){
-		byte[] decodeData=null;
-		
-		try {
-//			decodeData=RSACoder.decryptByPublicKey(null, null);
-			decodeData=SefDES.decrypt(DBConfig.getUserName().getBytes(), DBConfig.getKey());
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return new String(decodeData);
-	}
-	
-	private String DenpytUserPwd(){
-		byte[] decodeData=null;
-		
-		try {
-//			decodeData=RSACoder.decryptyByPrivateKey(null, null);
-			decodeData=SefDES.decrypt(DBConfig.getPWD().getBytes(), DBConfig.getKey());
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		return new String(decodeData);
-	}
-	
+
 	public Connection getConnection() {
 		return connection;
 	}
-	
 }

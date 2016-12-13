@@ -12,9 +12,8 @@ import javax.crypto.spec.DESKeySpec;
 import publicTransportaion.util.HexConverter;
 
 public class SefDES extends Safetier {
-	
-	public static final String ALGORITHM="DES";
-	
+
+	public static final String ALGORITHM = "DES";
 
 	public SefDES() {
 		// TODO Auto-generated constructor stub
@@ -26,93 +25,103 @@ public class SefDES extends Safetier {
 	 * @param key
 	 * 
 	 * @return
+	 * 
 	 * @throw Exception
 	 */
-	private static Key toKey(byte[] key) throws Exception{
-		DESKeySpec desKeySpec=new DESKeySpec(key);
-		SecretKeyFactory keyFactory=SecretKeyFactory.getInstance(ALGORITHM);
-		SecretKey secretKey=keyFactory.generateSecret(desKeySpec);
-		
+	private static Key toKey(byte[] key) throws Exception {
+		DESKeySpec desKeySpec = new DESKeySpec(key);
+		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
+		SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
+
 		return secretKey;
 	}
-	
+
 	/*
 	 * 解密
 	 * 
 	 * @param data
+	 * 
 	 * @param key
+	 * 
 	 * @return
 	 * 
 	 * throws Exception
 	 */
-	public static byte[] decrypt(byte[] data, String key)throws Exception {
-			Key k=toKey(decryptBASE64(key));
-			Cipher cipher=Cipher.getInstance(ALGORITHM);
-			cipher.init(Cipher.DECRYPT_MODE, k);
-			
-			return cipher.doFinal(data);
-	}
-	
-	/*
-	 * 加密
-	 * @param data
-	 * @param key
-	 * @return
-	 * @throws Exception
-	 */
-	public static byte[] encrypt(byte[] data,String key) throws Exception{
-		Key k=toKey(decryptBASE64(key));
-		Cipher cipher=Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.ENCRYPT_MODE, k);
-		
+	public static byte[] decrypt(byte[] data, String key) throws Exception {
+		Key k = toKey(decryptBASE64(key));
+		Cipher cipher = Cipher.getInstance(ALGORITHM);
+		cipher.init(Cipher.DECRYPT_MODE, k);
+
 		return cipher.doFinal(data);
 	}
-	
+
+	/*
+	 * 加密
+	 * 
+	 * @param data
+	 * 
+	 * @param key
+	 * 
+	 * @return
+	 * 
+	 * @throws Exception
+	 */
+	public static byte[] encrypt(byte[] data, String key) throws Exception {
+		Key k = toKey(decryptBASE64(key));
+		Cipher cipher = Cipher.getInstance(ALGORITHM);
+		cipher.init(Cipher.ENCRYPT_MODE, k);
+
+		return cipher.doFinal(data);
+	}
+
 	/*
 	 * 生成密钥
 	 * 
 	 * @return
+	 * 
 	 * @throws Exception
 	 */
-	public static String initKey()throws Exception{
+	public static String initKey() throws Exception {
 		return initKey(null);
 	}
-	
+
 	/*
 	 * 生成密钥
 	 * 
 	 * @param seed
+	 * 
 	 * @return
+	 * 
 	 * @throws Exception
 	 */
 	public static String initKey(String seed) throws Exception {
-		SecureRandom secureRandom=null;
-		
-		if (seed!=null) {
-			secureRandom=new SecureRandom(decryptBASE64(seed));
+		SecureRandom secureRandom = null;
+
+		if (seed != null) {
+			secureRandom = new SecureRandom(decryptBASE64(seed));
 		} else {
-			secureRandom=new SecureRandom();
+			secureRandom = new SecureRandom();
 		}
-		
-		KeyGenerator kg=KeyGenerator.getInstance(ALGORITHM);
+
+		KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM);
 		kg.init(secureRandom);
-		
-		SecretKey secretKey=kg.generateKey();
-		
+
+		SecretKey secretKey = kg.generateKey();
+
 		return encryptBASE64(secretKey.getEncoded());
 	}
-	
+
 	public static String hexStrEncrypt(String data, String key) throws Exception {
 
 		byte[] bytes = data.getBytes();
 		String HexString = HexConverter.byteToHex(encrypt(bytes, key));
 		return HexString;
 	}
-	
-	public static String strArrDecrypt(String data, String key)throws Exception {
-		byte[] bytes=HexConverter.hexToByte(data);
-		String stringArr=new String(decrypt(bytes, key));
-		
+
+	public static String strArrDecrypt(String data, String key) throws Exception {
+		byte[] bytes = HexConverter.hexToByte(data);
+		String stringArr = new String(decrypt(bytes, key));
+
 		return stringArr;
 	}
 }

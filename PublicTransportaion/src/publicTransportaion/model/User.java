@@ -9,7 +9,7 @@ import publicTransportaion.model.en.Jurisdtion;
 import publicTransportaion.safety.Safetier;
 
 public class User {
-	
+
 	private StringProperty UserId;
 	private StringProperty FirstName;
 	private StringProperty SecondName;
@@ -17,17 +17,15 @@ public class User {
 	private StringProperty TEL;
 	private ObjectProperty<Jurisdtion> ControlLimit;
 	private ObjectProperty<GenderEnum> garde;
-	
-	
 
 	public User() {
-		UserId=new SimpleStringProperty();
-		PassWord=new SimpleStringProperty();
-		TEL=new SimpleStringProperty("111111");
-		FirstName=new SimpleStringProperty();
-		SecondName=new SimpleStringProperty();
-		ControlLimit=new SimpleObjectProperty<Jurisdtion>(Jurisdtion.admin);
-		garde=new SimpleObjectProperty<GenderEnum>(GenderEnum.sir);
+		UserId = new SimpleStringProperty();
+		PassWord = new SimpleStringProperty();
+		TEL = new SimpleStringProperty("111111");
+		FirstName = new SimpleStringProperty();
+		SecondName = new SimpleStringProperty();
+		ControlLimit = new SimpleObjectProperty<Jurisdtion>(Jurisdtion.admin);
+		garde = new SimpleObjectProperty<GenderEnum>(GenderEnum.sir);
 	}
 
 	public StringProperty getUserIdProperty() {
@@ -53,7 +51,7 @@ public class User {
 	public void setSecondNameProperty(StringProperty secondName) {
 		SecondName = secondName;
 	}
-	
+
 	public StringProperty getPassWordProperty() {
 		return PassWord;
 	}
@@ -85,64 +83,64 @@ public class User {
 	public void setGardeProperty(ObjectProperty<GenderEnum> garde) {
 		this.garde = garde;
 	}
-	
+
 	public String getUserId() {
 		return UserId.get();
 	}
-	
+
 	public void setUserId(String userId) {
 		this.UserId.set(userId);
 	}
-	
+
 	public String getFirstName() {
 		return FirstName.get();
 	}
-	
+
 	public void setFirstName(String firstName) {
 		this.FirstName.set(firstName);
 	}
-	
+
 	public String getSecondName() {
 		return SecondName.get();
 	}
-	
-	public void setSecondName(String secondName){
+
+	public void setSecondName(String secondName) {
 		this.SecondName.set(secondName);
 	}
-	
+
 	public String getPwd() {
 		return PassWord.get();
 	}
-	
+
 	public void setPwd(String passWord) {
 		this.PassWord.set(passWord);
 	}
-	
+
 	public String getTel() {
 		return TEL.get();
 	}
-	
+
 	public void setTel(String Tel) {
 		this.TEL.set(Tel);
 	}
-	
+
 	public Jurisdtion getControlLimit() {
 		return ControlLimit.get();
 	}
-	
+
 	public void setControlLimit(Jurisdtion controlLimit) {
 		this.ControlLimit.set(controlLimit);
 	}
-	
+
 	public GenderEnum getGarde() {
 		return garde.get();
 	}
-	
+
 	public void setGarde(GenderEnum garde) {
 		this.garde.set(garde);
 	}
-	
-	public static String encrytpMD5PWD(String Pwd){
+
+	public static String encrytpMD5PWD(String Pwd) {
 		try {
 			return Safetier.encryptBASE64(Safetier.encryptMD5(Pwd.getBytes()));
 		} catch (Exception e) {

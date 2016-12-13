@@ -6,19 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public enum Jurisdtion {
-	admin("超级管理员",1),
-	manage("管理员",2),
-	nomal("客户", 3);
-	
+	admin("超级管理员", 1), manage("管理员", 2), nomal("客户", 3);
+
 	private String name;
 	private int index;
-	
-	private Jurisdtion(String name, int index){
-		this.name=name;
-		this.index=index;
+
+	private Jurisdtion(String name, int index) {
+		this.name = name;
+		this.index = index;
 	}
-	
-	public static Jurisdtion getJur(int i){
+
+	public static Jurisdtion getJur(int i) {
 		switch (i) {
 		case 1:
 			return admin;
@@ -30,7 +28,8 @@ public enum Jurisdtion {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 	}
-	public static int getJurValue(Jurisdtion jurisdtion){
+
+	public static int getJurValue(Jurisdtion jurisdtion) {
 		switch (jurisdtion) {
 		case admin:
 			return 1;
@@ -42,9 +41,7 @@ public enum Jurisdtion {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 	}
-	
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -62,11 +59,11 @@ public enum Jurisdtion {
 	}
 
 	public static ObservableList<String> getJurList() {
-		ObservableList<String> jurisdtion=FXCollections.observableArrayList();
+		ObservableList<String> jurisdtion = FXCollections.observableArrayList();
 		jurisdtion.add("超级管理员");
 		jurisdtion.add("管理员");
 		jurisdtion.add("客户");
-		
+
 		return jurisdtion;
 	}
 }

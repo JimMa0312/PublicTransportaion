@@ -105,12 +105,11 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	}
 
 	private void connectAndSelectCarsInfor() {
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-		carsList.clear();
 
 		try {
-			Statement stmt = connection.createStatement();
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			carsList.clear();
+			Statement stmt = sqlDeloy.getConnection().createStatement();
 			String sql = "select * from Car_information";
 
 			ResultSet resultSet = stmt.executeQuery(sql);
@@ -128,8 +127,7 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			resultSet.close();
 			stmt.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -256,38 +254,34 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 	}
 
 	private boolean IsCommedwhiLP() {
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-
+		boolean isDone = false;
 		try {
-			PreparedStatement pStmt = connection
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			PreparedStatement pStmt = sqlDeloy.getConnection()
 					.prepareStatement("Select License_Plate as num from Car_information where License_Plate=?");
 			pStmt.setString(1, License_Plate_TextField.getText());
 			ResultSet res = pStmt.executeQuery();
-			boolean isComLP;
-			if (res.next()) {
-				isComLP = true;
-			} else {
-				isComLP = false;
+			while (res.next()) {
+				isDone = true;
+				if (isDone) {
+					break;
+				}
 			}
-
 			res.close();
 			pStmt.close();
 			sqlDeloy.shotDownCon();
-			return isComLP;
-		} catch (SQLException e) {
-			// TODO: handle exception
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+
+		return isDone;
 	}
 
 	private boolean InsertIntoSql(Cars cars) {
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-
+		boolean isDone = false;
 		try {
-			PreparedStatement pStmt = connection.prepareStatement(
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			PreparedStatement pStmt = sqlDeloy.getConnection().prepareStatement(
 					"INSERT INTO Car_information (License_Plate,Einge_id,Frame_id,Bus_tyoe,Can_population,Bus_Chair) VALUES (?,?,?,?,?,?)");
 			pStmt.setString(1, cars.getLicensePlate());
 			pStmt.setString(2, cars.getEingeId());
@@ -297,24 +291,21 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			pStmt.setInt(6, cars.getCarPopulation());
 			int row = pStmt.executeUpdate();
 			if (row > 0) {
-				return true;
+				isDone = true;
 			}
 			pStmt.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO: handle exception
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
-		return false;
+		return isDone;
 	}
 
 	private boolean UpDateSql() {
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
-
+		boolean isDone = false;
 		try {
-			PreparedStatement pStmt = connection.prepareStatement(
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			PreparedStatement pStmt = sqlDeloy.getConnection().prepareStatement(
 					"UPDATE Car_information SET License_Plate=?,Einge_id=?,Frame_id=?,Bus_tyoe=?,Can_population=?,Bus_Chair =? where License_Plate=?");
 			pStmt.setString(1, License_Plate_TextField.getText());
 			pStmt.setString(2, Engine_id_TextField.getText());
@@ -325,34 +316,30 @@ public class TransationManageCarsController implements ControlledStage, Initiali
 			pStmt.setString(7, License_Plate_TextField.getText());
 			int row = pStmt.executeUpdate();
 			if (row > 0) {
-				return true;
+				isDone = true;
 			}
 			pStmt.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO: handle exception
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
-		return false;
+		return isDone;
 	}
 
 	private boolean DeleteCarsInformationfromSql(String Id) {
 		boolean isOk = false;
-		SqlDeloy sqlDeloy = new SqlDeloy();
-		Connection connection = sqlDeloy.getConnection();
 		try {
-			PreparedStatement pStmt = connection.prepareStatement("Delete from Car_information where License_Plate=?");
+			SqlDeloy sqlDeloy = new SqlDeloy();
+			PreparedStatement pStmt = sqlDeloy.getConnection()
+					.prepareStatement("Delete from Car_information where License_Plate=?");
 			pStmt.setString(1, Id);
 			int rtn = pStmt.executeUpdate();
 			System.out.println(rtn);
 			isOk = (rtn == 0) ? false : true;
 
 			pStmt.close();
-			connection.close();
 			sqlDeloy.shotDownCon();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

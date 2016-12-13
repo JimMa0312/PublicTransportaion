@@ -1,7 +1,5 @@
 package publicTransportaion.model;
 
-import java.beans.Transient;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -9,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import publicTransportaion.safety.SefDES;
 import publicTransportaion.util.HexConverter;
 
-@XmlRootElement(name="DBconfig")
+@XmlRootElement(name = "DBconfig")
 public class DBconfigXml {
 	@XmlElement
 	private String UserName;
@@ -22,20 +20,20 @@ public class DBconfigXml {
 
 	public DBconfigXml() {
 	}
-	
-	public void LoadDBconfig()throws Exception{
-		String factKey=SefDES.initKey();
-		Key=HexConverter.binToHex(factKey);
-		UserName=SefDES.hexStrEncrypt(DBConfig.getUserName(), factKey);
-		Pwd=SefDES.hexStrEncrypt(DBConfig.getPWD(), factKey);
-		DBName=DBConfig.getDBname();
+
+	public void LoadDBconfig() throws Exception {
+		String factKey = SefDES.initKey();
+		Key = HexConverter.binToHex(factKey);
+		UserName = SefDES.hexStrEncrypt(DBConfig.getUserName(), factKey);
+		Pwd = SefDES.hexStrEncrypt(DBConfig.getPWD(), factKey);
+		DBName = DBConfig.getDBname();
 	}
-	
-	public void WriteDBconfig(){
-		DBConfig.setuserName(HexConverter.hexToBin(UserName));
-		DBConfig.setPWD(HexConverter.hexToBin(Pwd));
+
+	public void WriteDBconfig() throws Exception {
+		Key = HexConverter.hexToBin(Key);
+		DBConfig.setuserName(SefDES.strArrDecrypt(UserName, Key));
+		DBConfig.setPWD(SefDES.strArrDecrypt(Pwd, Key));
 		DBConfig.setDBname(DBName);
-		DBConfig.setKey(HexConverter.hexToBin(Key));
 	}
 
 	@XmlTransient
