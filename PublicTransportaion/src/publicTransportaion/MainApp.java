@@ -86,6 +86,7 @@ public class MainApp extends Application {
 
 		stageController.loadStage(SignInId, SignInRes, StageStyle.UNDECORATED);
 		stageController.loadStage(TransationManage_BusDynamicId, TranstationManage_BusDynamicRes);
+		primaryStage.setOnCloseRequest(e->System.exit(0));
 	}
 
 	private void initRootLayout() {
